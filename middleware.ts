@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
     if (!profile?.is_admin) return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  if ((pathname === '/' || pathname.startsWith('/auth')) && user) {
+  if ((pathname === '/' || (pathname.startsWith('/auth') && !pathname.startsWith('/auth/callback'))) && user) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
