@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { sendContactEmail } from '@/lib/email'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -20,6 +21,11 @@ export async function POST(req: NextRequest) {
   if (error) {
     return NextResponse.json({ error: 'Serverio klaida' }, { status: 500 })
   }
+
+  // Send email notification (non-blocking)
+  try {
+    await sendContactEmail({ name, email, service: service ?? 'Kita', message })
+  } catch { /* email failure non-fatal */ }
 
   return NextResponse.json({ ok: true })
 }
