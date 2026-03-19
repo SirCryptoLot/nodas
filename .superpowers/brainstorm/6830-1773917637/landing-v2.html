@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nodas.lt — Landing Page v2</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f8fafc; color:#0f172a; }
+
+  nav { background:#fff; border-bottom:1px solid #e2e8f0; padding:0 40px; height:64px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo-text { font-size:18px; font-weight:800; color:#1e40af; letter-spacing:-0.5px; }
+  .logo-text span { color:#93c5fd; font-weight:500; font-size:13px; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { color:#475569; font-size:14px; text-decoration:none; font-weight:500; }
+  .nav-cta { background:#2563eb; color:#fff; padding:9px 20px; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; }
+
+  /* HERO — pilnesnis */
+  .hero { background:#fff; padding:56px 40px 56px; border-bottom:1px solid #e2e8f0; }
+  .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 420px; gap:60px; align-items:start; }
+
+  .hero-left {}
+  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:#eff6ff; color:#1d4ed8; padding:6px 14px; border-radius:999px; font-size:13px; font-weight:600; margin-bottom:20px; border:1px solid #bfdbfe; }
+  .hero h1 { font-size:46px; font-weight:900; color:#0f172a; line-height:1.1; letter-spacing:-1.5px; margin-bottom:16px; }
+  .hero h1 em { color:#2563eb; font-style:normal; }
+  .hero-sub { font-size:17px; color:#64748b; line-height:1.65; margin-bottom:24px; }
+
+  /* USP sąrašas */
+  .usp-list { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+  .usp-item { display:flex; align-items:center; gap:10px; font-size:14px; color:#334155; }
+  .usp-check { width:20px; height:20px; background:#dbeafe; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; color:#2563eb; font-weight:700; }
+
+  .hero-buttons { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+  .btn-primary { background:#2563eb; color:#fff; padding:13px 26px; border-radius:10px; font-size:15px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+  .btn-secondary { background:#fff; color:#1e40af; padding:13px 26px; border-radius:10px; font-size:15px; font-weight:600; text-decoration:none; border:2px solid #bfdbfe; }
+
+  /* Micro-stats eilutė */
+  .hero-stats { display:flex; gap:0; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; background:#f8fafc; }
+  .stat { padding:14px 20px; flex:1; text-align:center; border-right:1px solid #e2e8f0; }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-size:22px; font-weight:900; color:#1e40af; line-height:1; }
+  .stat-label { font-size:11px; color:#64748b; margin-top:3px; line-height:1.3; }
+
+  /* Dešinė — kortelė */
+  .hero-right {}
+  .hero-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:28px; }
+  .hero-card-title { font-size:14px; font-weight:700; color:#0f172a; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid #e2e8f0; }
+  .service-quick { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+  .service-row { display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:12px 14px; cursor:pointer; }
+  .service-row:hover { border-color:#93c5fd; }
+  .service-row-left { display:flex; align-items:center; gap:10px; }
+  .service-row-icon { font-size:18px; }
+  .service-row-name { font-size:14px; font-weight:600; color:#0f172a; }
+  .service-row-desc { font-size:12px; color:#64748b; }
+  .service-row-price { font-size:13px; font-weight:700; color:#2563eb; white-space:nowrap; }
+  .hero-card-cta { background:#2563eb; color:#fff; width:100%; padding:12px; border-radius:8px; font-size:14px; font-weight:700; border:none; cursor:pointer; margin-bottom:12px; }
+  .hero-card-note { text-align:center; font-size:12px; color:#94a3b8; }
+
+  /* Pasitikėjimo juosta */
+  .trust-bar { background:#1e3a8a; padding:14px 40px; display:flex; justify-content:center; gap:48px; }
+  .trust-item { display:flex; align-items:center; gap:8px; color:#bfdbfe; font-size:13px; font-weight:500; }
+  .trust-item span { font-size:16px; }
+
+  /* ABOUT */
+  .about { padding:64px 40px; max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .about-img { background:linear-gradient(135deg,#eff6ff,#dbeafe); border-radius:16px; height:260px; display:flex; align-items:center; justify-content:center; }
+  .about-label { font-size:12px; font-weight:700; color:#2563eb; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+  .about h2 { font-size:30px; font-weight:800; color:#0f172a; line-height:1.2; margin-bottom:14px; }
+  .about p { color:#64748b; line-height:1.7; font-size:15px; }
+  .about-highlights { margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+  .highlight { display:flex; align-items:center; gap:10px; font-size:14px; color:#334155; }
+  .highlight-dot { width:8px; height:8px; border-radius:50%; background:#2563eb; flex-shrink:0; }
+
+  /* SERVICES */
+  .services { background:#fff; padding:64px 40px; border-top:1px solid #e2e8f0; }
+  .section-header { text-align:center; margin-bottom:40px; }
+  .section-label { font-size:12px; font-weight:700; color:#2563eb; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+  .section-header h2 { font-size:34px; font-weight:800; color:#0f172a; }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:1100px; margin:0 auto; }
+  .service-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:22px; }
+  .service-num { font-size:11px; font-weight:700; color:#93c5fd; margin-bottom:6px; }
+  .service-icon { font-size:26px; margin-bottom:12px; }
+  .service-card h3 { font-size:15px; font-weight:700; color:#0f172a; margin-bottom:6px; }
+  .service-card p { font-size:13px; color:#64748b; line-height:1.5; }
+  .service-price { margin-top:10px; font-size:14px; font-weight:700; color:#2563eb; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding:64px 40px; max-width:1000px; margin:0 auto; }
+  .testimonials-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .testimonial { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:22px; }
+  .stars { color:#f59e0b; font-size:13px; margin-bottom:10px; }
+  .testimonial p { font-size:14px; color:#334155; line-height:1.6; font-style:italic; }
+  .testimonial-author { margin-top:14px; font-size:13px; font-weight:600; color:#64748b; }
+
+  /* CONTACT */
+  .contact { background:#1e40af; padding:64px 40px; text-align:center; }
+  .contact h2 { font-size:34px; font-weight:800; color:#fff; margin-bottom:10px; }
+  .contact p { color:#93c5fd; font-size:16px; margin-bottom:28px; }
+  .contact-form { background:#fff; border-radius:16px; padding:28px; max-width:480px; margin:0 auto; text-align:left; }
+  .form-row { margin-bottom:14px; }
+  .form-row label { display:block; font-size:13px; font-weight:600; color:#374151; margin-bottom:5px; }
+  .form-row input, .form-row select, .form-row textarea { width:100%; padding:9px 13px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; color:#0f172a; background:#f9fafb; }
+  .form-row textarea { height:76px; resize:none; }
+  .form-submit { background:#2563eb; color:#fff; width:100%; padding:12px; border-radius:8px; font-size:15px; font-weight:700; border:none; cursor:pointer; }
+
+  footer { background:#0f172a; color:#94a3b8; padding:28px 40px; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+  footer a { color:#60a5fa; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none" style="margin-right:2px">
+      <circle cx="8" cy="18" r="4.5" fill="#2563eb"/>
+      <circle cx="28" cy="8" r="4.5" fill="#2563eb" opacity="0.65"/>
+      <circle cx="28" cy="28" r="4.5" fill="#2563eb" opacity="0.65"/>
+      <line x1="8" y1="18" x2="28" y2="8" stroke="#2563eb" stroke-width="1.5" opacity="0.4"/>
+      <line x1="8" y1="18" x2="28" y2="28" stroke="#2563eb" stroke-width="1.5" opacity="0.4"/>
+      <line x1="28" y1="8" x2="28" y2="28" stroke="#2563eb" stroke-width="1" opacity="0.25"/>
+    </svg>
+    <div class="logo-text">nodas<span>.lt</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Paslaugos</a></li>
+    <li><a href="#">Kainos</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Kontaktai</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Prisijungti →</a>
+</nav>
+
+<!-- HERO — 2 kolonos -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- Kairė -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#2563eb"/></svg>
+        🇱🇹 Lietuvos IT specialistas
+      </div>
+      <h1>Jūsų svetainė<br><em>veikia</em> tobulai.</h1>
+      <p class="hero-sub">Web remontas, AI svetainės, WordPress, serveriai — vienas specialistas visiems IT poreikiams. Greitas atsakas, sąžiningos kainos.</p>
+
+      <div class="usp-list">
+        <div class="usp-item"><div class="usp-check">✓</div>Svetainės klaidos ir atakos — taisau tą pačią dieną</div>
+        <div class="usp-item"><div class="usp-check">✓</div>AI sugeneruota svetainė per 5 minutes — nuo €149</div>
+        <div class="usp-item"><div class="usp-check">✓</div>Mėnesinė priežiūra su 24/7 monitoringu — nuo €29</div>
+        <div class="usp-item"><div class="usp-check">✓</div>Mokėjimai per Paysera — saugiai, lietuviškai</div>
+        <div class="usp-item"><div class="usp-check">✓</div>WordPress, React, Next.js, Linux serveriai</div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Užsakyti paslaugą →</a>
+        <a href="#" class="btn-secondary">Peržiūrėti kainas</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">€39</div><div class="stat-label">nuo<br>Web remontas</div></div>
+        <div class="stat"><div class="stat-num">24h</div><div class="stat-label">atsakymo<br>laikas</div></div>
+        <div class="stat"><div class="stat-num">9+</div><div class="stat-label">paslaugų<br>tipai</div></div>
+        <div class="stat"><div class="stat-num">AI</div><div class="stat-label">svetainės<br>generavimas</div></div>
+      </div>
+    </div>
+
+    <!-- Dešinė — greitas užsakymas -->
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-title">⚡ Greitas užsakymas — pasirinkite paslaugą:</div>
+        <div class="service-quick">
+          <div class="service-row">
+            <div class="service-row-left">
+              <div class="service-row-icon">🔧</div>
+              <div>
+                <div class="service-row-name">Web Remontas</div>
+                <div class="service-row-desc">Klaidos, atakos, lėtumas</div>
+              </div>
+            </div>
+            <div class="service-row-price">nuo €39</div>
+          </div>
+          <div class="service-row">
+            <div class="service-row-left">
+              <div class="service-row-icon">🤖</div>
+              <div>
+                <div class="service-row-name">AI Svetainė</div>
+                <div class="service-row-desc">Sugeneruojama per 5 min</div>
+              </div>
+            </div>
+            <div class="service-row-price">€149</div>
+          </div>
+          <div class="service-row">
+            <div class="service-row-left">
+              <div class="service-row-icon">📦</div>
+              <div>
+                <div class="service-row-name">WordPress / CMS</div>
+                <div class="service-row-desc">Su administravimu</div>
+              </div>
+            </div>
+            <div class="service-row-price">€349</div>
+          </div>
+          <div class="service-row">
+            <div class="service-row-left">
+              <div class="service-row-icon">🛡️</div>
+              <div>
+                <div class="service-row-name">Web SPA priežiūra</div>
+                <div class="service-row-desc">Monitoringas + backupai</div>
+              </div>
+            </div>
+            <div class="service-row-price">€29/mėn</div>
+          </div>
+        </div>
+        <button class="hero-card-cta">Pateikti užklausą →</button>
+        <div class="hero-card-note">arba rašykite: <a href="mailto:info@nodas.lt" style="color:#2563eb;text-decoration:none;font-weight:600;">info@nodas.lt</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PASITIKĖJIMO JUOSTA -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🔒</span> SSL sertifikatai</div>
+  <div class="trust-item"><span>⚡</span> Greitas atsakas</div>
+  <div class="trust-item"><span>🇱🇹</span> Lietuviška pagalba</div>
+  <div class="trust-item"><span>💳</span> Paysera mokėjimai</div>
+  <div class="trust-item"><span>🤖</span> AI technologijos</div>
+</div>
+
+<!-- ABOUT -->
+<section style="background:#f8fafc; border-bottom:1px solid #e2e8f0;">
+  <div class="about">
+    <div class="about-img">
+      <svg width="110" height="110" viewBox="0 0 120 120" fill="none">
+        <circle cx="30" cy="60" r="14" fill="#2563eb"/>
+        <circle cx="90" cy="25" r="14" fill="#2563eb" opacity="0.5"/>
+        <circle cx="90" cy="95" r="14" fill="#2563eb" opacity="0.5"/>
+        <line x1="30" y1="60" x2="90" y2="25" stroke="#2563eb" stroke-width="2.5" opacity="0.35"/>
+        <line x1="30" y1="60" x2="90" y2="95" stroke="#2563eb" stroke-width="2.5" opacity="0.35"/>
+        <line x1="90" y1="25" x2="90" y2="95" stroke="#2563eb" stroke-width="1.5" opacity="0.2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="about-label">Apie mane</div>
+      <h2>Solo dev.<br>Rimtas požiūris.</h2>
+      <p>Esu IT specialistas iš Lietuvos. Dirbau su daugybe svetainių — nuo paprastų landinigų iki sudėtingų e-parduotuvių. Mano misija: greita pagalba, sąžininga kaina, tiesus bendravimas.</p>
+      <div class="about-highlights">
+        <div class="highlight"><div class="highlight-dot"></div>Greitas atsakas — dažniausiai tą pačią dieną</div>
+        <div class="highlight"><div class="highlight-dot"></div>AI įrankiai pagreitina darbą, kaina lieka žema</div>
+        <div class="highlight"><div class="highlight-dot"></div>WordPress, React, Next.js, Linux serveriai</div>
+        <div class="highlight"><div class="highlight-dot"></div>Mokėjimai tik lietuviškais metodais (Paysera)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="section-header">
+    <div class="section-label">Paslaugos</div>
+    <h2>Ką galiu padaryti jums?</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">01</div><div class="service-icon">🔧</div><h3>Web Remontas</h3><p>Svetainė neveikia? Klaidos, lėtas greitis, nulaužta — sutaisau greitai.</p><div class="service-price">nuo €39</div></div>
+    <div class="service-card"><div class="service-num">02</div><div class="service-icon">🤖</div><h3>AI Svetainė</h3><p>Claude AI sugeneruoja jūsų svetainę pagal aprašymą per 5 minutes.</p><div class="service-price">€149 vienkartinis</div></div>
+    <div class="service-card"><div class="service-num">03</div><div class="service-icon">📦</div><h3>WordPress / CMS</h3><p>Pilnai valdoma svetainė su administravimo paneliu.</p><div class="service-price">€349 vienkartinis</div></div>
+    <div class="service-card"><div class="service-num">04</div><div class="service-icon">⚡</div><h3>Custom Dev</h3><p>React, Next.js — individualūs sprendimai verslui.</p><div class="service-price">Individualus</div></div>
+    <div class="service-card"><div class="service-num">05</div><div class="service-icon">🛡️</div><h3>Web SPA priežiūra</h3><p>Mėnesinė priežiūra, monitoringas, backupai, turinio keitimai.</p><div class="service-price">€29–€129/mėn</div></div>
+    <div class="service-card"><div class="service-num">06</div><div class="service-icon">🧠</div><h3>AI Sprendimai</h3><p>AI agentai, chatbotai, automatizavimas jūsų verslui.</p><div class="service-price">Individualus</div></div>
+    <div class="service-card"><div class="service-num">07</div><div class="service-icon">🔍</div><h3>SEO</h3><p>Optimizuojame svetainę Google paieškos rezultatams.</p><div class="service-price">Individualus</div></div>
+    <div class="service-card"><div class="service-num">08</div><div class="service-icon">🖥️</div><h3>Serverių diegimas</h3><p>Linux serverių konfigūracija, hosting, domenai.</p><div class="service-price">Individualus</div></div>
+    <div class="service-card"><div class="service-num">09</div><div class="service-icon">🛒</div><h3>El. parduotuvė</h3><p>WooCommerce ar custom e-commerce sprendimai.</p><div class="service-price">Individualus</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:#f8fafc;border-top:1px solid #e2e8f0;">
+  <div class="testimonials">
+    <div class="section-header">
+      <div class="section-label">Atsiliepimai</div>
+      <h2>Ką sako klientai</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial"><div class="stars">★★★★★</div><p>"Mano WooCommerce parduotuvė buvo nulaužta. Donaldas sutaisė per kelias valandas ir viską apsaugojo."</p><div class="testimonial-author">— Rūta K., e-parduotuvės savininkė</div></div>
+      <div class="testimonial"><div class="stars">★★★★★</div><p>"AI sugeneruota svetainė mūsų kavinei — per dieną turėjome puikų puslapį. Tikrai rekomenduoju!"</p><div class="testimonial-author">— Tomas M., kavinės savininkas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Pradėkime dirbti</h2>
+  <p>Parašykite — atsakysiu per 24 valandas</p>
+  <div class="contact-form">
+    <div class="form-row"><label>Vardas</label><input type="text" placeholder="Jūsų vardas"></div>
+    <div class="form-row"><label>El. paštas</label><input type="email" placeholder="jusu@pastas.lt"></div>
+    <div class="form-row"><label>Paslauga</label><select><option>Web Remontas</option><option>AI Svetainė</option><option>WordPress</option><option>Kita</option></select></div>
+    <div class="form-row"><label>Žinutė</label><textarea placeholder="Aprašykite savo projektą ar problemą..."></textarea></div>
+    <button class="form-submit">Siųsti užklausą →</button>
+  </div>
+</section>
+
+<footer>
+  <div>© 2024 nodas.lt — IT paslaugos Lietuvoje</div>
+  <div style="display:flex;gap:20px;"><a href="#">Privatumo politika</a><a href="mailto:info@nodas.lt">info@nodas.lt</a></div>
+</footer>
+
+</body>
+</html>

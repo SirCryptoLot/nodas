@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nodas.lt — Dashboard Maketas</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f1f5f9; color:#0f172a; display:flex; height:100vh; overflow:hidden; }
+
+  /* SIDEBAR */
+  .sidebar { width:220px; background:#fff; border-right:1px solid #e2e8f0; display:flex; flex-direction:column; flex-shrink:0; }
+  .sidebar-logo { padding:20px 18px 16px; border-bottom:1px solid #f1f5f9; display:flex; align-items:center; gap:8px; }
+  .sidebar-logo-text { font-size:16px; font-weight:800; color:#1e40af; }
+  .sidebar-logo-text span { color:#93c5fd; font-size:12px; }
+  .sidebar-nav { padding:12px 0; flex:1; overflow-y:auto; }
+  .nav-section { padding:6px 14px 4px; font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:9px 16px; font-size:13px; font-weight:500; color:#475569; cursor:pointer; border-radius:0; transition:all 0.15s; margin:1px 8px; border-radius:8px; }
+  .nav-item:hover { background:#f8fafc; color:#1e40af; }
+  .nav-item.active { background:#eff6ff; color:#1e40af; font-weight:600; }
+  .nav-item-icon { width:16px; text-align:center; font-size:15px; }
+  .nav-badge { margin-left:auto; background:#dbeafe; color:#1d4ed8; font-size:10px; font-weight:700; padding:2px 7px; border-radius:999px; }
+  .sidebar-user { padding:14px 16px; border-top:1px solid #f1f5f9; display:flex; align-items:center; gap:10px; }
+  .user-avatar { width:32px; height:32px; background:#dbeafe; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#1e40af; }
+  .user-info-name { font-size:13px; font-weight:600; color:#0f172a; }
+  .user-info-tier { font-size:11px; color:#94a3b8; }
+
+  /* MAIN */
+  .main { flex:1; overflow-y:auto; display:flex; flex-direction:column; }
+  .topbar { background:#fff; border-bottom:1px solid #e2e8f0; padding:0 28px; height:56px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+  .topbar-title { font-size:15px; font-weight:700; color:#0f172a; }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .topbar-btn { background:#2563eb; color:#fff; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:600; border:none; cursor:pointer; }
+  .notif { width:32px; height:32px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; cursor:pointer; position:relative; }
+  .notif-dot { width:8px; height:8px; background:#ef4444; border-radius:50%; position:absolute; top:6px; right:6px; border:2px solid #fff; }
+
+  .content { padding:24px 28px; flex:1; }
+
+  /* STATS */
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+  .stat-card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:18px 20px; }
+  .stat-card-label { font-size:12px; color:#64748b; font-weight:500; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .stat-card-value { font-size:26px; font-weight:900; color:#0f172a; line-height:1; }
+  .stat-card-sub { font-size:12px; color:#94a3b8; margin-top:4px; }
+  .stat-card.accent { border-color:#bfdbfe; background:#eff6ff; }
+  .stat-card.accent .stat-card-value { color:#1e40af; }
+
+  /* GRID 2 col */
+  .two-col { display:grid; grid-template-columns:1fr 340px; gap:20px; }
+
+  /* PANEL */
+  .panel { background:#fff; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; }
+  .panel-header { padding:14px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center; }
+  .panel-title { font-size:14px; font-weight:700; color:#0f172a; }
+  .panel-link { font-size:12px; color:#2563eb; font-weight:600; cursor:pointer; }
+
+  /* SITES LIST */
+  .site-row { display:flex; align-items:center; gap:14px; padding:12px 20px; border-bottom:1px solid #f8fafc; }
+  .site-row:last-child { border-bottom:none; }
+  .site-thumb { width:40px; height:40px; background:linear-gradient(135deg,#dbeafe,#eff6ff); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .site-name { font-size:13px; font-weight:600; color:#0f172a; }
+  .site-sub { font-size:11px; color:#64748b; }
+  .site-status { margin-left:auto; background:#dcfce7; color:#166534; font-size:11px; font-weight:600; padding:3px 9px; border-radius:999px; }
+  .site-status.draft { background:#fef9c3; color:#854d0e; }
+
+  /* ORDERS */
+  .order-row { display:flex; align-items:center; gap:12px; padding:11px 20px; border-bottom:1px solid #f8fafc; }
+  .order-row:last-child { border-bottom:none; }
+  .order-icon { width:34px; height:34px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .order-name { font-size:13px; font-weight:600; color:#0f172a; }
+  .order-date { font-size:11px; color:#94a3b8; }
+  .order-status { margin-left:auto; font-size:11px; font-weight:600; padding:3px 9px; border-radius:999px; }
+  .status-pending { background:#fef3c7; color:#92400e; }
+  .status-progress { background:#dbeafe; color:#1e40af; }
+  .status-done { background:#dcfce7; color:#166534; }
+
+  /* QUICK ACTIONS */
+  .quick-actions { display:flex; flex-direction:column; gap:10px; padding:16px; }
+  .quick-btn { display:flex; align-items:center; gap:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px 14px; cursor:pointer; transition:all 0.15s; }
+  .quick-btn:hover { border-color:#93c5fd; background:#eff6ff; }
+  .quick-btn-icon { font-size:20px; }
+  .quick-btn-text { font-size:13px; font-weight:600; color:#0f172a; }
+  .quick-btn-sub { font-size:11px; color:#64748b; }
+  .quick-arrow { margin-left:auto; color:#94a3b8; font-size:14px; }
+
+  /* TIER BANNER */
+  .tier-banner { background:linear-gradient(135deg,#1e40af,#2563eb); border-radius:12px; padding:18px 20px; color:#fff; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; }
+  .tier-info { }
+  .tier-label { font-size:11px; font-weight:700; opacity:0.75; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
+  .tier-name { font-size:18px; font-weight:800; }
+  .tier-desc { font-size:12px; opacity:0.8; margin-top:3px; }
+  .tier-upgrade { background:rgba(255,255,255,0.2); color:#fff; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:600; border:1px solid rgba(255,255,255,0.3); cursor:pointer; white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+      <circle cx="8" cy="18" r="4.5" fill="#2563eb"/>
+      <circle cx="28" cy="8" r="4.5" fill="#2563eb" opacity="0.65"/>
+      <circle cx="28" cy="28" r="4.5" fill="#2563eb" opacity="0.65"/>
+      <line x1="8" y1="18" x2="28" y2="8" stroke="#2563eb" stroke-width="1.5" opacity="0.4"/>
+      <line x1="8" y1="18" x2="28" y2="28" stroke="#2563eb" stroke-width="1.5" opacity="0.4"/>
+    </svg>
+    <div class="sidebar-logo-text">nodas<span>.lt</span></div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">Pagrindinis</div>
+    <div class="nav-item active"><span class="nav-item-icon">🏠</span> Dashboard</div>
+    <div class="nav-item"><span class="nav-item-icon">🌐</span> Mano svetainės <span class="nav-badge">1</span></div>
+    <div class="nav-item"><span class="nav-item-icon">📋</span> Užsakymai <span class="nav-badge">2</span></div>
+
+    <div class="nav-section" style="margin-top:8px;">Paslaugos</div>
+    <div class="nav-item"><span class="nav-item-icon">🤖</span> AI Svetainė</div>
+    <div class="nav-item"><span class="nav-item-icon">🔧</span> Web Remontas</div>
+    <div class="nav-item"><span class="nav-item-icon">🛡️</span> Web SPA</div>
+    <div class="nav-item"><span class="nav-item-icon">🧠</span> AI Sprendimai</div>
+    <div class="nav-item"><span class="nav-item-icon">🔍</span> SEO</div>
+
+    <div class="nav-section" style="margin-top:8px;">Kita</div>
+    <div class="nav-item"><span class="nav-item-icon">👤</span> Profilis</div>
+  </nav>
+
+  <div class="sidebar-user">
+    <div class="user-avatar">D</div>
+    <div>
+      <div class="user-info-name">Donaldas</div>
+      <div class="user-info-tier">simple planas</div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-title">Sveiki sugrįžę, Donaldas 👋</div>
+    <div class="topbar-right">
+      <div class="notif">🔔<div class="notif-dot"></div></div>
+      <button class="topbar-btn">+ Naujas užsakymas</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- TIER BANNER -->
+    <div class="tier-banner">
+      <div class="tier-info">
+        <div class="tier-label">Jūsų planas</div>
+        <div class="tier-name">Simple</div>
+        <div class="tier-desc">1 AI svetainė · Pagrindinis funkcionalumas</div>
+      </div>
+      <button class="tier-upgrade">Atnaujinti planą →</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card accent">
+        <div class="stat-card-label">🌐 Svetainės</div>
+        <div class="stat-card-value">1</div>
+        <div class="stat-card-sub">iš 1 leidžiamų</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">📋 Užsakymai</div>
+        <div class="stat-card-value">2</div>
+        <div class="stat-card-sub">1 vykdomas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">🛡️ SPA planas</div>
+        <div class="stat-card-value">—</div>
+        <div class="stat-card-sub">neprenumeruota</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">📬 Žinutės</div>
+        <div class="stat-card-value">1</div>
+        <div class="stat-card-sub">neatsakyta</div>
+      </div>
+    </div>
+
+    <!-- TWO COLUMNS -->
+    <div class="two-col">
+
+      <!-- Kairė: svetainės + užsakymai -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">🌐 Mano svetainės</div>
+            <div class="panel-link">Visos →</div>
+          </div>
+          <div class="site-row">
+            <div class="site-thumb">☕</div>
+            <div>
+              <div class="site-name">kavine-vilnius.nodas.lt</div>
+              <div class="site-sub">Sukurta: 2024-03-10 · AI generuota</div>
+            </div>
+            <div class="site-status">Paskelbta</div>
+          </div>
+          <div style="padding:14px 20px;background:#f8fafc;border-top:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;color:#64748b;">Simple planas: 1 svetainė leidžiama</span>
+            <button style="background:#2563eb;color:#fff;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;border:none;cursor:pointer;">+ Nauja svetainė</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">📋 Paskutiniai užsakymai</div>
+            <div class="panel-link">Visi →</div>
+          </div>
+          <div class="order-row">
+            <div class="order-icon">🔧</div>
+            <div>
+              <div class="order-name">Web Remontas — WordPress</div>
+              <div class="order-date">2024-03-15</div>
+            </div>
+            <div class="order-status status-progress">Vykdoma</div>
+          </div>
+          <div class="order-row">
+            <div class="order-icon">🤖</div>
+            <div>
+              <div class="order-name">AI Svetainė — kavinė</div>
+              <div class="order-date">2024-03-10</div>
+            </div>
+            <div class="order-status status-done">Atlikta</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dešinė: greiti veiksmai -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">⚡ Greiti veiksmai</div>
+        </div>
+        <div class="quick-actions">
+          <div class="quick-btn">
+            <div class="quick-btn-icon">🤖</div>
+            <div>
+              <div class="quick-btn-text">Generuoti AI svetainę</div>
+              <div class="quick-btn-sub">Claude AI · nuo €149</div>
+            </div>
+            <div class="quick-arrow">›</div>
+          </div>
+          <div class="quick-btn">
+            <div class="quick-btn-icon">🔧</div>
+            <div>
+              <div class="quick-btn-text">Užsakyti remontą</div>
+              <div class="quick-btn-sub">Klaidos, atakos · nuo €39</div>
+            </div>
+            <div class="quick-arrow">›</div>
+          </div>
+          <div class="quick-btn">
+            <div class="quick-btn-icon">🛡️</div>
+            <div>
+              <div class="quick-btn-text">Prenumeruoti Web SPA</div>
+              <div class="quick-btn-sub">Monitoringas · nuo €29/mėn</div>
+            </div>
+            <div class="quick-arrow">›</div>
+          </div>
+          <div class="quick-btn">
+            <div class="quick-btn-icon">🧠</div>
+            <div>
+              <div class="quick-btn-text">AI Sprendimai</div>
+              <div class="quick-btn-sub">Chatbotai, agentai</div>
+            </div>
+            <div class="quick-arrow">›</div>
+          </div>
+          <div class="quick-btn">
+            <div class="quick-btn-icon">🔍</div>
+            <div>
+              <div class="quick-btn-text">SEO Optimizacija</div>
+              <div class="quick-btn-sub">Google paieška</div>
+            </div>
+            <div class="quick-arrow">›</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

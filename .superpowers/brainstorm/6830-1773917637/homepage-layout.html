@@ -1,0 +1,83 @@
+<h2>Pagrindinio puslapio struktūra</h2>
+<p class="subtitle">Kaip išdėstyti turinį landing page'e?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="services-first" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;font-size:11px;color:#334155;">
+      <div class="mock-nav" style="font-size:10px;margin-bottom:8px;">nodas.lt | Paslaugos | Kainos | Kontaktai</div>
+      <div style="background:#eff6ff;border-left:3px solid #3b82f6;padding:10px;border-radius:4px;margin-bottom:8px;">
+        <div style="font-weight:700;color:#1e3a8a;font-size:13px;">Hero — trumpas pavadinimas + CTA</div>
+        <div style="color:#64748b;">"Web remontas. Greita. Kokybiškai."</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;padding:8px;border-radius:4px;margin-bottom:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+        <div style="background:#f1f5f9;padding:6px;border-radius:3px;text-align:center;font-size:9px;">🔧 Remontas<br>nuo €39</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:3px;text-align:center;font-size:9px;">🤖 AI Svetainė<br>€149</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:3px;text-align:center;font-size:9px;">📦 Web SPA<br>€29/mėn</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;padding:8px;border-radius:4px;margin-bottom:6px;font-size:9px;color:#64748b;">
+        Kodėl mes? · 3 priežastys
+      </div>
+      <div style="background:#1e3a8a;padding:8px;border-radius:4px;text-align:center;color:#fff;font-size:9px;">
+        Kontaktai / Forma
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Paslaugos pirmiau</h3>
+      <p>Hero → Paslaugų tinklelis → Privalumai → Kontaktai. Klientas iš karto mato kainas ir paslauga. Greičiausias kelias iki užsakymo.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="story-first" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;font-size:11px;color:#334155;">
+      <div class="mock-nav" style="font-size:10px;margin-bottom:8px;">nodas.lt | Apie | Paslaugos | Blog | Kontaktai</div>
+      <div style="background:#1e3a8a;padding:12px;border-radius:4px;margin-bottom:8px;color:#fff;text-align:center;">
+        <div style="font-weight:700;font-size:14px;margin-bottom:4px;">Didelis hero + animacija</div>
+        <div style="font-size:9px;opacity:0.8;">Solo dev · Lietuva · Nuo 2024</div>
+        <div style="background:#3b82f6;padding:4px 10px;border-radius:3px;display:inline-block;margin-top:6px;font-size:9px;">Sužinoti daugiau ↓</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;padding:8px;border-radius:4px;margin-bottom:6px;font-size:9px;color:#64748b;">
+        Apie mane · istorija · vertybės
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;padding:8px;border-radius:4px;margin-bottom:6px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+        <div style="background:#f1f5f9;padding:6px;border-radius:3px;text-align:center;font-size:9px;">Paslauga 1</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:3px;text-align:center;font-size:9px;">Paslauga 2</div>
+      </div>
+      <div style="background:#f0fdf4;border:1px solid #86efac;padding:6px;border-radius:4px;font-size:9px;color:#166534;">
+        Atsiliepimai
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Istorija pirmiau</h3>
+      <p>Didelis hero → Apie mane → Paslaugos → Atsiliepimai → Kontaktai. Kuria pasitikėjimą, tinka solo dev verslui kur asmenybė svarbi.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="conversion" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;font-size:11px;color:#334155;">
+      <div class="mock-nav" style="font-size:10px;margin-bottom:8px;">nodas.lt | Paslaugos | Kainos | Kontaktai</div>
+      <div style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);padding:12px;border-radius:4px;margin-bottom:8px;color:#fff;">
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">Hero + forma dešinėje</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;">
+          <div style="font-size:9px;opacity:0.9;">Tekstas apie paslaugą ir privalumus</div>
+          <div style="background:rgba(255,255,255,0.15);padding:6px;border-radius:3px;font-size:8px;">
+            Vardas ___<br>El. paštas ___<br>Paslauga ▾<br><div style="background:#fff;color:#1e3a8a;padding:3px;border-radius:2px;margin-top:4px;text-align:center;">Siųsti</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px;">
+        <div style="background:#fff;border:1px solid #e2e8f0;padding:6px;border-radius:4px;text-align:center;font-size:9px;">✓ Stat. 1</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;padding:6px;border-radius:4px;text-align:center;font-size:9px;">✓ Stat. 2</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;padding:6px;border-radius:4px;text-align:center;font-size:9px;">✓ Stat. 3</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;padding:8px;border-radius:4px;font-size:9px;color:#64748b;">
+        Pilnas paslaugų sąrašas
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Konversija pirmiau</h3>
+      <p>Hero su kontaktų forma dešinėje → Statistika → Paslaugos. Maksimaliai orientuota į užsakymus — klientas gali susisiekti nepaslinko žemyn.</p>
+    </div>
+  </div>
+
+</div>
