@@ -13,7 +13,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Trūksta laukų' }, { status: 400 })
   }
 
-  await supabase.from('contact_submissions').insert({ name, email, service: service ?? 'Kita', message })
+  const { error } = await supabase
+    .from('contact_submissions')
+    .insert({ name, email, service: service ?? 'Kita', message })
+
+  if (error) {
+    return NextResponse.json({ error: 'Serverio klaida' }, { status: 500 })
+  }
 
   return NextResponse.json({ ok: true })
 }
