@@ -51,6 +51,12 @@ export async function PUT(req: NextRequest) {
 
   const { html, name, prompt } = await req.json()
 
+  // Ensure profile exists
+  await supabase.from('profiles').upsert(
+    { id: user.id, full_name: (user.user_metadata?.full_name as string) ?? null },
+    { onConflict: 'id', ignoreDuplicates: true }
+  )
+
   const { data: profile } = await supabase.from('profiles').select('tier').eq('id', user.id).single()
   if (profile?.tier === 'simple') {
     const { count } = await supabase.from('generated_sites').select('*', { count: 'exact', head: true }).eq('user_id', user.id)

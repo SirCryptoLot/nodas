@@ -26,6 +26,12 @@ export async function POST(req: NextRequest) {
   const { service_type, notes, price } = await req.json()
   if (!service_type) return NextResponse.json({ error: 'service_type privalomas' }, { status: 400 })
 
+  // Ensure profile exists (trigger may not have fired)
+  await supabase.from('profiles').upsert(
+    { id: user.id, full_name: (user.user_metadata?.full_name as string) ?? null },
+    { onConflict: 'id', ignoreDuplicates: true }
+  )
+
   const { data, error } = await supabase.from('orders').insert({
     user_id: user.id, service_type, notes, price,
   }).select().single()
