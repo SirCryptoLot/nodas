@@ -40,7 +40,9 @@ export async function POST(req: NextRequest) {
       sendOrderConfirmEmail(user.email!, userName, service_type),
       sendAdminNewOrder(service_type, userName),
     ])
-  } catch { /* email failure non-fatal */ }
+  } catch (emailErr) {
+    console.error('[orders] email send failed:', emailErr)
+  }
 
   return NextResponse.json({ order: data })
 }
