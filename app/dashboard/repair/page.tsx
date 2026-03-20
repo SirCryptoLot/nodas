@@ -62,7 +62,7 @@ export default function RepairPage() {
           </div>
         ))}
         {error && <div style={{ color: '#ef4444', fontSize: 13, marginBottom: 12 }}>{error}</div>}
-        <button type="submit" disabled={loading || !form.problem.trim()} style={{ background: '#2563eb', color: '#fff', padding: '11px 24px', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}>
+        <button type="submit" onClick={e => e.stopPropagation()} disabled={loading || !form.problem.trim()} style={{ background: '#2563eb', color: '#fff', padding: '11px 24px', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}>
           {loading ? 'Siunčiama...' : 'Siųsti užklausą →'}
         </button>
       </form>

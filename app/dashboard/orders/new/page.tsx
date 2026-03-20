@@ -60,7 +60,7 @@ export default function NewOrderPage() {
         {step === 1 && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {SERVICES.map(s => (
-              <button key={s.name} onClick={() => { setService(s.name); setStep(2) }}
+              <button type="button" key={s.name} onClick={(e) => { e.preventDefault(); setService(s.name); setStep(2) }}
                 style={{ padding: '14px 16px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, textAlign: 'left', cursor: 'pointer', transition: 'border-color 0.15s' }}>
                 <div style={{ fontSize: 20, marginBottom: 4 }}>{s.icon}</div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>{s.name}</div>
@@ -116,10 +116,11 @@ export default function NewOrderPage() {
             )}
 
             <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={() => setStep(1)} style={{ padding: '11px 20px', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 8, fontSize: 14, cursor: 'pointer', fontWeight: 500 }}>
+              <button type="button" onClick={() => setStep(1)} style={{ padding: '11px 20px', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 8, fontSize: 14, cursor: 'pointer', fontWeight: 500 }}>
                 ← Atgal
               </button>
               <button
+                type="button"
                 onClick={handleSubmit}
                 disabled={loading || !form.description.trim() || !form.contact.trim()}
                 style={{ padding: '11px 28px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', opacity: (loading || !form.description.trim() || !form.contact.trim()) ? 0.6 : 1 }}
