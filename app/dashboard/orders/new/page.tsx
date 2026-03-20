@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 // ── Service definitions ────────────────────────────────────────────────────
@@ -449,12 +450,23 @@ const SERVICE_WIZARD: Record<string, WizardStep[]> = {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export default function NewOrderPage() {
+  const searchParams = useSearchParams()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [step, setStep] = useState(0)
   const [values, setValues] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+
+  // Pre-select service from URL param ?s=remontas
+  useEffect(() => {
+    const s = searchParams.get('s')
+    if (s && SERVICE_WIZARD[s]) {
+      setSelectedId(s)
+      setStep(0)
+      setValues({})
+    }
+  }, [searchParams])
 
   const selectedService = SERVICES.find(s => s.id === selectedId)
   const wizard = selectedId ? SERVICE_WIZARD[selectedId] ?? [] : []
