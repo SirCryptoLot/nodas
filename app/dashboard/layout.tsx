@@ -17,9 +17,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const tier = profile?.tier ?? 'simple'
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9' }}>
+    <div className="dashboard-layout">
       <DashboardSidebar userName={userName} tier={tier} />
-      <div style={{ marginLeft: 220, flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="dashboard-content" style={{ display: 'flex', flexDirection: 'column' }}>
         {children}
       </div>
     </div>

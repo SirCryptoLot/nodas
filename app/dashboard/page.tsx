@@ -21,7 +21,7 @@ export default async function DashboardPage() {
   return (
     <div style={{ padding: '0 28px 28px' }}>
       {/* Topbar */}
-      <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0 0 0', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, marginLeft: -28, marginRight: -28, paddingLeft: 28, paddingRight: 28 }}>
+      <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, marginLeft: -28, marginRight: -28, paddingLeft: 72, paddingRight: 28 }}>
         <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Sveiki sugrįžę, {firstName} 👋</div>
         <Link href="/dashboard/orders/new" style={{ background: '#2563eb', color: '#fff', padding: '7px 16px', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
           + Naujas užsakymas
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16, marginBottom: 24 }}>
+      <div className="mobile-grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16, marginBottom: 24 }}>
         {[
           { label: '🌐 Svetainės', value: siteCount, sub: `iš ${profile?.tier === 'simple' ? '1' : '∞'} leidžiamų` },
           { label: '📋 Užsakymai', value: orderCount, sub: `${activeOrders} vykdomi` },
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Quick actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
+      <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
         {[
           { href: '/dashboard/sites', icon: '🤖', name: 'AI Svetainė', sub: 'nuo €149' },
           { href: '/dashboard/repair', icon: '🔧', name: 'Web Remontas', sub: 'nuo €39' },

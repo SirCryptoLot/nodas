@@ -42,7 +42,7 @@ export default function Home() {
         background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)',
         padding: '72px 40px 80px',
       }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 420px', gap: 60, alignItems: 'center' }}>
+        <div className="mobile-stack" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 420px', gap: 60, alignItems: 'center' }}>
 
           {/* Left column */}
           <div>
@@ -54,7 +54,7 @@ export default function Home() {
               <span>🇱🇹</span> Lietuvos IT specialistas
             </div>
 
-            <h1 style={{
+            <h1 className="mobile-hero-title" style={{
               fontSize: 48, fontWeight: 900, color: '#fff',
               lineHeight: 1.15, margin: '0 0 20px',
             }}>
@@ -114,7 +114,7 @@ export default function Home() {
           </div>
 
           {/* Right column — quick-order card */}
-          <div style={{
+          <div className="mobile-full" style={{
             background: '#fff', borderRadius: 20, padding: 28,
             boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
           }}>
@@ -244,7 +244,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div style={{
+          <div className="mobile-grid-1" style={{
             display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20,
           }}>
             {SERVICES.map(({ icon, title, desc, price }) => (
