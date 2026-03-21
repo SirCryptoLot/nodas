@@ -377,6 +377,106 @@ export async function sendShopOrderConfirmEmail(to: string, total: number, items
   })
 }
 
+// ── Invoice email (client) ─────────────────────────────────────────────────
+
+export async function sendInvoiceEmail(invoice: {
+  invoice_number: string
+  invoice_type: string
+  client_name: string
+  client_email: string
+  client_company?: string
+  client_address?: string
+  client_vat?: string
+  items: { description: string; qty: number; unit_price: number }[]
+  vat_rate: number
+  due_date?: string
+  notes?: string
+  issued_at?: string
+}) {
+  const subtotal = invoice.items.reduce((s, i) => s + i.qty * i.unit_price, 0)
+  const vatAmt = subtotal * (invoice.vat_rate / 100)
+  const total = subtotal + vatAmt
+  const isProforma = invoice.invoice_type === 'proforma'
+  const dueDate = invoice.due_date
+    ? new Date(invoice.due_date).toLocaleDateString('lt-LT', { year: 'numeric', month: 'long', day: 'numeric' })
+    : '—'
+
+  const itemRows = invoice.items.map(i => `
+    <tr>
+      <td style="padding:10px 14px;font-size:13px;color:#0f172a;border-bottom:1px solid #f1f5f9">${i.description}</td>
+      <td style="padding:10px 14px;font-size:13px;color:#374151;text-align:center;border-bottom:1px solid #f1f5f9">${i.qty}</td>
+      <td style="padding:10px 14px;font-size:13px;color:#374151;text-align:right;border-bottom:1px solid #f1f5f9">€${i.unit_price.toFixed(2)}</td>
+      <td style="padding:10px 14px;font-size:13px;font-weight:600;color:#0f172a;text-align:right;border-bottom:1px solid #f1f5f9">€${(i.qty * i.unit_price).toFixed(2)}</td>
+    </tr>
+  `).join('')
+
+  await resend.emails.send({
+    from: FROM, to: invoice.client_email,
+    subject: `🧾 ${isProforma ? 'Išankstinė sąskaita' : 'Sąskaita faktūra'} Nr. ${invoice.invoice_number} — nodas.lt`,
+    html: layout(`
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:22px;font-weight:900;color:#0f172a;margin-bottom:4px">🧾 ${isProforma ? 'Išankstinė sąskaita' : 'Sąskaita faktūra'}</div>
+          <div style="font-size:14px;color:#64748b">Nr. <strong>${invoice.invoice_number}</strong></div>
+          ${isProforma ? `<span style="display:inline-block;background:#fef9c3;color:#854d0e;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;margin-top:6px">IŠANKSTINĖ</span>` : ''}
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:12px;color:#94a3b8">Išrašyta</div>
+          <div style="font-size:13px;font-weight:600;color:#374151">${invoice.issued_at ? new Date(invoice.issued_at).toLocaleDateString('lt-LT') : new Date().toLocaleDateString('lt-LT')}</div>
+          <div style="font-size:12px;color:#94a3b8;margin-top:6px">Apmokėti iki</div>
+          <div style="font-size:13px;font-weight:700;color:#dc2626">${dueDate}</div>
+        </div>
+      </div>
+
+      ${infoTable([
+        ['Klientas', `<strong>${invoice.client_name}</strong>${invoice.client_company ? `<br><span style="color:#64748b">${invoice.client_company}</span>` : ''}`],
+        ...(invoice.client_address ? [['Adresas', invoice.client_address] as [string, string]] : []),
+        ...(invoice.client_vat ? [['PVM kodas', invoice.client_vat] as [string, string]] : []),
+        ['Tiekėjas', 'nodas.lt · info@nodas.lt'],
+      ])}
+
+      <table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin:20px 0">
+        <thead>
+          <tr style="background:#f8fafc">
+            <th style="padding:10px 14px;font-size:12px;font-weight:700;color:#64748b;text-align:left">Aprašymas</th>
+            <th style="padding:10px 14px;font-size:12px;font-weight:700;color:#64748b;text-align:center">Kiekis</th>
+            <th style="padding:10px 14px;font-size:12px;font-weight:700;color:#64748b;text-align:right">Kaina</th>
+            <th style="padding:10px 14px;font-size:12px;font-weight:700;color:#64748b;text-align:right">Suma</th>
+          </tr>
+        </thead>
+        <tbody>${itemRows}</tbody>
+        <tfoot>
+          <tr><td colspan="3" style="padding:8px 14px;font-size:13px;color:#64748b;text-align:right">Suma be PVM</td>
+              <td style="padding:8px 14px;font-size:13px;color:#0f172a;font-weight:600;text-align:right">€${subtotal.toFixed(2)}</td></tr>
+          ${invoice.vat_rate > 0 ? `<tr><td colspan="3" style="padding:8px 14px;font-size:13px;color:#64748b;text-align:right">PVM (${invoice.vat_rate}%)</td>
+              <td style="padding:8px 14px;font-size:13px;color:#0f172a;font-weight:600;text-align:right">€${vatAmt.toFixed(2)}</td></tr>` : ''}
+          <tr style="background:#f0fdf4">
+            <td colspan="3" style="padding:12px 14px;font-size:15px;font-weight:800;color:#166534;text-align:right">Viso mokėti</td>
+            <td style="padding:12px 14px;font-size:17px;font-weight:900;color:#166534;text-align:right">€${total.toFixed(2)}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      ${invoice.notes ? `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;margin:16px 0">
+        <div style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:6px">Pastabos</div>
+        <div style="font-size:13px;color:#374151;line-height:1.6;white-space:pre-wrap">${invoice.notes}</div>
+      </div>` : ''}
+
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:16px 18px;margin:20px 0">
+        <div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px">💳 Apmokėjimo informacija</div>
+        <div style="font-size:13px;color:#1e40af;line-height:1.7">
+          El. paštas: <strong>info@nodas.lt</strong><br>
+          Apmokėti iki: <strong>${dueDate}</strong>
+        </div>
+      </div>
+
+      ${btn(`${SITE_URL}/dashboard`, '💳 Peržiūrėti sąskaitą →')}
+
+      <p style="font-size:12px;color:#94a3b8;margin:16px 0 0;text-align:center">Klausimų? <a href="mailto:info@nodas.lt" style="color:#2563eb">info@nodas.lt</a></p>
+    `, `Sąskaita Nr. ${invoice.invoice_number} — €${total.toFixed(2)}`),
+  })
+}
+
 // ── Admin — shop order ─────────────────────────────────────────────────────
 
 export async function sendAdminShopOrder(total: number, itemCount: number) {

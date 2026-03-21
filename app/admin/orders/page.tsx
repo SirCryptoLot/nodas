@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import Link from 'next/link'
 
 type Order = {
   id: string
@@ -317,6 +318,12 @@ export default function AdminOrdersPage() {
                           background: '#2563eb', color: '#fff', opacity: sending === order.id ? 0.7 : 1 }}>
                         {sending === order.id ? '📤 Siunčiama...' : '📧 Siųsti klientui'}
                       </button>
+
+                      <Link
+                        href={`/admin/saskaitos?client_name=${encodeURIComponent(order.user_name)}&client_email=${encodeURIComponent(order.user_email)}&service=${encodeURIComponent(order.service_type)}&price=${order.price ?? ''}&order_id=${order.id}`}
+                        style={{ padding: '10px 16px', background: '#f0fdf4', color: '#166534', border: '1px solid #86efac', borderRadius: 8, fontSize: 13, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                        💼 Išrašyti sąskaitą
+                      </Link>
 
                       {order.user_email && (
                         <a href={`mailto:${order.user_email}?subject=${encodeURIComponent(`Jūsų ${order.service_type} užsakymas`)}`}

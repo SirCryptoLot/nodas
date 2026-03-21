@@ -11,6 +11,7 @@ const ADMIN_NAV = [
   { href: '/admin/produktai', label: '🛒 Produktai' },
   { href: '/admin/kontaktai', label: '📬 Kontaktai' },
   { href: '/admin/uzrasai',   label: '🗒️ Užrašai' },
+  { href: '/admin/saskaitos', label: '💼 Sąskaitos' },
 ]
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
