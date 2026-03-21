@@ -199,6 +199,7 @@ export async function sendOrderStatusEmail(
   serviceType: string,
   status: string,
   notes = '',
+  clientComment = '',
 ) {
   const statusMap: Record<string, { icon: string; label: string; color: string; bg: string; msg: string }> = {
     in_progress: { icon: '⚙️', label: 'Vykdoma', color: '#1e40af', bg: '#dbeafe', msg: 'Komanda pradėjo dirbti su jūsų užsakymu.' },
@@ -225,6 +226,12 @@ export async function sendOrderStatusEmail(
         ['Atnaujinta', new Date().toLocaleDateString('lt-LT', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })],
       ])}
 
+      ${clientComment ? `
+        <div style="background:#f0fdf4;border:1px solid #86efac;border-left:4px solid #22c55e;border-radius:8px;padding:16px 18px;margin:20px 0">
+          <div style="font-size:12px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">💬 Žinutė nuo komandos</div>
+          <div style="font-size:14px;color:#14532d;line-height:1.7;white-space:pre-wrap">${clientComment}</div>
+        </div>
+      ` : ''}
       ${notes ? notesBox(notes) : ''}
 
       ${status === 'done' ? `

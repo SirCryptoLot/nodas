@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     .select('*, profiles(full_name, phone)')
     .order('created_at', { ascending: false })
 
-  // Attach emails from auth.users
   const { data: { users } } = await adminSupabase.auth.admin.listUsers({ perPage: 1000 })
   const emailMap = Object.fromEntries(users.map(u => [u.id, u.email ?? '']))
 
@@ -25,7 +24,7 @@ export async function GET(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   if (!await checkAdmin(req)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  const { id, status, price, admin_notes } = await req.json()
+  const { id, status, price, admin_notes, client_comment, sendEmail } = await req.json()
 
   const updates: Record<string, unknown> = {}
   if (status !== undefined) updates.status = status
@@ -36,8 +35,8 @@ export async function PUT(req: NextRequest) {
     .from('orders').update(updates).eq('id', id).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Send email on status change
-  if (status && order) {
+  // Send email to client only if explicitly requested
+  if (sendEmail && order) {
     try {
       const [{ data: profile }, { data: authData }] = await Promise.all([
         adminSupabase.from('profiles').select('full_name').eq('id', order.user_id).single(),
@@ -45,12 +44,19 @@ export async function PUT(req: NextRequest) {
       ])
       const userEmail = authData.user?.email
       if (userEmail) {
+        // Combine original notes + admin comment for the email
+        const emailContent = [
+          order.notes,
+          client_comment ? `\n💬 Papildoma informacija:\n${client_comment}` : '',
+        ].filter(Boolean).join('\n')
+
         await sendOrderStatusEmail(
           userEmail,
           profile?.full_name ?? 'Klientas',
           order.service_type,
-          status,
-          order.notes ?? '',
+          status ?? order.status,
+          emailContent,
+          client_comment ?? '',
         )
       }
     } catch (e) {
