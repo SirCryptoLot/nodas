@@ -1,4 +1,180 @@
+import type { Metadata } from 'next'
 import { ContactForm } from './_components/ContactForm'
+
+const BASE_URL = 'https://nodas.lt'
+
+export const metadata: Metadata = {
+  title: 'Svetainių remontas ir priežiūra Lietuvoje — nuo €39 | nodas.lt',
+  description:
+    'Svetainė sugedo, lėta ar nulaužta? Profesionalus web remontas Lietuvoje — diagnozė per 4h, mokate tik už rezultatą. Web SPA priežiūra nuo €29/mėn. WordPress, React, Wix, Shopify, Next.js.',
+  alternates: {
+    canonical: BASE_URL,
+    languages: { lt: BASE_URL, 'x-default': BASE_URL },
+  },
+  openGraph: {
+    title: 'Svetainių remontas ir priežiūra Lietuvoje | nodas.lt',
+    description:
+      'Svetainė sugedo? Sutvarkom per 24h. Diagnozė nemokama — mokate tik už rezultatą. Web SPA priežiūra nuo €29/mėn. Dirbame su WordPress, React, Wix, Shopify.',
+    url: BASE_URL,
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'nodas.lt — Svetainių remontas Lietuvoje' }],
+  },
+}
+
+// ── JSON-LD: Service schemas ────────────────────────────────────────────────
+
+const jsonLdWebRemontas = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${BASE_URL}/#web-remontas`,
+  name: 'Web Remontas',
+  alternateName: ['Svetainės remontas', 'Svetainių taisymas', 'WordPress remontas'],
+  description:
+    'Profesionalus svetainių remontas Lietuvoje. Diagnozuojame per 4 valandas, taisome greitai. Dirbame su WordPress, React, Next.js, Wix, Shopify ir kitomis platformomis. Mokate tik už rezultatą.',
+  url: BASE_URL,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'nodas.lt',
+    url: BASE_URL,
+    email: 'info@nodas.lt',
+    address: { '@type': 'PostalAddress', addressCountry: 'LT' },
+  },
+  areaServed: { '@type': 'Country', name: 'Lithuania' },
+  serviceType: 'Web Development',
+  category: 'Website Repair',
+  offers: {
+    '@type': 'Offer',
+    name: 'Web Remontas',
+    description: 'Svetainių remontas ir taisymas. Diagnozė nemokama.',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      minPrice: '39',
+      priceCurrency: 'EUR',
+      description: 'nuo €39 — galutinė kaina priklauso nuo darbo sudėtingumo',
+    },
+    availability: 'https://schema.org/InStock',
+    validFrom: '2024-01-01',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Web Remonto paslaugos',
+    itemListElement: [
+      { '@type': 'Offer', name: 'WordPress remontas', price: '39', priceCurrency: 'EUR' },
+      { '@type': 'Offer', name: 'Svetainės saugumo atkūrimas', price: '59', priceCurrency: 'EUR' },
+      { '@type': 'Offer', name: 'Greičio optimizavimas', price: '49', priceCurrency: 'EUR' },
+      { '@type': 'Offer', name: 'SSL sertifikato konfigūracija', price: '39', priceCurrency: 'EUR' },
+    ],
+  },
+}
+
+const jsonLdWebSpa = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${BASE_URL}/#web-spa`,
+  name: 'Web SPA Priežiūra',
+  alternateName: ['Svetainių priežiūra', 'Svetainių palaikymas', 'Web priežiūra Lietuva'],
+  description:
+    'Mėnesinė svetainių priežiūra ir monitoringas. Uptime stebėjimas 24/7, kasdieniniai backupai, SSL atnaujinimas, turinio keitimai. Jūs — verslui, mes — techninei daliai.',
+  url: BASE_URL,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'nodas.lt',
+    url: BASE_URL,
+    email: 'info@nodas.lt',
+    address: { '@type': 'PostalAddress', addressCountry: 'LT' },
+  },
+  areaServed: { '@type': 'Country', name: 'Lithuania' },
+  serviceType: 'Website Maintenance',
+  category: 'Web Hosting & Maintenance',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Web SPA priežiūros planai',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        name: 'Bazinis planas',
+        description: 'Uptime stebėjimas, SSL, mėnesinė ataskaita, 1 turinio keitimas',
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: '29', priceCurrency: 'EUR', unitCode: 'MON' },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Pro planas',
+        description: 'Kasdieniniai backupai, 3 turinio keitimai/mėn., atsakymas per 8h',
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: '59', priceCurrency: 'EUR', unitCode: 'MON' },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Enterprise planas',
+        description: 'Realaus laiko monitoringas, CDN, SLA 99.9%, avarinis atsakymas per 2h',
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: '129', priceCurrency: 'EUR', unitCode: 'MON' },
+      },
+    ],
+  },
+}
+
+const jsonLdFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Kaip greitai galite sutvarkyti svetainę?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Diagnozę atliekame per 4 valandas. Dauguma remonto darbų — tą pačią dieną. Sudėtingesniais atvejais — per 1–2 darbo dienas.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kiek kainuoja web remontas?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Paprastos klaidos taisymas — nuo €39. Galutinė kaina priklauso nuo problemos sudėtingumo. Visada pateikiame kainą prieš pradedant darbą — jokių netikėtumų.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kas įeina į Web SPA priežiūrą?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Priklausomai nuo plano: uptime monitoringas, kasdieniniai backupai, SSL atnaujinimas, turinio keitimai ir prioritetinis techninis palaikymas.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ar dirbate su visomis svetainių platformomis?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Taip — WordPress, Webflow, Wix, Shopify, custom HTML/PHP, React/Next.js ir daugiau.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ar reikia mokėti iš anksto?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Web remontui — ne. Mokate tik po to, kai problema išspręsta ir jūs patenkinti rezultatu.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kuo skiriasi Web SPA nuo paprastos priežiūros?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Web SPA — tai aktyvus stebėjimas ir prevencija, o ne tik reagavimas į problemas. Jei svetainė sugenda — apie tai sužinosime mes, ne jūs.',
+      },
+    },
+  ],
+}
+
+const jsonLdBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Pradžia', item: BASE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Web Remontas', item: `${BASE_URL}/#paslaugos` },
+    { '@type': 'ListItem', position: 3, name: 'Web SPA Priežiūra', item: `${BASE_URL}/#planai` },
+  ],
+}
 
 const SERVICES = [
   { icon: '🔧', title: 'Web Remontas', desc: 'Svetainė lėta, nulaužta ar neveikia? Diagnozuojame per 4h, taisome greitai. Jokio mokėjimo iš anksto.', price: 'nuo €39', highlight: true },
@@ -66,6 +242,10 @@ const FAQ = [
 export default function Home() {
   return (
     <main style={{ background: '#f8fafc', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebRemontas) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSpa) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
 
       {/* ── HERO ── */}
       <section className="mobile-section" style={{
