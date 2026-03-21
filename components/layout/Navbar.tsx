@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { Logo } from '@/components/ui/Logo'
 
 const NAV_LINKS = [
-  { href: '/#paslaugos', label: 'Paslaugos' },
-  { href: '/#apie', label: 'Apie' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#kontaktai', label: 'Kontaktai' },
+  { href: '/web-remontas', label: '🔧 Web Remontas' },
+  { href: '/web-spa',      label: '🛡️ Web SPA' },
+  { href: '/blog',         label: 'Blog' },
+  { href: '/#kontaktai',   label: 'Kontaktai' },
 ]
 
 export function Navbar() {

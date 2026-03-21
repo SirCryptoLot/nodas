@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 const BASE = 'https://nodas.lt'
-const now = new Date()
+const now  = new Date()
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [{ data: posts }, { data: products }] = await Promise.all([
@@ -12,17 +12,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ])
 
   const static_: MetadataRoute.Sitemap = [
-    // Core pages — highest priority
-    { url: BASE,                    lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/#paslaugos`,    lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/#planai`,       lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/#duk`,          lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/#kontaktai`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    // Blog & shop
-    { url: `${BASE}/blog`,          lastModified: now, changeFrequency: 'daily',   priority: 0.7 },
-    { url: `${BASE}/parduotuve`,    lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
-    // Auth
-    { url: `${BASE}/auth/login`,    lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
+    // Pagrindiniai puslapiai
+    { url: BASE,                   lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE}/web-remontas`, lastModified: now, changeFrequency: 'weekly',  priority: 0.95 },
+    { url: `${BASE}/web-spa`,      lastModified: now, changeFrequency: 'weekly',  priority: 0.95 },
+    // Sekcijos
+    { url: `${BASE}/#paslaugos`,   lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/#planai`,      lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/#duk`,         lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/#kontaktai`,   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    // Blog ir parduotuvė
+    { url: `${BASE}/blog`,         lastModified: now, changeFrequency: 'daily',   priority: 0.7 },
+    { url: `${BASE}/parduotuve`,   lastModified: now, changeFrequency: 'weekly',  priority: 0.5 },
   ]
 
   const blogPages: MetadataRoute.Sitemap = (posts ?? []).map(p => ({

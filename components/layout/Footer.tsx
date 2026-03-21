@@ -14,7 +14,7 @@ export function Footer() {
               nodas<span style={{ color: '#60a5fa' }}>.lt</span>
             </div>
             <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.7, margin: '0 0 16px' }}>
-              Lietuviškas IT specialistas. Web remontas, AI svetainės, serveriai ir daugiau.
+              Svetainių remontas ir priežiūra Lietuvoje. Diagnozė per 4h, mokate tik už rezultatą.
             </p>
             <a href="mailto:info@nodas.lt" style={{ color: '#60a5fa', fontSize: 13, textDecoration: 'none' }}>
               ✉️ info@nodas.lt
@@ -27,11 +27,11 @@ export function Footer() {
               Paslaugos
             </div>
             {[
-              { href: '/#paslaugos', label: 'Web Remontas' },
-              { href: '/#paslaugos', label: 'AI Svetainė' },
-              { href: '/#paslaugos', label: 'WordPress / CMS' },
-              { href: '/#paslaugos', label: 'Web SPA priežiūra' },
-              { href: '/#paslaugos', label: 'SEO' },
+              { href: '/web-remontas',  label: 'Web Remontas' },
+              { href: '/web-spa',       label: 'Web SPA priežiūra' },
+              { href: '/#paslaugos',    label: 'WordPress / CMS' },
+              { href: '/#paslaugos',    label: 'AI Svetainė' },
+              { href: '/#paslaugos',    label: 'SEO' },
             ].map(({ href, label }) => (
               <Link key={label} href={href} style={{ display: 'block', fontSize: 13, color: '#64748b', textDecoration: 'none', marginBottom: 8 }}>
                 {label}
@@ -45,11 +45,11 @@ export function Footer() {
               Nuorodos
             </div>
             {[
-              { href: '/blog', label: 'Blog' },
-              { href: '/parduotuve', label: 'Parduotuvė' },
-              { href: '/#apie', label: 'Apie' },
-              { href: '/#kontaktai', label: 'Kontaktai' },
-              { href: '/auth/login', label: 'Prisijungti' },
+              { href: '/#planai',     label: 'Planai ir kainos' },
+              { href: '/#duk',        label: 'D.U.K.' },
+              { href: '/blog',        label: 'Blog' },
+              { href: '/#kontaktai',  label: 'Kontaktai' },
+              { href: '/auth/login',  label: 'Prisijungti' },
             ].map(({ href, label }) => (
               <Link key={label} href={href} style={{ display: 'block', fontSize: 13, color: '#64748b', textDecoration: 'none', marginBottom: 8 }}>
                 {label}
