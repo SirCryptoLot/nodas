@@ -14,7 +14,6 @@ const NAV_MAIN = [
 
 const NAV_SERVICES = [
   { href: '/dashboard/orders/new?s=remontas',  icon: '🔧', label: 'Web Remontas' },
-  { href: '/dashboard/orders/new?s=ai-site',   icon: '🤖', label: 'AI Svetainė' },
   { href: '/dashboard/orders/new?s=wordpress', icon: '📦', label: 'WordPress / CMS' },
   { href: '/dashboard/orders/new?s=custom',    icon: '⚡', label: 'Custom Dev' },
   { href: '/dashboard/orders/new?s=spa',       icon: '🛡️', label: 'Web SPA priežiūra' },

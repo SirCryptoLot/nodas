@@ -7,7 +7,6 @@ import { createClient } from '@/lib/supabase/client'
 
 const SERVICES = [
   { id: 'remontas',  icon: '🔧', name: 'Web Remontas',      price: 'nuo €39' },
-  { id: 'ai-site',  icon: '🤖', name: 'AI Svetainė',        price: '€149' },
   { id: 'wordpress', icon: '📦', name: 'WordPress / CMS',    price: 'nuo €349' },
   { id: 'custom',   icon: '⚡', name: 'Custom Dev',          price: 'Individualus' },
   { id: 'spa',      icon: '🛡️', name: 'Web SPA priežiūra',  price: 'nuo €29/mėn' },

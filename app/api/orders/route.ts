@@ -43,8 +43,8 @@ export async function POST(req: NextRequest) {
     const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', user.id).single()
     const userName = profile?.full_name ?? user.email ?? 'Vartotojas'
     await Promise.all([
-      sendOrderConfirmEmail(user.email!, userName, service_type),
-      sendAdminNewOrder(service_type, userName),
+      sendOrderConfirmEmail(user.email!, userName, service_type, notes ?? '', data.id),
+      sendAdminNewOrder(service_type, userName, user.email!, notes ?? '', data.id),
     ])
   } catch (emailErr) {
     console.error('[orders] email send failed:', emailErr)

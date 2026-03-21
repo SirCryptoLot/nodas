@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 
-type Site = { id: string; name: string; subdomain: string; created_at: string }
 type Order = { id: string; service_type: string; status: string; created_at: string }
 
 const STATUS_COLORS: Record<string, { bg: string; color: string; label: string }> = {
@@ -14,20 +13,18 @@ const STATUS_COLORS: Record<string, { bg: string; color: string; label: string }
 }
 
 export function ProfileClient({
-  email, profile, sites, recentOrders,
+  email, profile, recentOrders,
 }: {
   email: string
   profile: Record<string, string> | null
-  sites: Site[]
   recentOrders: Order[]
 }) {
-  const [name, setName]       = useState(profile?.full_name ?? '')
-  const [phone, setPhone]     = useState(profile?.phone ?? '')
-  const [notes, setNotes]     = useState('')
-  const [saving, setSaving]   = useState(false)
-  const [saved, setSaved]     = useState(false)
+  const [name, setName]   = useState(profile?.full_name ?? '')
+  const [phone, setPhone] = useState(profile?.phone ?? '')
+  const [notes, setNotes] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved]   = useState(false)
 
-  // Load notes from localStorage
   useEffect(() => {
     const stored = localStorage.getItem('nodas_profile_notes')
     if (stored) setNotes(stored)
@@ -84,7 +81,6 @@ export function ProfileClient({
             </div>
           </div>
 
-          {/* Form */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             {[
               { label: 'Vardas Pavardė', value: name, set: setName, placeholder: 'Jonas Jonaitis' },
@@ -102,8 +98,7 @@ export function ProfileClient({
             ))}
           </div>
 
-          <div style={{ marginTop: 14 }}>
-            {saved && <span style={{ color: '#16a34a', fontSize: 13, marginRight: 12 }}>✅ Išsaugota!</span>}
+          <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
               onClick={handleSave}
               disabled={saving}
@@ -111,6 +106,7 @@ export function ProfileClient({
             >
               {saving ? 'Saugoma...' : 'Išsaugoti'}
             </button>
+            {saved && <span style={{ color: '#16a34a', fontSize: 13 }}>✅ Išsaugota!</span>}
           </div>
         </div>
 
@@ -120,7 +116,7 @@ export function ProfileClient({
           <textarea
             value={notes}
             onChange={e => setNotes(e.target.value)}
-            placeholder="Asmeniniai užrašai — projekto idėjos, reikalavimai, pastabos..."
+            placeholder="Asmeniniai užrašai — projekto idėjos, reikalavimai, pastabos, ką reikia užsakyti..."
             rows={4}
             style={{
               width: '100%', padding: '10px 12px', border: '1px solid #d1d5db',
@@ -128,7 +124,7 @@ export function ProfileClient({
             }}
           />
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-            <span style={{ fontSize: 11, color: '#94a3b8' }}>Saugoma tik šiame naršyklėje</span>
+            <span style={{ fontSize: 11, color: '#94a3b8' }}>Saugoma tik šioje naršyklėje</span>
             <button
               onClick={() => { localStorage.setItem('nodas_profile_notes', notes); setSaved(true); setTimeout(() => setSaved(false), 2000) }}
               style={{ background: '#f1f5f9', color: '#374151', padding: '7px 16px', border: '1px solid #e2e8f0', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
@@ -138,43 +134,8 @@ export function ProfileClient({
           </div>
         </div>
 
-        {/* === My sites === */}
-        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: 22 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>🌐 Mano svetainės</div>
-            <Link href="/dashboard/sites" style={{ fontSize: 12, color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>Generuoti naują →</Link>
-          </div>
-          {sites.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: 13 }}>
-              <div style={{ fontSize: 28, marginBottom: 8 }}>🌐</div>
-              Dar nėra svetainių.{' '}
-              <Link href="/dashboard/sites" style={{ color: '#2563eb', textDecoration: 'none' }}>Sugeneruoti AI svetainę →</Link>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {sites.map(site => (
-                <div key={site.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', background: '#f8fafc', borderRadius: 8 }}>
-                  <span style={{ fontSize: 16 }}>🌐</span>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a' }}>{site.name}</div>
-                    <div style={{ fontSize: 11, color: '#64748b' }}>{site.subdomain}.nodas.lt</div>
-                  </div>
-                  <a
-                    href={`https://${site.subdomain}.nodas.lt`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ fontSize: 12, color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}
-                  >
-                    Atidaryti ↗
-                  </a>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* === Recent orders === */}
-        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: 22 }}>
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: 22, gridColumn: '1 / -1' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>📋 Paskutiniai užsakymai</div>
             <Link href="/dashboard/orders" style={{ fontSize: 12, color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>Visi →</Link>
@@ -213,10 +174,10 @@ export function ProfileClient({
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {[
               { href: '/dashboard/orders/new', label: '+ Naujas užsakymas', primary: true },
-              { href: '/dashboard/sites', label: '🤖 AI Svetainė' },
               { href: '/dashboard/orders/new?s=remontas', label: '🔧 Web Remontas' },
               { href: '/dashboard/orders/new?s=spa', label: '🛡️ Web SPA priežiūra' },
               { href: '/dashboard/orders/new?s=seo', label: '🔍 SEO' },
+              { href: '/dashboard/orders/new?s=custom', label: '⚡ Custom Dev' },
             ].map(({ href, label, primary }) => (
               <Link key={href} href={href} style={{
                 padding: '8px 16px', borderRadius: 8, fontSize: 13, fontWeight: 600,

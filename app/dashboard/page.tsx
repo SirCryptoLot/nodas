@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 const SERVICES = [
   { s: 'remontas',  icon: '🔧', name: 'Web Remontas',      price: 'nuo €39' },
-  { s: 'ai-site',  icon: '🤖', name: 'AI Svetainė',        price: '€149' },
   { s: 'wordpress', icon: '📦', name: 'WordPress / CMS',    price: 'nuo €349' },
   { s: 'custom',   icon: '⚡', name: 'Custom Dev',          price: 'Individualus' },
   { s: 'spa',      icon: '🛡️', name: 'Web SPA priežiūra',  price: 'nuo €29/mėn' },

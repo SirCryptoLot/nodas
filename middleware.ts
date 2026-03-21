@@ -36,12 +36,15 @@ export async function middleware(request: NextRequest) {
 
   if (pathname.startsWith('/admin')) {
     if (!user) return NextResponse.redirect(new URL('/auth/login', request.url))
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('is_admin')
-      .eq('id', user.id)
-      .single()
-    if (!profile?.is_admin) return NextResponse.redirect(new URL('/dashboard', request.url))
+    const ADMIN_EMAILS = ['tadasvwow066@gmail.com', 'info@nodas.lt']
+    if (!ADMIN_EMAILS.includes(user.email ?? '')) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('is_admin')
+        .eq('id', user.id)
+        .single()
+      if (!profile?.is_admin) return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
   }
 
   if ((pathname === '/' || (pathname.startsWith('/auth') && !pathname.startsWith('/auth/callback'))) && user) {
