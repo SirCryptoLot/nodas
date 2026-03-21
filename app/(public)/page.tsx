@@ -1,35 +1,65 @@
 import { ContactForm } from './_components/ContactForm'
 
 const SERVICES = [
-  { icon: '🔧', title: 'Web Remontas', desc: 'Svetainė neveikia? Klaidos, lėtas greitis, nulaužta — sutaisau greitai.', price: 'nuo €39' },
-  { icon: '🤖', title: 'AI Svetainė', desc: 'Claude AI sugeneruoja jūsų svetainę pagal aprašymą per 5 minutes.', price: '€149 vienkartinis' },
-  { icon: '📦', title: 'WordPress / CMS', desc: 'Pilnai valdoma svetainė su administravimo paneliu.', price: '€349 vienkartinis' },
-  { icon: '⚡', title: 'Custom Dev — React, Next.js', desc: 'Individualūs sprendimai verslui.', price: 'Individualus' },
-  { icon: '🛡️', title: 'Web SPA priežiūra', desc: 'Mėnesinė priežiūra, monitoringas, backupai, turinio keitimai.', price: '€29–€129/mėn' },
-  { icon: '🧠', title: 'AI Sprendimai', desc: 'AI agentai, chatbotai, automatizavimas jūsų verslui.', price: 'Individualus' },
-  { icon: '🔍', title: 'SEO', desc: 'Optimizuojame svetainę Google paieškos rezultatams.', price: 'Individualus' },
-  { icon: '🖥️', title: 'Serverių diegimas', desc: 'Linux serverių konfigūracija, hosting, domenai.', price: 'Individualus' },
-  { icon: '🛒', title: 'El. parduotuvė', desc: 'WooCommerce ar custom e-commerce sprendimai.', price: 'Individualus' },
+  { icon: '🔧', title: 'Web Remontas', desc: 'Svetainė lėta, nulaužta ar neveikia? Diagnozuojame per 4h, taisome greitai. Jokio mokėjimo iš anksto.', price: 'nuo €39', highlight: true },
+  { icon: '🛡️', title: 'Web SPA priežiūra', desc: 'Mėnesinė priežiūra, monitoringas 24/7, backupai, SSL, turinio keitimai. Jūs — verslui.', price: 'nuo €29/mėn', highlight: true },
+  { icon: '🤖', title: 'AI Svetainė', desc: 'Aprašykite verslą — AI sukurs profesionalią svetainę per minutes.', price: '€149' },
+  { icon: '📦', title: 'WordPress / CMS', desc: 'Pilnai valdoma svetainė su administravimo paneliu ir SEO įrankiais.', price: '€349' },
+  { icon: '⚡', title: 'Custom Dev', desc: 'Individualios sistemos React, Next.js ir Node.js technologijomis.', price: 'Pagal poreikį' },
+  { icon: '🔍', title: 'SEO', desc: 'Optimizuojame svetainę Google paieškos rezultatams ir turinio strategijai.', price: 'Individualus' },
 ]
 
-const TRUST_ITEMS = [
-  { icon: '🔒', label: 'SSL apsauga' },
-  { icon: '⚡', label: 'Greitas atsakas' },
-  { icon: '🇱🇹', label: 'Lietuviškas specialistas' },
-  { icon: '💳', label: 'Paysera mokėjimai' },
-  { icon: '🤖', label: 'AI technologijos' },
-]
-
-const TESTIMONIALS = [
+const SPA_PLANS = [
   {
-    text: 'Kreipiausi dėl sugriuvusios svetainės — Donaldas sutaisė per kelias valandas. Greitas, kompetentingas, aiškiai paaiškina.',
-    author: 'Tomas K.',
-    role: 'Smulkaus verslo savininkas',
+    name: 'Bazinis',
+    price: '€29',
+    period: '/mėn',
+    features: ['Uptime stebėjimas kas 15 min.', 'SSL sertifikato įspėjimas', 'Mėnesinė ataskaita', '1 turinio keitimas/mėn.'],
+    cta: 'Pradėti',
+    popular: false,
   },
   {
-    text: 'Užsakiau AI svetainę ir per dieną jau turėjau pilnai veikiančią svetainę. Fantastiškas rezultatas už tokią kainą!',
-    author: 'Rūta M.',
-    role: 'Laisvai samdoma dizainerė',
+    name: 'Pro',
+    price: '€59',
+    period: '/mėn',
+    features: ['Uptime stebėjimas kas 5 min.', 'Kasdieniniai backupai', '3 turinio keitimai/mėn.', 'Atsakymas per 8h'],
+    cta: 'Pasirinkti',
+    popular: true,
+  },
+  {
+    name: 'Enterprise',
+    price: '€129',
+    period: '/mėn',
+    features: ['Realaus laiko stebėjimas', 'CDN tinklas', 'SLA 99.9%', 'Avarinis atsakymas per 2h (24/7)'],
+    cta: 'Susisiekti',
+    popular: false,
+  },
+]
+
+const FAQ = [
+  {
+    q: 'Kaip greitai galite sutvarkyti svetainę?',
+    a: 'Diagnozę atliekame per 4 valandas. Dauguma remonto darbų — tą pačią dieną. Sudėtingesniais atvejais — per 1–2 darbo dienas.',
+  },
+  {
+    q: 'Kiek kainuoja web remontas?',
+    a: 'Paprastos klaidos taisymas — nuo €39. Galutinė kaina priklauso nuo problemos sudėtingumo. Visada pateikiame kainą prieš pradedant darbą — jokių netikėtumų.',
+  },
+  {
+    q: 'Kas įeina į Web SPA priežiūrą?',
+    a: 'Priklausomai nuo plano: uptime monitoringas, kasdieniniai backupai, SSL atnaujinimas, turinio keitimai ir prioritetinis techninis palaikymas.',
+  },
+  {
+    q: 'Ar dirbate su visomis svetainių platformomis?',
+    a: 'Taip — WordPress, Webflow, Wix, Shopify, custom HTML/PHP, React/Next.js ir daugiau. Jei kyla abejonių — susisiekite, patarsime.',
+  },
+  {
+    q: 'Ar reikia mokėti iš anksto?',
+    a: 'Web remontui — ne. Mokate tik po to, kai problema išspręsta ir jūs patenkinti rezultatu. SPA priežiūrai — pirmasis mėnuo po pirmojo patikrinimo.',
+  },
+  {
+    q: 'Kuo skiriasi Web SPA nuo paprastos priežiūros?',
+    a: 'Web SPA — tai aktyvus stebėjimas ir prevencija, o ne tik reagavimas į problemas. Jei svetainė sugenda — apie tai sužinosime mes, ne jūs.',
   },
 ]
 
@@ -49,36 +79,39 @@ export default function Home() {
 
           {/* Left column */}
           <div>
+            {/* LT badge */}
             <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
+              display: 'inline-flex', alignItems: 'center', gap: 7,
               background: 'rgba(255,255,255,0.15)', borderRadius: 100,
-              padding: '6px 16px', fontSize: 13, color: '#bfdbfe', marginBottom: 20,
+              padding: '5px 14px', marginBottom: 22,
             }}>
-              🇱🇹 Lietuvos IT specialistas
+              <span style={{ fontSize: 14 }}>🇱🇹</span>
+              <span style={{ fontSize: 12, color: '#bfdbfe', fontWeight: 600, letterSpacing: '0.3px' }}>
+                Lietuvos IT specialistas
+              </span>
             </div>
 
             <h1 className="mobile-hero-title" style={{
-              fontSize: 46, fontWeight: 900, color: '#fff',
-              lineHeight: 1.15, margin: '0 0 18px', letterSpacing: '-1px',
+              fontSize: 50, fontWeight: 900, color: '#fff',
+              lineHeight: 1.1, margin: '0 0 18px', letterSpacing: '-1.5px',
             }}>
-              Jūsų svetainė veikia tobulai.
+              Svetainė sugedo?<br />
+              <span style={{ color: '#93c5fd' }}>Sutvarkom.</span>
             </h1>
 
-            <p style={{ fontSize: 17, color: '#bfdbfe', margin: '0 0 24px', lineHeight: 1.65 }}>
-              Web remontas, AI svetainės, WordPress, serverių diegimas.
-              Greitas, patikimas — nuo <strong style={{ color: '#fff' }}>€39</strong>.
+            <p style={{ fontSize: 17, color: '#bfdbfe', margin: '0 0 28px', lineHeight: 1.65 }}>
+              Web remontas ir priežiūra — greita, patikima, be jokio mokėjimo iš anksto.
+              Nuo <strong style={{ color: '#fff' }}>€39</strong>.
             </p>
 
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 9 }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
-                'Svetainių remontas per 24 val.',
-                'AI svetainė per 5 minutes',
-                'WordPress ir e-commerce sprendimai',
-                'Linux serverių konfigūracija',
-                'Mėnesinė SPA priežiūra',
+                '🔧 Web remontas per 24 val. — nuo €39',
+                '🛡️ Mėnesinė SPA priežiūra — nuo €29/mėn',
+                '⚙️ WordPress, React, Next.js, Wix, Shopify',
+                '✓ Diagnozė per 4h · mokate tik už rezultatą',
               ].map(item => (
-                <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#e0f2fe', fontSize: 15 }}>
-                  <span style={{ color: '#4ade80', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>✓</span>
+                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#e0f2fe', fontSize: 15, lineHeight: 1.5 }}>
                   {item}
                 </li>
               ))}
@@ -90,7 +123,7 @@ export default function Home() {
                 padding: '13px 28px', borderRadius: 10, fontSize: 15,
                 fontWeight: 700, textDecoration: 'none',
               }}>
-                Gauti pasiūlymą →
+                Gauti nemokamą diagnostiką →
               </a>
               <a href="#paslaugos" style={{
                 background: 'rgba(255,255,255,0.12)', color: '#fff',
@@ -103,12 +136,12 @@ export default function Home() {
 
             <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
               {[
-                { value: '50+', label: 'Projektų' },
-                { value: '24h', label: 'Atsakymo laikas' },
-                { value: '€39', label: 'Nuo' },
+                { value: '< 4h', label: 'Diagnozė' },
+                { value: '24h', label: 'Remontas' },
+                { value: '99.9%', label: 'SPA uptime' },
               ].map(({ value, label }) => (
                 <div key={label}>
-                  <div style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>{value}</div>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{value}</div>
                   <div style={{ fontSize: 12, color: '#93c5fd', marginTop: 2 }}>{label}</div>
                 </div>
               ))}
@@ -120,14 +153,14 @@ export default function Home() {
             background: '#fff', borderRadius: 20, padding: 28,
             boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
           }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>Greitai pradėti</div>
-            <div style={{ fontSize: 13, color: '#64748b', marginBottom: 18 }}>Pasirinkite paslaugą</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>⚡ Greita pagalba</div>
+            <div style={{ fontSize: 13, color: '#64748b', marginBottom: 18 }}>Pasirinkite paslaugą — atsakome per 4h</div>
 
             {[
               { icon: '🔧', label: 'Web Remontas', price: 'nuo €39', color: '#fef3c7', badge: '#f59e0b' },
-              { icon: '🤖', label: 'AI Svetainė', price: '€149', color: '#ede9fe', badge: '#7c3aed' },
-              { icon: '📦', label: 'WordPress', price: '€349', color: '#dcfce7', badge: '#16a34a' },
               { icon: '🛡️', label: 'SPA priežiūra', price: 'nuo €29/mėn', color: '#dbeafe', badge: '#2563eb' },
+              { icon: '📦', label: 'WordPress', price: '€349', color: '#dcfce7', badge: '#16a34a' },
+              { icon: '🤖', label: 'AI Svetainė', price: '€149', color: '#ede9fe', badge: '#7c3aed' },
             ].map(({ icon, label, price, color, badge }) => (
               <a key={label} href="#kontaktai" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -149,7 +182,7 @@ export default function Home() {
               Susisiekti dabar →
             </a>
             <div style={{ textAlign: 'center', fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
-              Atsakome per 24 val. · Nemokama konsultacija
+              Nemokama konsultacija · Atsakome per 4h
             </div>
           </div>
         </div>
@@ -160,70 +193,20 @@ export default function Home() {
         <div style={{
           maxWidth: 1100, margin: '0 auto',
           display: 'flex', justifyContent: 'center', alignItems: 'center',
-          flexWrap: 'wrap', gap: 20,
+          flexWrap: 'wrap', gap: 24,
         }}>
-          {TRUST_ITEMS.map(({ icon, label }) => (
+          {[
+            { icon: '🔒', label: 'SSL apsauga' },
+            { icon: '⚡', label: 'Atsakymas per 4h' },
+            { icon: '🇱🇹', label: 'Lietuviškai' },
+            { icon: '🛡️', label: '24/7 monitoringas' },
+            { icon: '💳', label: 'Paysera mokėjimai' },
+          ].map(({ icon, label }) => (
             <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#bfdbfe', fontSize: 13 }}>
-              <span style={{ fontSize: 18 }}>{icon}</span>
+              <span style={{ fontSize: 16 }}>{icon}</span>
               <span>{label}</span>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── ABOUT ── */}
-      <section id="apie" className="mobile-section" style={{ padding: '80px 40px', background: '#fff' }}>
-        <div className="mobile-stack mobile-gap-sm" style={{
-          maxWidth: 1100, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center',
-        }}>
-
-          {/* SVG — hidden on mobile */}
-          <div className="mobile-hide-svg" style={{ display: 'flex', justifyContent: 'center' }}>
-            <svg width="300" height="240" viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="20" y="30" width="280" height="180" rx="16" fill="#dbeafe" />
-              <rect x="40" y="50" width="240" height="140" rx="10" fill="#1e3a8a" />
-              <rect x="56" y="66" width="100" height="8" rx="4" fill="#60a5fa" />
-              <rect x="56" y="82" width="160" height="6" rx="3" fill="#3b82f6" opacity="0.6" />
-              <rect x="56" y="96" width="140" height="6" rx="3" fill="#3b82f6" opacity="0.4" />
-              <rect x="56" y="110" width="80" height="28" rx="6" fill="#2563eb" />
-              <rect x="148" y="110" width="80" height="28" rx="6" fill="#1d4ed8" opacity="0.5" />
-              <circle cx="220" cy="160" r="30" fill="#60a5fa" opacity="0.3" />
-              <text x="210" y="166" fontSize="22" fill="#2563eb">🤖</text>
-              <rect x="100" y="218" width="120" height="12" rx="6" fill="#e2e8f0" />
-              <rect x="130" y="235" width="60" height="8" rx="4" fill="#cbd5e1" />
-            </svg>
-          </div>
-
-          {/* Text */}
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
-              Apie mane
-            </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: '0 0 16px', lineHeight: 1.2 }}>
-              Solo IT specialistas su aistra technologijoms
-            </h2>
-            <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.7, margin: '0 0 14px' }}>
-              Sveiki! Aš esu <strong>Donaldas</strong> — nepriklausomas web kūrėjas ir IT specialistas iš Lietuvos.
-              Dirbu su klientais tiesiogiai, be tarpininkų.
-            </p>
-            <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.7, margin: '0 0 24px' }}>
-              Naudoju moderniausias technologijas — <strong>Next.js, React, AI</strong> — kad jūsų projektas
-              būtų greitas, modernus ir efektyvus.
-            </p>
-            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-              {[
-                { value: '5+', label: 'Metų patirtis' },
-                { value: '50+', label: 'Projektų' },
-                { value: '100%', label: 'Patenkintų klientų' },
-              ].map(({ value, label }) => (
-                <div key={label} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 26, fontWeight: 800, color: '#2563eb' }}>{value}</div>
-                  <div style={{ fontSize: 12, color: '#64748b' }}>{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -235,25 +218,36 @@ export default function Home() {
               Paslaugos
             </div>
             <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
-              Viskas, ko reikia jūsų verslui
+              Viskas, ko reikia jūsų svetainei
             </h2>
             <p style={{ fontSize: 15, color: '#64748b', marginTop: 10 }}>
-              Nuo greito remonto iki pilnų e-commerce sprendimų
+              Web remontas ir priežiūra — mūsų specializacija
             </p>
           </div>
 
           <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
-            {SERVICES.map(({ icon, title, desc, price }) => (
+            {SERVICES.map(({ icon, title, desc, price, highlight }) => (
               <div key={title} style={{
-                background: '#fff', borderRadius: 14, padding: 22,
-                border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                display: 'flex', flexDirection: 'column',
+                background: highlight ? 'linear-gradient(135deg, #eff6ff, #dbeafe)' : '#fff',
+                borderRadius: 14, padding: 24,
+                border: highlight ? '2px solid #2563eb' : '1px solid #e2e8f0',
+                boxShadow: highlight ? '0 4px 20px rgba(37,99,235,0.12)' : '0 2px 8px rgba(0,0,0,0.04)',
+                display: 'flex', flexDirection: 'column', position: 'relative',
               }}>
+                {highlight && (
+                  <div style={{
+                    position: 'absolute', top: -11, left: 20,
+                    background: '#2563eb', color: '#fff', fontSize: 10, fontWeight: 700,
+                    padding: '3px 10px', borderRadius: 999, letterSpacing: '0.5px', textTransform: 'uppercase',
+                  }}>Populiariausia</div>
+                )}
                 <div style={{ fontSize: 30, marginBottom: 10 }}>{icon}</div>
                 <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{title}</div>
                 <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, flex: 1, marginBottom: 14 }}>{desc}</div>
                 <div style={{
-                  display: 'inline-block', background: '#dbeafe', color: '#1e40af',
+                  display: 'inline-block',
+                  background: highlight ? '#2563eb' : '#dbeafe',
+                  color: highlight ? '#fff' : '#1e40af',
                   borderRadius: 8, padding: '4px 12px', fontSize: 13, fontWeight: 700, alignSelf: 'flex-start',
                 }}>
                   {price}
@@ -264,44 +258,146 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
+      {/* ── HOW IT WORKS ── */}
       <section className="mobile-section" style={{ padding: '80px 40px', background: '#fff' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 44 }}>
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 52 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
-              Atsiliepimai
+              Procesas
             </div>
             <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
-              Ką sako klientai
+              Paprasta kaip 1-2-3
             </h2>
           </div>
 
-          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-            {TESTIMONIALS.map(({ text, author, role }) => (
-              <div key={author} style={{
-                background: '#f8fafc', borderRadius: 16, padding: 28,
-                border: '1px solid #e2e8f0',
-              }}>
-                <div style={{ fontSize: 36, color: '#2563eb', marginBottom: 10, lineHeight: 1 }}>&ldquo;</div>
-                <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.7, margin: '0 0 20px', fontStyle: 'italic' }}>
-                  {text}
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{
-                    width: 40, height: 40, borderRadius: '50%', flexShrink: 0,
-                    background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#fff', fontWeight: 700, fontSize: 14,
-                  }}>
-                    {author[0]}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>{author}</div>
-                    <div style={{ fontSize: 12, color: '#64748b' }}>{role}</div>
-                  </div>
-                  <div style={{ marginLeft: 'auto', color: '#f59e0b', fontSize: 14, whiteSpace: 'nowrap' }}>★★★★★</div>
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+            {[
+              { num: '01', icon: '📋', title: 'Aprašykite problemą', desc: 'Pasakykite kas nutiko — per formą, el. paštą ar telefonu. Jokių techninių žargonų.' },
+              { num: '02', icon: '🔍', title: 'Diagnozuojame per 4h', desc: 'Išsiaiškinsime problemą ir pateikime tikslią kainą. Jokių netikėtumų, jokio mokėjimo iš anksto.' },
+              { num: '03', icon: '✅', title: 'Sutvarkom ir pristatom', desc: 'Dirbiame greičiai. Gavę jūsų patvirtinimą — problema išspręsta, svetainė veikia.' },
+            ].map(({ num, icon, title, desc }) => (
+              <div key={num} style={{ textAlign: 'center' }}>
+                <div style={{
+                  width: 60, height: 60, borderRadius: '50%', background: '#eff6ff',
+                  border: '2px solid #bfdbfe', margin: '0 auto 16px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26,
+                }}>
+                  {icon}
                 </div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 2, marginBottom: 8 }}>{num}</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 10 }}>{title}</div>
+                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6 }}>{desc}</div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SPA PLANS ── */}
+      <section id="planai" className="mobile-section" style={{ padding: '80px 40px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
+              Planai
+            </div>
+            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: '0 0 12px' }}>
+              Web SPA priežiūros planai
+            </h2>
+            <p style={{ fontSize: 15, color: '#64748b', margin: 0 }}>
+              Patikėkite svetainę mums. Jūs — verslui, mes — techninei daliai.
+            </p>
+          </div>
+
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
+            {SPA_PLANS.map(({ name, price, period, features, cta, popular }) => (
+              <div key={name} style={{
+                background: popular ? 'linear-gradient(135deg, #1e3a8a, #2563eb)' : '#fff',
+                borderRadius: 18, padding: 30,
+                border: popular ? 'none' : '1px solid #e2e8f0',
+                boxShadow: popular ? '0 8px 40px rgba(37,99,235,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                position: 'relative', transform: popular ? 'scale(1.04)' : 'none',
+              }}>
+                {popular && (
+                  <div style={{
+                    position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
+                    background: '#f59e0b', color: '#fff', fontSize: 11, fontWeight: 700,
+                    padding: '4px 14px', borderRadius: 999, whiteSpace: 'nowrap',
+                  }}>⭐ POPULIARIAUSIAS</div>
+                )}
+                <div style={{ fontSize: 15, fontWeight: 700, color: popular ? '#bfdbfe' : '#64748b', marginBottom: 12 }}>{name}</div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 20 }}>
+                  <span style={{ fontSize: 38, fontWeight: 900, color: popular ? '#fff' : '#0f172a' }}>{price}</span>
+                  <span style={{ fontSize: 14, color: popular ? '#93c5fd' : '#64748b' }}>{period}</span>
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {features.map(f => (
+                    <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: popular ? '#bfdbfe' : '#374151', lineHeight: 1.5 }}>
+                      <span style={{ color: popular ? '#4ade80' : '#2563eb', flexShrink: 0, fontSize: 14 }}>✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#kontaktai" style={{
+                  display: 'block', textAlign: 'center', padding: '12px 0',
+                  background: popular ? '#fff' : '#2563eb',
+                  color: popular ? '#1e40af' : '#fff',
+                  borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none',
+                }}>
+                  {cta} →
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Repair pricing note */}
+          <div style={{
+            marginTop: 36, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14,
+            padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: 16,
+          }}>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>🔧 Web Remontas — vienkartinis</div>
+              <div style={{ fontSize: 13, color: '#64748b' }}>Diagnozė nemokama · Mokate tik už rezultatą · Nuo €39</div>
+            </div>
+            <a href="#kontaktai" style={{
+              background: '#0f172a', color: '#fff', padding: '11px 22px',
+              borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
+            }}>
+              Kreiptis dabar →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section id="duk" className="mobile-section" style={{ padding: '80px 40px', background: '#fff' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
+              D.U.K.
+            </div>
+            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+              Dažniausiai užduodami klausimai
+            </h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {FAQ.map(({ q, a }) => (
+              <details key={q} style={{
+                background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden',
+              }}>
+                <summary style={{
+                  padding: '18px 22px', fontSize: 15, fontWeight: 700, color: '#0f172a',
+                  cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  userSelect: 'none',
+                }}>
+                  {q}
+                  <span style={{ color: '#2563eb', fontSize: 20, flexShrink: 0, marginLeft: 12 }}>+</span>
+                </summary>
+                <div style={{ padding: '0 22px 18px', fontSize: 14, color: '#475569', lineHeight: 1.7, borderTop: '1px solid #e2e8f0', paddingTop: 16 }}>
+                  {a}
+                </div>
+              </details>
             ))}
           </div>
         </div>
@@ -318,10 +414,10 @@ export default function Home() {
               Kontaktai
             </div>
             <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#fff', margin: 0 }}>
-              Pradėkime jūsų projektą
+              Pradėkime šiandien
             </h2>
             <p style={{ fontSize: 15, color: '#bfdbfe', marginTop: 12 }}>
-              Parašykite — atsakysime per 24 valandas.
+              Parašykite — atsakysime per 4 valandas.
             </p>
           </div>
 
@@ -332,7 +428,7 @@ export default function Home() {
               ✉️ info@nodas.lt
             </a>
             <span style={{ color: '#bfdbfe', fontSize: 14 }}>🇱🇹 Lietuva</span>
-            <span style={{ color: '#bfdbfe', fontSize: 14 }}>⚡ Per 24 val.</span>
+            <span style={{ color: '#bfdbfe', fontSize: 14 }}>⚡ Per 4 val.</span>
           </div>
         </div>
       </section>
