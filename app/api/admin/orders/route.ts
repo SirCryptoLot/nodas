@@ -26,16 +26,29 @@ export async function PUT(req: NextRequest) {
   if (!await checkAdmin(req)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const { id, status, price, admin_notes, client_comment, sendEmail } = await req.json()
 
+  // Build update — only include fields that have values
   const updates: Record<string, unknown> = {}
   if (status !== undefined) updates.status = status
-  if (price !== undefined) updates.price = price
+  if (price !== null && price !== undefined) updates.price = price
+
+  // Try with admin_notes first; if column doesn't exist, retry without it
   if (admin_notes !== undefined) updates.admin_notes = admin_notes
 
-  const { data: order, error } = await adminSupabase
+  let result = await adminSupabase
     .from('orders').update(updates).eq('id', id).select().single()
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Send email to client only if explicitly requested
+  // Fallback: admin_notes column may not exist in schema
+  if (result.error && admin_notes !== undefined) {
+    const safeUpdates = { ...updates }
+    delete safeUpdates.admin_notes
+    result = await adminSupabase
+      .from('orders').update(safeUpdates).eq('id', id).select().single()
+  }
+
+  if (result.error) return NextResponse.json({ error: result.error.message }, { status: 500 })
+  const order = result.data
+
+  // Send email to client only when explicitly requested
   if (sendEmail && order) {
     try {
       const [{ data: profile }, { data: authData }] = await Promise.all([
@@ -44,23 +57,18 @@ export async function PUT(req: NextRequest) {
       ])
       const userEmail = authData.user?.email
       if (userEmail) {
-        // Combine original notes + admin comment for the email
-        const emailContent = [
-          order.notes,
-          client_comment ? `\n💬 Papildoma informacija:\n${client_comment}` : '',
-        ].filter(Boolean).join('\n')
-
         await sendOrderStatusEmail(
           userEmail,
           profile?.full_name ?? 'Klientas',
           order.service_type,
           status ?? order.status,
-          emailContent,
+          order.notes ?? '',
           client_comment ?? '',
         )
       }
     } catch (e) {
       console.error('[admin/orders] email error:', e)
+      // Don't fail the whole request if only email fails
     }
   }
 
