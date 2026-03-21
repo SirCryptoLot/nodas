@@ -214,16 +214,38 @@ export default function SaskaitosPage() {
   }
 
   async function save() {
+    if (!form.client_name || !form.client_email) {
+      setMsg('❌ Privalomi laukai: Kliento vardas ir el. paštas')
+      return
+    }
     setSaving(true)
     const token = await getToken()
-    const body = { ...form, issued_at: editing?.issued_at ?? new Date().toISOString() }
+    // Sanitize: convert empty strings to null for optional DB fields
+    const body = {
+      ...form,
+      due_date:       form.due_date       || null,
+      client_company: form.client_company || null,
+      client_address: form.client_address || null,
+      client_vat:     form.client_vat     || null,
+      notes:          form.notes          || null,
+      order_id:       form.order_id       || null,
+      issued_at:      editing?.issued_at ?? new Date().toISOString(),
+    }
+    let res: Response
     if (modal === 'create') {
-      await fetch('/api/admin/saskaitos', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(body) })
-    } else if (editing) {
-      await fetch('/api/admin/saskaitos', { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id: editing.id, ...body }) })
+      res = await fetch('/api/admin/saskaitos', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(body) })
+    } else {
+      res = await fetch('/api/admin/saskaitos', { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id: editing!.id, ...body }) })
     }
     setSaving(false)
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      setMsg(`❌ Klaida: ${err.error ?? res.statusText}`)
+      return
+    }
     setModal(null)
+    setMsg('✅ Sąskaita išsaugota')
+    setTimeout(() => setMsg(''), 3000)
     load()
   }
 
