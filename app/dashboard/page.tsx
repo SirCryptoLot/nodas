@@ -55,9 +55,11 @@ export default async function DashboardPage() {
       }}>
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, opacity: 0.75, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 4 }}>Jūsų planas</div>
-          <div style={{ fontSize: 18, fontWeight: 800, textTransform: 'capitalize' }}>{profile?.tier ?? 'simple'}</div>
+          <div style={{ fontSize: 18, fontWeight: 800 }}>
+            {({'simple': 'Pradedantysis', 'pro': 'Profesionalus', 'business': 'Verslo', 'enterprise': 'Enterprise'} as Record<string, string>)[profile?.tier ?? 'simple'] ?? 'Pradedantysis'}
+          </div>
           <div style={{ fontSize: 12, opacity: 0.8, marginTop: 3 }}>
-            {profile?.tier === 'simple' ? '1 AI svetainė · Pagrindinis funkcionalumas' : 'Neribotos svetainės · Premium funkcionalumas'}
+            {profile?.tier === 'simple' ? 'Pradedantysis · Pagrindinis funkcionalumas' : 'Premium funkcionalumas · Prioritetinis aptarnavimas'}
           </div>
         </div>
         <Link href="/dashboard/orders/new?s=spa" style={{

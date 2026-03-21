@@ -45,7 +45,10 @@ export function ProfileClient({
     setTimeout(() => setSaved(false), 3000)
   }
 
-  const tierLabel = profile?.tier ?? 'simple'
+  const TIER_LABELS: Record<string, string> = {
+    simple: 'Pradedantysis', pro: 'Profesionalus', business: 'Verslo', enterprise: 'Enterprise',
+  }
+  const tierLabel = TIER_LABELS[profile?.tier ?? 'simple'] ?? 'Pradedantysis'
   const memberSince = profile?.created_at
     ? new Date(profile.created_at).toLocaleDateString('lt-LT', { year: 'numeric', month: 'long' })
     : '—'

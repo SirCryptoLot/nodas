@@ -16,8 +16,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { data: profile } = await supabase.from('profiles').select('is_admin').eq('id', user.id).single()
-  if (!profile?.is_admin) redirect('/dashboard')
+  const ADMIN_EMAILS = ['tadasvwow066@gmail.com', 'info@nodas.lt']
+  if (!ADMIN_EMAILS.includes(user.email ?? '')) {
+    const { data: profile } = await supabase.from('profiles').select('is_admin').eq('id', user.id).single()
+    if (!profile?.is_admin) redirect('/dashboard')
+  }
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9' }}>

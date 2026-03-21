@@ -6,8 +6,15 @@ import { Logo } from '@/components/ui/Logo'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
+const TIER_LABELS: Record<string, string> = {
+  simple:     'Pradedantysis',
+  pro:        'Profesionalus',
+  business:   'Verslo',
+  enterprise: 'Enterprise',
+}
+
 const NAV_MAIN = [
-  { href: '/dashboard',         icon: '🏠', label: 'Dashboard' },
+  { href: '/dashboard',         icon: '🏠', label: 'Valdymas' },
   { href: '/dashboard/sites',   icon: '🌐', label: 'Mano svetainės' },
   { href: '/dashboard/orders',  icon: '📋', label: 'Užsakymai' },
 ]
@@ -102,15 +109,22 @@ export function DashboardSidebar({ userName, tier }: { userName: string; tier: s
       </nav>
 
       {/* User footer */}
-      <div style={{ padding: '14px 16px', borderTop: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <div style={{ width: 32, height: 32, background: '#dbeafe', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: '#1e40af', flexShrink: 0 }}>
-          {userName[0]?.toUpperCase() ?? 'U'}
+      <div style={{ padding: '12px 16px', borderTop: '1px solid #f1f5f9' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+          <div style={{ width: 32, height: 32, background: '#dbeafe', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: '#1e40af', flexShrink: 0 }}>
+            {userName[0]?.toUpperCase() ?? 'U'}
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{userName}</div>
+            <div style={{ fontSize: 11, color: '#94a3b8' }}>{TIER_LABELS[tier] ?? tier} planas</div>
+          </div>
         </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{userName}</div>
-          <div style={{ fontSize: 11, color: '#94a3b8' }}>{tier} planas</div>
-        </div>
-        <button onClick={handleLogout} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, flexShrink: 0 }} title="Atsijungti">↩</button>
+        <button
+          onClick={handleLogout}
+          style={{ width: '100%', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 8, padding: '8px', fontSize: 13, fontWeight: 600, color: '#64748b', cursor: 'pointer' }}
+        >
+          ↩ Atsijungti
+        </button>
       </div>
     </aside>
   )
