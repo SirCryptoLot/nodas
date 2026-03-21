@@ -5,10 +5,10 @@ const TIER_LABELS: Record<string, string> = {
   simple: 'Pradedantysis', pro: 'Profesionalus', business: 'Verslo', enterprise: 'Enterprise',
 }
 const STATUS_COLORS: Record<string, string> = {
-  pending: '#f59e0b', in_progress: '#3b82f6', done: '#10b981', cancelled: '#94a3b8',
+  pending: '#f59e0b', in_progress: '#3b82f6', completed: '#10b981', cancelled: '#94a3b8',
 }
 const STATUS_LT: Record<string, string> = {
-  pending: 'Laukiama', in_progress: 'Vykdoma', done: 'Atlikta', cancelled: 'Atšaukta',
+  pending: 'Laukiama', in_progress: 'Vykdoma', completed: 'Atlikta', cancelled: 'Atšaukta',
 }
 
 export default async function AdminPage() {
@@ -33,9 +33,9 @@ export default async function AdminPage() {
     adminSupabase.from('orders').select('id', { count: 'exact', head: true }),
     adminSupabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
     adminSupabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'in_progress'),
-    adminSupabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'done'),
+    adminSupabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'completed'),
     adminSupabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
-    adminSupabase.from('orders').select('price').eq('status', 'done').not('price', 'is', null),
+    adminSupabase.from('orders').select('price').eq('status', 'completed').not('price', 'is', null),
     adminSupabase.from('orders').select('id, service_type, status, created_at').order('created_at', { ascending: false }).limit(10),
     adminSupabase.from('profiles').select('id, full_name, tier, created_at').order('created_at', { ascending: false }).limit(5),
     adminSupabase.from('orders').select('status'),
@@ -43,7 +43,7 @@ export default async function AdminPage() {
 
   const revenue = (revenueData ?? []).reduce((s, o) => s + (Number(o.price) ?? 0), 0)
   const total = totalOrders ?? 0
-  const byStatus = ['pending', 'in_progress', 'done', 'cancelled'].map(s => {
+  const byStatus = ['pending', 'in_progress', 'completed', 'cancelled'].map(s => {
     const count = (allOrders ?? []).filter(o => o.status === s).length
     return { status: s, count, pct: total > 0 ? Math.round((count / total) * 100) : 0 }
   })

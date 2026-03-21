@@ -5,7 +5,7 @@ import Link from 'next/link'
 const STATUS: Record<string, { label: string; color: string; bg: string; icon: string }> = {
   pending:     { label: 'Laukiama',    color: '#92400e', bg: '#fef9c3', icon: '⏳' },
   in_progress: { label: 'Vykdoma',    color: '#1e40af', bg: '#dbeafe', icon: '⚙️' },
-  done:        { label: 'Atlikta',    color: '#166534', bg: '#dcfce7', icon: '✅' },
+  completed:   { label: 'Atlikta',    color: '#166534', bg: '#dcfce7', icon: '✅' },
   cancelled:   { label: 'Atšaukta',  color: '#64748b', bg: '#f1f5f9', icon: '❌' },
 }
 
@@ -100,8 +100,8 @@ export default async function OrdersPage() {
               {order.status !== 'cancelled' && (
                 <div style={{ padding: '0 20px 16px' }}>
                   <div style={{ display: 'flex', gap: 0, position: 'relative' }}>
-                    {['pending', 'in_progress', 'done'].map((s, i) => {
-                      const steps = ['pending', 'in_progress', 'done']
+                    {['pending', 'in_progress', 'completed'].map((s, i) => {
+                      const steps = ['pending', 'in_progress', 'completed']
                       const currentIdx = steps.indexOf(order.status)
                       const isPast = i < currentIdx
                       const isCurrent = i === currentIdx

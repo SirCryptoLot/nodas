@@ -8,7 +8,7 @@ type Order = { id: string; service_type: string; status: string; created_at: str
 const STATUS_COLORS: Record<string, { bg: string; color: string; label: string }> = {
   pending:     { bg: '#fef9c3', color: '#854d0e', label: 'Laukiama' },
   in_progress: { bg: '#dbeafe', color: '#1e40af', label: 'Vykdoma' },
-  done:        { bg: '#dcfce7', color: '#166534', label: 'Atlikta' },
+  completed:   { bg: '#dcfce7', color: '#166534', label: 'Atlikta' },
   cancelled:   { bg: '#f1f5f9', color: '#64748b', label: 'Atšaukta' },
 }
 

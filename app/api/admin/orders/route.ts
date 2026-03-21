@@ -24,31 +24,20 @@ export async function GET(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   if (!await checkAdmin(req)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  const { id, status, price, admin_notes, client_comment, sendEmail } = await req.json()
+  const { id, status, price, client_comment, sendEmail } = await req.json()
 
-  // Build update — only include fields that have values
+  // Only update columns that exist in the schema (status, price)
   const updates: Record<string, unknown> = {}
   if (status !== undefined) updates.status = status
   if (price !== null && price !== undefined) updates.price = price
 
-  // Try with admin_notes first; if column doesn't exist, retry without it
-  if (admin_notes !== undefined) updates.admin_notes = admin_notes
-
-  let result = await adminSupabase
+  const { data: order, error } = await adminSupabase
     .from('orders').update(updates).eq('id', id).select().single()
 
-  // Fallback: admin_notes column may not exist in schema
-  if (result.error && admin_notes !== undefined) {
-    const safeUpdates = { ...updates }
-    delete safeUpdates.admin_notes
-    result = await adminSupabase
-      .from('orders').update(safeUpdates).eq('id', id).select().single()
-  }
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  if (result.error) return NextResponse.json({ error: result.error.message }, { status: 500 })
-  const order = result.data
+  let emailSent = false
 
-  // Send email to client only when explicitly requested
   if (sendEmail && order) {
     try {
       const [{ data: profile }, { data: authData }] = await Promise.all([
@@ -65,14 +54,14 @@ export async function PUT(req: NextRequest) {
           order.notes ?? '',
           client_comment ?? '',
         )
+        emailSent = true
       }
     } catch (e) {
       console.error('[admin/orders] email error:', e)
-      // Don't fail the whole request if only email fails
     }
   }
 
-  return NextResponse.json({ order })
+  return NextResponse.json({ order, emailSent })
 }
 
 export async function DELETE(req: NextRequest) {

@@ -25,7 +25,7 @@ type PendingEdit = {
 const STATUS_OPTS = [
   { value: 'pending',     label: 'Laukiama',  color: '#f59e0b', bg: '#fef9c3' },
   { value: 'in_progress', label: 'Vykdoma',   color: '#3b82f6', bg: '#dbeafe' },
-  { value: 'done',        label: 'Atlikta',   color: '#10b981', bg: '#dcfce7' },
+  { value: 'completed',   label: 'Atlikta',   color: '#10b981', bg: '#dcfce7' },
   { value: 'cancelled',   label: 'Atšaukta',  color: '#94a3b8', bg: '#f1f5f9' },
 ]
 
@@ -36,10 +36,13 @@ async function getToken() {
 }
 
 function initEdit(order: Order): PendingEdit {
+  const savedNotes = typeof window !== 'undefined'
+    ? localStorage.getItem(`admin_note_order_${order.id}`) ?? ''
+    : ''
   return {
     status:        order.status,
     clientComment: '',
-    adminNotes:    order.admin_notes ?? '',
+    adminNotes:    savedNotes,
     priceStr:      order.price != null ? String(order.price) : '',
   }
 }
@@ -81,14 +84,15 @@ export default function AdminOrdersPage() {
     const ed = pending[id]
     if (!ed) return false
     const token = await getToken()
+    // Save admin notes to localStorage (no DB column for this)
+    if (ed.adminNotes) localStorage.setItem(`admin_note_order_${id}`, ed.adminNotes)
     const res = await fetch('/api/admin/orders', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         id,
-        status:       ed.status,
-        admin_notes:  ed.adminNotes,
-        price:        ed.priceStr ? Number(ed.priceStr) : null,
+        status: ed.status,
+        price:  ed.priceStr ? Number(ed.priceStr) : null,
         ...extra,
       }),
     })

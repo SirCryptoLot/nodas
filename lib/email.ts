@@ -203,7 +203,7 @@ export async function sendOrderStatusEmail(
 ) {
   const statusMap: Record<string, { icon: string; label: string; color: string; bg: string; msg: string }> = {
     in_progress: { icon: '⚙️', label: 'Vykdoma', color: '#1e40af', bg: '#dbeafe', msg: 'Komanda pradėjo dirbti su jūsų užsakymu.' },
-    done:        { icon: '✅', label: 'Atlikta', color: '#166534', bg: '#dcfce7', msg: 'Darbas atliktas! Tikimės, kad viską įvertinsite teigiamai.' },
+    completed:   { icon: '✅', label: 'Atlikta', color: '#166534', bg: '#dcfce7', msg: 'Darbas atliktas! Tikimės, kad viską įvertinsite teigiamai.' },
     cancelled:   { icon: '❌', label: 'Atšaukta', color: '#991b1b', bg: '#fee2e2', msg: 'Jūsų užsakymas atšauktas. Klausimų — rašykite info@nodas.lt.' },
   }
   const s = statusMap[status] ?? { icon: '📋', label: status, color: '#374151', bg: '#f1f5f9', msg: 'Jūsų užsakymo statusas atnaujintas.' }
@@ -234,7 +234,7 @@ export async function sendOrderStatusEmail(
       ` : ''}
       ${notes ? notesBox(notes) : ''}
 
-      ${status === 'done' ? `
+      ${status === 'completed' ? `
         <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:16px 18px;margin:20px 0;text-align:center">
           <div style="font-size:14px;font-weight:700;color:#92400e;margin-bottom:6px">⭐ Kaip įvertinote paslaugą?</div>
           <div style="font-size:13px;color:#b45309">Jūsų atsiliepimas padeda mums tobulėti. Rašykite info@nodas.lt</div>
