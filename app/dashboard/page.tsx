@@ -63,7 +63,12 @@ export default async function DashboardPage() {
     supabase.from('orders').select('id, status').eq('user_id', user.id),
   ])
 
-  const firstName = profile?.full_name?.split(' ')[0] ?? 'Vartotojas'
+  const displayName = profile?.full_name
+    ?? (user.user_metadata?.full_name as string | undefined)
+    ?? (user.user_metadata?.name as string | undefined)
+    ?? user.email
+    ?? 'Vartotojas'
+  const firstName = displayName.split(' ')[0]
   const siteCount = sites?.length ?? 0
   const orderCount = orders?.length ?? 0
   const activeOrders = orders?.filter(o => o.status === 'in_progress').length ?? 0

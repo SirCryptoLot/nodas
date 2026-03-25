@@ -13,7 +13,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .eq('id', user.id)
     .single()
 
-  const userName = profile?.full_name ?? user.email ?? 'Vartotojas'
+  const userName = profile?.full_name
+    ?? (user.user_metadata?.full_name as string | undefined)
+    ?? (user.user_metadata?.name as string | undefined)
+    ?? user.email
+    ?? 'Vartotojas'
   const tier = profile?.tier ?? 'simple'
 
   return (
