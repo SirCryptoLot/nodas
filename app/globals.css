@@ -29,7 +29,7 @@ body {
 /* ── Responsive utilities ──────────────────────────────── */
 
 /* Dashboard layout */
-.dashboard-layout { display: flex; min-height: 100vh; background: #f1f5f9; }
+.dashboard-layout { display: flex; min-height: 100vh; background: #f8fafc; }
 .dashboard-sidebar { width: 220px; flex-shrink: 0; }
 .dashboard-content { margin-left: 220px; flex: 1; min-width: 0; }
 

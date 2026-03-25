@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 }
 
-// ── JSON-LD: Service schemas ────────────────────────────────────────────────
+// ── JSON-LD ─────────────────────────────────────────────────────────────────
 
 const jsonLdWebRemontas = {
   '@context': 'https://schema.org',
@@ -176,13 +176,184 @@ const jsonLdBreadcrumb = {
   ],
 }
 
+// ── SVG Icons ────────────────────────────────────────────────────────────────
+
+function IconWrench({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
+  )
+}
+
+function IconShield({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  )
+}
+
+function IconBot({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="18" height="10" x="3" y="11" rx="2" />
+      <circle cx="12" cy="5" r="2" />
+      <path d="M12 7v4M8 16v.01M16 16v.01" />
+    </svg>
+  )
+}
+
+function IconGlobe({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20" />
+    </svg>
+  )
+}
+
+function IconCode({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  )
+}
+
+function IconSearch({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  )
+}
+
+function IconCheck({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  )
+}
+
+function IconArrowRight({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  )
+}
+
+function IconZap({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  )
+}
+
+function IconMail({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  )
+}
+
+function IconLock({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+  )
+}
+
+function IconClock({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  )
+}
+
+function IconMonitor({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="14" x="2" y="3" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+    </svg>
+  )
+}
+
+// ── Data ─────────────────────────────────────────────────────────────────────
+
 const SERVICES = [
-  { icon: '🔧', title: 'Web Remontas', desc: 'Svetainė lėta, nulaužta ar neveikia? Diagnozuojame per 4h, taisome greitai. Jokio mokėjimo iš anksto.', price: 'nuo €39', highlight: true },
-  { icon: '🛡️', title: 'Web SPA priežiūra', desc: 'Mėnesinė priežiūra, monitoringas 24/7, backupai, SSL, turinio keitimai. Jūs — verslui.', price: 'nuo €29/mėn', highlight: true },
-  { icon: '🤖', title: 'AI Svetainė', desc: 'Aprašykite verslą — AI sukurs profesionalią svetainę per minutes.', price: '€149' },
-  { icon: '📦', title: 'WordPress / CMS', desc: 'Pilnai valdoma svetainė su administravimo paneliu ir SEO įrankiais.', price: '€349' },
-  { icon: '⚡', title: 'Custom Dev', desc: 'Individualios sistemos React, Next.js ir Node.js technologijomis.', price: 'Pagal poreikį' },
-  { icon: '🔍', title: 'SEO', desc: 'Optimizuojame svetainę Google paieškos rezultatams ir turinio strategijai.', price: 'Individualus' },
+  {
+    Icon: IconWrench,
+    title: 'Web Remontas',
+    desc: 'Svetainė lėta, nulaužta ar neveikia? Diagnozuojame per 4h, taisome tą pačią dieną. Jokio mokėjimo iš anksto.',
+    price: 'nuo €39',
+    highlight: true,
+    href: '/web-remontas',
+    iconBg: '#dbeafe',
+    iconColor: '#2563eb',
+  },
+  {
+    Icon: IconShield,
+    title: 'Web SPA priežiūra',
+    desc: 'Mėnesinė priežiūra, monitoringas 24/7, backupai, SSL, turinio keitimai. Jūs — verslui, mes — techninei daliai.',
+    price: 'nuo €29/mėn',
+    highlight: true,
+    href: '/web-spa',
+    iconBg: '#dcfce7',
+    iconColor: '#16a34a',
+  },
+  {
+    Icon: IconBot,
+    title: 'AI Svetainė',
+    desc: 'Aprašykite verslą — AI sukurs profesionalią svetainę per minutes.',
+    price: '€149',
+    highlight: false,
+    href: '#kontaktai',
+    iconBg: '#ede9fe',
+    iconColor: '#7c3aed',
+  },
+  {
+    Icon: IconGlobe,
+    title: 'WordPress / CMS',
+    desc: 'Pilnai valdoma svetainė su administravimo paneliu ir SEO įrankiais.',
+    price: '€349',
+    highlight: false,
+    href: '#kontaktai',
+    iconBg: '#fef3c7',
+    iconColor: '#d97706',
+  },
+  {
+    Icon: IconCode,
+    title: 'Custom Dev',
+    desc: 'Individualios sistemos React, Next.js ir Node.js technologijomis.',
+    price: 'Pagal poreikį',
+    highlight: false,
+    href: '#kontaktai',
+    iconBg: '#f1f5f9',
+    iconColor: '#475569',
+  },
+  {
+    Icon: IconSearch,
+    title: 'SEO',
+    desc: 'Optimizuojame svetainę Google paieškos rezultatams ir turinio strategijai.',
+    price: 'Individualus',
+    highlight: false,
+    href: '#kontaktai',
+    iconBg: '#fce7f3',
+    iconColor: '#db2777',
+  },
 ]
 
 const SPA_PLANS = [
@@ -239,6 +410,8 @@ const FAQ = [
   },
 ]
 
+// ── Page ─────────────────────────────────────────────────────────────────────
+
 export default function Home() {
   return (
     <main style={{ background: '#f8fafc', minHeight: '100vh' }}>
@@ -247,240 +420,371 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
 
-      {/* ── HERO ── */}
-      <section className="mobile-section" style={{
-        background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)',
-        padding: '72px 40px 80px',
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #1e40af 100%)',
+        padding: '80px 24px 90px',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
-        <div className="mobile-stack mobile-gap-sm" style={{
-          maxWidth: 1100, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: '1fr 400px', gap: 56, alignItems: 'center',
-        }}>
+        {/* Decorative blobs */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', top: -120, right: -120,
+          width: 480, height: 480, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(37,99,235,0.28) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+        <div aria-hidden="true" style={{
+          position: 'absolute', bottom: -80, left: -80,
+          width: 320, height: 320, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(249,115,22,0.14) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
 
-          {/* Left column */}
-          <div>
-            {/* LT badge */}
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 7,
-              background: 'rgba(255,255,255,0.15)', borderRadius: 100,
-              padding: '5px 14px', marginBottom: 22,
-            }}>
-              <span style={{ fontSize: 14 }}>🇱🇹</span>
-              <span style={{ fontSize: 12, color: '#bfdbfe', fontWeight: 600, letterSpacing: '0.3px' }}>
-                Lietuvos IT specialistas
-              </span>
-            </div>
-
-            <h1 className="mobile-hero-title" style={{
-              fontSize: 50, fontWeight: 900, color: '#fff',
-              lineHeight: 1.1, margin: '0 0 18px', letterSpacing: '-1.5px',
-            }}>
-              Svetainė sugedo?<br />
-              <span style={{ color: '#93c5fd' }}>Sutvarkom.</span>
-            </h1>
-
-            <p style={{ fontSize: 17, color: '#bfdbfe', margin: '0 0 28px', lineHeight: 1.65 }}>
-              Web remontas ir priežiūra — greita, patikima, be jokio mokėjimo iš anksto.
-              Nuo <strong style={{ color: '#fff' }}>€39</strong>.
-            </p>
-
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[
-                '🔧 Web remontas per 24 val. — nuo €39',
-                '🛡️ Mėnesinė SPA priežiūra — nuo €29/mėn',
-                '⚙️ WordPress, React, Next.js, Wix, Shopify',
-                '✓ Diagnozė per 4h · mokate tik už rezultatą',
-              ].map(item => (
-                <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#e0f2fe', fontSize: 15, lineHeight: 1.5 }}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 36 }}>
-              <a href="#kontaktai" style={{
-                background: '#fff', color: '#1e3a8a',
-                padding: '13px 28px', borderRadius: 10, fontSize: 15,
-                fontWeight: 700, textDecoration: 'none',
-              }}>
-                Gauti nemokamą diagnostiką →
-              </a>
-              <a href="#paslaugos" style={{
-                background: 'rgba(255,255,255,0.12)', color: '#fff',
-                padding: '13px 28px', borderRadius: 10, fontSize: 15,
-                fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.25)',
-              }}>
-                Paslaugos
-              </a>
-            </div>
-
-            <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-              {[
-                { value: '< 4h', label: 'Diagnozė' },
-                { value: '24h', label: 'Remontas' },
-                { value: '99.9%', label: 'SPA uptime' },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <div style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{value}</div>
-                  <div style={{ fontSize: 12, color: '#93c5fd', marginTop: 2 }}>{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right column — quick-order card */}
-          <div className="mobile-full" style={{
-            background: '#fff', borderRadius: 20, padding: 28,
-            boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
+        <div style={{ maxWidth: 1160, margin: '0 auto', position: 'relative' }}>
+          <div className="mobile-stack mobile-gap-sm" style={{
+            display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center',
           }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>⚡ Greita pagalba</div>
-            <div style={{ fontSize: 13, color: '#64748b', marginBottom: 18 }}>Pasirinkite paslaugą — atsakome per 4h</div>
 
-            {[
-              { icon: '🔧', label: 'Web Remontas', price: 'nuo €39', color: '#fef3c7', badge: '#f59e0b' },
-              { icon: '🛡️', label: 'SPA priežiūra', price: 'nuo €29/mėn', color: '#dbeafe', badge: '#2563eb' },
-              { icon: '📦', label: 'WordPress', price: '€349', color: '#dcfce7', badge: '#16a34a' },
-              { icon: '🤖', label: 'AI Svetainė', price: '€149', color: '#ede9fe', badge: '#7c3aed' },
-            ].map(({ icon, label, price, color, badge }) => (
-              <a key={label} href="#kontaktai" style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '11px 14px', borderRadius: 10, background: color,
-                marginBottom: 10, textDecoration: 'none',
+            {/* Left */}
+            <div>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: 100, padding: '6px 16px', marginBottom: 28,
               }}>
-                <span style={{ fontSize: 14, fontWeight: 600, color: '#0f172a' }}>{icon} {label}</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', background: badge, borderRadius: 6, padding: '3px 10px', whiteSpace: 'nowrap' }}>
-                  {price}
+                <span style={{ fontSize: 14 }}>🇱🇹</span>
+                <span style={{ fontSize: 12, color: '#93c5fd', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  Lietuvos IT specialistas
                 </span>
-              </a>
-            ))}
+              </div>
 
-            <a href="#kontaktai" style={{
-              display: 'block', textAlign: 'center',
-              background: '#2563eb', color: '#fff', padding: '13px 0',
-              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none', marginTop: 14,
+              <h1 className="mobile-hero-title" style={{
+                fontSize: 54, fontWeight: 900, color: '#fff',
+                lineHeight: 1.08, margin: '0 0 20px', letterSpacing: '-1.5px',
+              }}>
+                Svetainė sugedo?<br />
+                <span style={{
+                  background: 'linear-gradient(90deg, #f97316, #fb923c)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                }}>Sutvarkom.</span>
+              </h1>
+
+              <p style={{ fontSize: 18, color: '#cbd5e1', margin: '0 0 32px', lineHeight: 1.7, maxWidth: 540 }}>
+                Profesionalus web remontas ir priežiūra — diagnozė per 4h,
+                mokate tik už rezultatą. Nuo <strong style={{ color: '#fff' }}>€39</strong>.
+              </p>
+
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  'Web remontas per 24 val. — nuo €39',
+                  'Mėnesinė SPA priežiūra — nuo €29/mėn',
+                  'WordPress, React, Next.js, Wix, Shopify',
+                  'Diagnozė per 4h · mokate tik už rezultatą',
+                ].map(item => (
+                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#e2e8f0', fontSize: 15 }}>
+                    <span style={{ color: '#f97316', flexShrink: 0, display: 'flex' }}>
+                      <IconCheck />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+                <a href="#kontaktai"
+                  className="inline-flex items-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-orange-600"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    background: '#f97316', color: '#fff',
+                    padding: '14px 28px', borderRadius: 10, fontSize: 15,
+                    fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  Gauti nemokamą diagnostiką
+                  <IconArrowRight />
+                </a>
+                <a href="#paslaugos"
+                  className="transition-colors duration-200 hover:bg-white/20"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    background: 'rgba(255,255,255,0.08)', color: '#e2e8f0',
+                    padding: '14px 28px', borderRadius: 10, fontSize: 15,
+                    fontWeight: 600, textDecoration: 'none',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                  }}
+                >
+                  Paslaugos
+                </a>
+              </div>
+
+              <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap' }}>
+                {[
+                  { value: '< 4h', label: 'Diagnozė' },
+                  { value: '24h', label: 'Remontas' },
+                  { value: '99.9%', label: 'SPA uptime' },
+                ].map(({ value, label }) => (
+                  <div key={label}>
+                    <div style={{ fontSize: 26, fontWeight: 900, color: '#fff', letterSpacing: '-0.5px' }}>{value}</div>
+                    <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2, fontWeight: 500 }}>{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Quick order card */}
+            <div className="mobile-full" style={{
+              background: '#fff', borderRadius: 20, padding: 30,
+              boxShadow: '0 24px 80px rgba(0,0,0,0.35)',
             }}>
-              Susisiekti dabar →
-            </a>
-            <div style={{ textAlign: 'center', fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
-              Nemokama konsultacija · Atsakome per 4h
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                <span style={{ color: '#f97316', display: 'flex' }}><IconZap /></span>
+                <span style={{ fontSize: 16, fontWeight: 700, color: '#0f172a' }}>Greita pagalba</span>
+              </div>
+              <div style={{ fontSize: 13, color: '#64748b', marginBottom: 20 }}>
+                Pasirinkite paslaugą — atsakome per 4h
+              </div>
+
+              {[
+                { label: 'Web Remontas', price: 'nuo €39', bg: '#eff6ff', accent: '#2563eb', Icon: IconWrench },
+                { label: 'SPA priežiūra', price: 'nuo €29/mėn', bg: '#f0fdf4', accent: '#16a34a', Icon: IconShield },
+                { label: 'WordPress', price: '€349', bg: '#fefce8', accent: '#ca8a04', Icon: IconGlobe },
+                { label: 'AI Svetainė', price: '€149', bg: '#f5f3ff', accent: '#7c3aed', Icon: IconBot },
+              ].map(({ label, price, bg, accent, Icon }) => (
+                <a key={label} href="#kontaktai"
+                  className="transition-all duration-150 hover:-translate-y-px hover:shadow-md cursor-pointer"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '12px 14px', borderRadius: 10, background: bg,
+                    marginBottom: 10, textDecoration: 'none',
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 14, fontWeight: 600, color: '#0f172a' }}>
+                    <span style={{ color: accent, display: 'flex' }}><Icon size={18} /></span>
+                    {label}
+                  </span>
+                  <span style={{
+                    fontSize: 12, fontWeight: 700, color: '#fff', background: accent,
+                    borderRadius: 6, padding: '3px 10px', whiteSpace: 'nowrap',
+                  }}>
+                    {price}
+                  </span>
+                </a>
+              ))}
+
+              <a href="#kontaktai"
+                className="flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-orange-600"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  background: '#f97316', color: '#fff', padding: '14px 0',
+                  borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+                  marginTop: 16,
+                }}
+              >
+                Susisiekti dabar
+                <IconArrowRight />
+              </a>
+              <div style={{ textAlign: 'center', fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
+                Nemokama konsultacija · Atsakome per 4h
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── TRUST BAR ── */}
-      <section style={{ background: '#1e3a8a', padding: '16px 24px' }}>
+      {/* ── TRUST BAR ────────────────────────────────────────────────────── */}
+      <section style={{ background: '#1e3a8a', padding: '14px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <div style={{
-          maxWidth: 1100, margin: '0 auto',
+          maxWidth: 1160, margin: '0 auto',
           display: 'flex', justifyContent: 'center', alignItems: 'center',
-          flexWrap: 'wrap', gap: 24,
+          flexWrap: 'wrap', gap: 28,
         }}>
           {[
-            { icon: '🔒', label: 'SSL apsauga' },
-            { icon: '⚡', label: 'Atsakymas per 4h' },
-            { icon: '🇱🇹', label: 'Lietuviškai' },
-            { icon: '🛡️', label: '24/7 monitoringas' },
-            { icon: '💳', label: 'Paysera mokėjimai' },
-          ].map(({ icon, label }) => (
-            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#bfdbfe', fontSize: 13 }}>
-              <span style={{ fontSize: 16 }}>{icon}</span>
-              <span>{label}</span>
+            { Icon: IconLock, label: 'SSL apsauga' },
+            { Icon: IconClock, label: 'Atsakymas per 4h' },
+            { Icon: IconMonitor, label: '24/7 monitoringas' },
+            { Icon: IconZap, label: 'Paysera mokėjimai' },
+          ].map(({ Icon, label }) => (
+            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#93c5fd', fontSize: 13, fontWeight: 500 }}>
+              <span style={{ display: 'flex', opacity: 0.8 }}><Icon /></span>
+              {label}
             </div>
           ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#93c5fd', fontSize: 13, fontWeight: 500 }}>
+            <span style={{ fontSize: 16 }}>🇱🇹</span>
+            Lietuviškai
+          </div>
         </div>
       </section>
 
-      {/* ── SERVICES ── */}
-      <section id="paslaugos" className="mobile-section" style={{ padding: '80px 40px', background: '#f8fafc' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 44 }}>
+      {/* ── PROBLEM STATEMENT ────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '72px 24px' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#f97316', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 14 }}>
+            Ar jums pažįstama?
+          </div>
+          <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', margin: '0 0 48px', lineHeight: 1.2 }}>
+            Svetainė neveikia — o verslas stovi
+          </h2>
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            {[
+              {
+                title: 'Svetainė lėta arba neveikia',
+                desc: 'Pirkėjai palieka, Google baudžia — kiekviena minutė kainuoja.',
+                bg: '#fef2f2', border: '#fecaca', text: '#991b1b',
+              },
+              {
+                title: 'Nulaužta ar užkrėsta',
+                desc: 'Virusai, spam nuorodos, juodasis sąrašas — reikalingas skubus atstatymas.',
+                bg: '#fff7ed', border: '#fed7aa', text: '#9a3412',
+              },
+              {
+                title: 'Niekas neatsako',
+                desc: 'Kūrėjas dingo, hostingas tylus, nežinote kur ieškoti pagalbos.',
+                bg: '#fdf4ff', border: '#e9d5ff', text: '#6b21a8',
+              },
+            ].map(({ title, desc, bg, border, text }) => (
+              <div key={title} style={{
+                background: bg, border: `1px solid ${border}`, borderRadius: 14,
+                padding: '24px 22px', textAlign: 'left',
+              }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: text, marginBottom: 8 }}>{title}</div>
+                <div style={{ fontSize: 13, color: '#475569', lineHeight: 1.65 }}>{desc}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 40, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>
+            Jei taip — <span style={{ color: '#f97316' }}>mes čia</span>.{' '}
+            <a href="#kontaktai"
+              className="hover:text-blue-800 transition-colors duration-150"
+              style={{ color: '#2563eb', textDecoration: 'underline', textDecorationColor: '#bfdbfe' }}
+            >
+              Kreipkitės dabar →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES ─────────────────────────────────────────────────────── */}
+      <section id="paslaugos" style={{ padding: '80px 24px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 1160, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Paslaugos
             </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+            <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', margin: '0 0 12px' }}>
               Viskas, ko reikia jūsų svetainei
             </h2>
-            <p style={{ fontSize: 15, color: '#64748b', marginTop: 10 }}>
+            <p style={{ fontSize: 15, color: '#64748b', margin: 0 }}>
               Web remontas ir priežiūra — mūsų specializacija
             </p>
           </div>
 
           <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
-            {SERVICES.map(({ icon, title, desc, price, highlight }) => (
-              <div key={title} style={{
-                background: highlight ? 'linear-gradient(135deg, #eff6ff, #dbeafe)' : '#fff',
-                borderRadius: 14, padding: 24,
-                border: highlight ? '2px solid #2563eb' : '1px solid #e2e8f0',
-                boxShadow: highlight ? '0 4px 20px rgba(37,99,235,0.12)' : '0 2px 8px rgba(0,0,0,0.04)',
-                display: 'flex', flexDirection: 'column', position: 'relative',
-              }}>
+            {SERVICES.map(({ Icon, title, desc, price, highlight, href, iconBg, iconColor }) => (
+              <a key={title} href={href}
+                className="flex flex-col cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                style={{
+                  background: '#fff', borderRadius: 16, padding: 26,
+                  border: highlight ? '2px solid #2563eb' : '1px solid #e2e8f0',
+                  boxShadow: highlight ? '0 4px 24px rgba(37,99,235,0.1)' : '0 1px 4px rgba(0,0,0,0.04)',
+                  textDecoration: 'none', position: 'relative',
+                }}
+              >
                 {highlight && (
                   <div style={{
                     position: 'absolute', top: -11, left: 20,
                     background: '#2563eb', color: '#fff', fontSize: 10, fontWeight: 700,
-                    padding: '3px 10px', borderRadius: 999, letterSpacing: '0.5px', textTransform: 'uppercase',
+                    padding: '3px 12px', borderRadius: 999, letterSpacing: '0.5px', textTransform: 'uppercase',
                   }}>Populiariausia</div>
                 )}
-                <div style={{ fontSize: 30, marginBottom: 10 }}>{icon}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{title}</div>
-                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, flex: 1, marginBottom: 14 }}>{desc}</div>
                 <div style={{
-                  display: 'inline-block',
-                  background: highlight ? '#2563eb' : '#dbeafe',
-                  color: highlight ? '#fff' : '#1e40af',
-                  borderRadius: 8, padding: '4px 12px', fontSize: 13, fontWeight: 700, alignSelf: 'flex-start',
+                  width: 44, height: 44, borderRadius: 12, background: iconBg,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: iconColor, marginBottom: 14, flexShrink: 0,
+                }}>
+                  <Icon />
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{title}</div>
+                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.65, flex: 1, marginBottom: 16 }}>{desc}</div>
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  background: highlight ? '#eff6ff' : '#f1f5f9',
+                  color: highlight ? '#1e40af' : '#475569',
+                  borderRadius: 8, padding: '5px 12px', fontSize: 13, fontWeight: 700, alignSelf: 'flex-start',
                 }}>
                   {price}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section className="mobile-section" style={{ padding: '80px 40px', background: '#fff' }}>
+      {/* ── HOW IT WORKS ─────────────────────────────────────────────────── */}
+      <section style={{ padding: '80px 24px', background: '#fff' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 52 }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Procesas
             </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
-              Paprasta kaip 1-2-3
+            <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+              Kaip tai veikia
             </h2>
           </div>
 
-          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, position: 'relative' }}>
             {[
-              { num: '01', icon: '📋', title: 'Aprašykite problemą', desc: 'Pasakykite kas nutiko — per formą, el. paštą ar telefonu. Jokių techninių žargonų.' },
-              { num: '02', icon: '🔍', title: 'Diagnozuojame per 4h', desc: 'Išsiaiškinsime problemą ir pateikime tikslią kainą. Jokių netikėtumų, jokio mokėjimo iš anksto.' },
-              { num: '03', icon: '✅', title: 'Sutvarkom ir pristatom', desc: 'Dirbiame greičiai. Gavę jūsų patvirtinimą — problema išspręsta, svetainė veikia.' },
-            ].map(({ num, icon, title, desc }) => (
-              <div key={num} style={{ textAlign: 'center' }}>
+              {
+                num: '01', title: 'Aprašykite problemą',
+                desc: 'Pasakykite kas nutiko — per formą, el. paštą ar telefonu. Jokių techninių žargonų.',
+                Icon: IconMail,
+              },
+              {
+                num: '02', title: 'Diagnozuojame per 4h',
+                desc: 'Išsiaiškinsime problemą ir pateikime tikslią kainą. Jokių netikėtumų, jokio mokėjimo iš anksto.',
+                Icon: IconSearch,
+              },
+              {
+                num: '03', title: 'Sutvarkom ir pristatom',
+                desc: 'Dirbiame greitai. Gavę jūsų patvirtinimą — problema išspręsta, svetainė veikia.',
+                Icon: IconCheck,
+              },
+            ].map(({ num, title, desc, Icon }, i) => (
+              <div key={num} style={{ textAlign: 'center', position: 'relative' }}>
+                {i < 2 && (
+                  <div aria-hidden="true" style={{
+                    position: 'absolute', top: 28, left: '65%', right: '-35%',
+                    height: 2, background: 'linear-gradient(90deg, #2563eb, #bfdbfe)',
+                    zIndex: 0,
+                  }} />
+                )}
                 <div style={{
-                  width: 60, height: 60, borderRadius: '50%', background: '#eff6ff',
-                  border: '2px solid #bfdbfe', margin: '0 auto 16px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26,
+                  width: 56, height: 56, borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #1e40af, #2563eb)',
+                  margin: '0 auto 20px', position: 'relative', zIndex: 1,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff', boxShadow: '0 4px 16px rgba(37,99,235,0.3)',
                 }}>
-                  {icon}
+                  <Icon size={22} />
                 </div>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 2, marginBottom: 8 }}>{num}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 2, marginBottom: 10 }}>{num}</div>
                 <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 10 }}>{title}</div>
-                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6 }}>{desc}</div>
+                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.7 }}>{desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── SPA PLANS ── */}
-      <section id="planai" className="mobile-section" style={{ padding: '80px 40px', background: '#f8fafc' }}>
+      {/* ── SPA PLANS ────────────────────────────────────────────────────── */}
+      <section id="planai" style={{ padding: '80px 24px', background: '#f8fafc' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ textAlign: 'center', marginBottom: 52 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Planai
             </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: '0 0 12px' }}>
+            <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', margin: '0 0 12px' }}>
               Web SPA priežiūros planai
             </h2>
             <p style={{ fontSize: 15, color: '#64748b', margin: 0 }}>
@@ -488,42 +792,51 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
+          <div className="mobile-grid-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22, alignItems: 'center' }}>
             {SPA_PLANS.map(({ name, price, period, features, cta, popular }) => (
               <div key={name} style={{
-                background: popular ? 'linear-gradient(135deg, #1e3a8a, #2563eb)' : '#fff',
-                borderRadius: 18, padding: 30,
+                background: popular ? 'linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%)' : '#fff',
+                borderRadius: 20, padding: popular ? 34 : 28,
                 border: popular ? 'none' : '1px solid #e2e8f0',
-                boxShadow: popular ? '0 8px 40px rgba(37,99,235,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
-                position: 'relative', transform: popular ? 'scale(1.04)' : 'none',
+                boxShadow: popular ? '0 12px 48px rgba(15,23,42,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                position: 'relative',
+                transform: popular ? 'scale(1.04)' : 'none',
               }}>
                 {popular && (
                   <div style={{
-                    position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                    background: '#f59e0b', color: '#fff', fontSize: 11, fontWeight: 700,
-                    padding: '4px 14px', borderRadius: 999, whiteSpace: 'nowrap',
-                  }}>⭐ POPULIARIAUSIAS</div>
+                    position: 'absolute', top: -13, left: '50%', transform: 'translateX(-50%)',
+                    background: 'linear-gradient(90deg, #f97316, #fb923c)', color: '#fff',
+                    fontSize: 11, fontWeight: 800, padding: '5px 16px', borderRadius: 999,
+                    whiteSpace: 'nowrap', letterSpacing: '0.5px', textTransform: 'uppercase',
+                  }}>Populiariausias</div>
                 )}
-                <div style={{ fontSize: 15, fontWeight: 700, color: popular ? '#bfdbfe' : '#64748b', marginBottom: 12 }}>{name}</div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 20 }}>
-                  <span style={{ fontSize: 38, fontWeight: 900, color: popular ? '#fff' : '#0f172a' }}>{price}</span>
-                  <span style={{ fontSize: 14, color: popular ? '#93c5fd' : '#64748b' }}>{period}</span>
+                <div style={{ fontSize: 14, fontWeight: 700, color: popular ? '#93c5fd' : '#64748b', marginBottom: 14 }}>{name}</div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 24 }}>
+                  <span style={{ fontSize: 42, fontWeight: 900, color: popular ? '#fff' : '#0f172a', letterSpacing: '-1px' }}>{price}</span>
+                  <span style={{ fontSize: 14, color: popular ? '#93c5fd' : '#94a3b8' }}>{period}</span>
                 </div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {features.map(f => (
-                    <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: popular ? '#bfdbfe' : '#374151', lineHeight: 1.5 }}>
-                      <span style={{ color: popular ? '#4ade80' : '#2563eb', flexShrink: 0, fontSize: 14 }}>✓</span>
+                    <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: popular ? '#cbd5e1' : '#374151', lineHeight: 1.55 }}>
+                      <span style={{ color: popular ? '#4ade80' : '#2563eb', flexShrink: 0, display: 'flex', marginTop: 1 }}>
+                        <IconCheck />
+                      </span>
                       {f}
                     </li>
                   ))}
                 </ul>
-                <a href="#kontaktai" style={{
-                  display: 'block', textAlign: 'center', padding: '12px 0',
-                  background: popular ? '#fff' : '#2563eb',
-                  color: popular ? '#1e40af' : '#fff',
-                  borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none',
-                }}>
-                  {cta} →
+                <a href="#kontaktai"
+                  className={`flex items-center justify-center gap-2 cursor-pointer transition-colors duration-200 ${popular ? 'hover:bg-orange-600' : 'hover:bg-blue-900'}`}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                    padding: '13px 0',
+                    background: popular ? '#f97316' : '#1e40af',
+                    color: '#fff',
+                    borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  {cta}
+                  <IconArrowRight />
                 </a>
               </div>
             ))}
@@ -531,50 +844,69 @@ export default function Home() {
 
           {/* Repair pricing note */}
           <div style={{
-            marginTop: 36, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14,
-            padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginTop: 40, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14,
+            padding: '22px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             flexWrap: 'wrap', gap: 16,
           }}>
-            <div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>🔧 Web Remontas — vienkartinis</div>
-              <div style={{ fontSize: 13, color: '#64748b' }}>Diagnozė nemokama · Mokate tik už rezultatą · Nuo €39</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: 10, background: '#eff6ff',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#2563eb', flexShrink: 0,
+              }}>
+                <IconWrench size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 3 }}>Web Remontas — vienkartinis</div>
+                <div style={{ fontSize: 13, color: '#64748b' }}>Diagnozė nemokama · Mokate tik už rezultatą · Nuo €39</div>
+              </div>
             </div>
-            <a href="#kontaktai" style={{
-              background: '#0f172a', color: '#fff', padding: '11px 22px',
-              borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
-            }}>
-              Kreiptis dabar →
+            <a href="#kontaktai"
+              className="inline-flex items-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-slate-800"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: '#0f172a', color: '#fff', padding: '12px 22px',
+                borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Kreiptis dabar
+              <IconArrowRight />
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section id="duk" className="mobile-section" style={{ padding: '80px 40px', background: '#fff' }}>
+      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+      <section id="duk" style={{ padding: '80px 24px', background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ textAlign: 'center', marginBottom: 52 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               D.U.K.
             </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+            <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', margin: 0 }}>
               Dažniausiai užduodami klausimai
             </h2>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {FAQ.map(({ q, a }) => (
               <details key={q} style={{
-                background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden',
+                background: '#f8fafc', border: '1px solid #e2e8f0',
+                borderRadius: 12, overflow: 'hidden',
               }}>
                 <summary style={{
                   padding: '18px 22px', fontSize: 15, fontWeight: 700, color: '#0f172a',
-                  cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  userSelect: 'none',
+                  cursor: 'pointer', listStyle: 'none', display: 'flex',
+                  justifyContent: 'space-between', alignItems: 'center', userSelect: 'none',
                 }}>
                   {q}
-                  <span style={{ color: '#2563eb', fontSize: 20, flexShrink: 0, marginLeft: 12 }}>+</span>
+                  <span style={{ color: '#2563eb', fontSize: 22, flexShrink: 0, marginLeft: 16, fontWeight: 300, lineHeight: 1 }}>+</span>
                 </summary>
-                <div style={{ padding: '0 22px 18px', fontSize: 14, color: '#475569', lineHeight: 1.7, borderTop: '1px solid #e2e8f0', paddingTop: 16 }}>
+                <div style={{
+                  padding: '16px 22px 20px', fontSize: 14, color: '#475569',
+                  lineHeight: 1.75, borderTop: '1px solid #e2e8f0',
+                }}>
                   {a}
                 </div>
               </details>
@@ -583,32 +915,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
-      <section id="kontaktai" className="mobile-section" style={{
-        background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
-        padding: '80px 40px',
+      {/* ── CONTACT ──────────────────────────────────────────────────────── */}
+      <section id="kontaktai" style={{
+        background: 'linear-gradient(160deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%)',
+        padding: '88px 24px',
+        position: 'relative', overflow: 'hidden',
       }}>
-        <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#93c5fd', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
+        <div aria-hidden="true" style={{
+          position: 'absolute', top: -100, right: -100, width: 400, height: 400, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{ maxWidth: 600, margin: '0 auto', position: 'relative' }}>
+          <div style={{ textAlign: 'center', marginBottom: 44 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#f97316', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Kontaktai
             </div>
-            <h2 className="mobile-h2" style={{ fontSize: 34, fontWeight: 800, color: '#fff', margin: 0 }}>
+            <h2 className="mobile-h2" style={{ fontSize: 36, fontWeight: 800, color: '#fff', margin: '0 0 14px' }}>
               Pradėkime šiandien
             </h2>
-            <p style={{ fontSize: 15, color: '#bfdbfe', marginTop: 12 }}>
-              Parašykite — atsakysime per 4 valandas.
+            <p style={{ fontSize: 16, color: '#94a3b8', margin: 0, lineHeight: 1.6 }}>
+              Parašykite — atsakysime per 4 valandas. Diagnozė nemokama.
             </p>
           </div>
 
           <ContactForm />
 
-          <div style={{ textAlign: 'center', marginTop: 28, display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
-            <a href="mailto:info@nodas.lt" style={{ color: '#93c5fd', fontSize: 14, textDecoration: 'none' }}>
-              ✉️ info@nodas.lt
+          <div style={{
+            textAlign: 'center', marginTop: 28,
+            display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap',
+          }}>
+            <a href="mailto:info@nodas.lt"
+              className="inline-flex items-center gap-2 transition-colors duration-200 hover:text-blue-300"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: '#93c5fd', fontSize: 14, textDecoration: 'none' }}
+            >
+              <IconMail />
+              info@nodas.lt
             </a>
-            <span style={{ color: '#bfdbfe', fontSize: 14 }}>🇱🇹 Lietuva</span>
-            <span style={{ color: '#bfdbfe', fontSize: 14 }}>⚡ Per 4 val.</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#475569', fontSize: 14 }}>
+              <span>🇱🇹</span>
+              Lietuva
+            </span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 7, color: '#475569', fontSize: 14 }}>
+              <span style={{ color: '#f97316', display: 'flex' }}><IconZap /></span>
+              Per 4 val.
+            </span>
           </div>
         </div>
       </section>
