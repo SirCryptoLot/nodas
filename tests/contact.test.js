@@ -103,6 +103,15 @@ test('no reply_to when contact is a phone number', async () => {
   assert.equal(sent.reply_to, undefined);
 });
 
+test('no reply_to when contact mixes email with other text', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: { ...valid, contact: 'jonas@gmail.com, 860012345' } }, res);
+  assert.equal(res.statusCode, 200);
+  const sent = JSON.parse(calls[0].opts.body);
+  assert.equal(sent.reply_to, undefined);
+  assert.ok(sent.html.includes('jonas@gmail.com, 860012345'));
+});
+
 test('fails with 502 when Resend errors', async () => {
   globalThis.fetch = async () => ({ ok: false, json: async () => ({}) });
   const res = fakeRes();

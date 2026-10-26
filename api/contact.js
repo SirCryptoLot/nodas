@@ -79,7 +79,8 @@ export default async function handler(req, res) {
     subject: `Nauja užklausa: ${PLANS[plan]}`,
     html,
   };
-  if (contact.includes('@')) email.reply_to = contact;
+  // Atsakymo adresas tik tada, kai laukas yra vienas aiškus el. paštas, kitaip Resend atmestų laišką.
+  if (/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(contact)) email.reply_to = contact;
 
   try {
     const r = await fetch('https://api.resend.com/emails', {

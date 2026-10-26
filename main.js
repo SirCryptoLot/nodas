@@ -37,7 +37,10 @@
       const done = document.createElement('p');
       done.className = 'done';
       done.textContent = 'Ačiū! Atsakysime kuo greičiau.';
+      done.setAttribute('role', 'status');
+      done.tabIndex = -1;
       form.replaceWith(done);
+      done.focus();
     } catch {
       const email = document.querySelector('[data-email]')?.textContent || '';
       status.className = 'status err';
