@@ -29,9 +29,16 @@ test('shows exact prices and VAT note', () => {
   }
 });
 
-test('loads Pixelify Sans with latin-ext', () => {
-  assert.match(html, /fonts\.googleapis\.com\/css2\?family=Pixelify\+Sans[^"]*/);
-  assert.match(html, /subset=latin-ext/);
+test('self-hosts Pixelify Sans incl. latin-ext, no Google requests', () => {
+  const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(html + css, /fonts\.(googleapis|gstatic)\.com/);
+  for (const f of ['pixelify-sans-latin.woff2', 'pixelify-sans-latin-ext.woff2']) {
+    assert.ok(css.includes(`/fonts/${f}`), `@font-face for ${f} missing`);
+    const bytes = readFileSync(new URL(`../fonts/${f}`, import.meta.url));
+    assert.equal(bytes.subarray(0, 4).toString('latin1'), 'wOF2', `${f} is not woff2`);
+  }
+  assert.match(css, /font-family:\s*'Pixelify Sans'/);
+  assert.match(css, /U\+0100-02BA/);
 });
 
 test('placeholders only in contacts and footer', () => {
