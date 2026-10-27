@@ -37,15 +37,15 @@ test('shows exact prices and VAT note', () => {
   }
 });
 
-test('self-hosts Pixelify Sans incl. latin-ext, no Google requests', () => {
+test('self-hosts JetBrains Mono incl. latin-ext, no Google requests', () => {
   const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
   assert.doesNotMatch(html + css, /fonts\.(googleapis|gstatic)\.com/);
-  for (const f of ['pixelify-sans-latin.woff2', 'pixelify-sans-latin-ext.woff2']) {
+  for (const f of ['jetbrains-mono-latin.woff2', 'jetbrains-mono-latin-ext.woff2']) {
     assert.ok(css.includes(`/fonts/${f}`), `@font-face for ${f} missing`);
     const bytes = readFileSync(new URL(`../fonts/${f}`, import.meta.url));
     assert.equal(bytes.subarray(0, 4).toString('latin1'), 'wOF2', `${f} is not woff2`);
   }
-  assert.match(css, /font-family:\s*'Pixelify Sans'/);
+  assert.match(css, /font-family:\s*'JetBrains Mono'/);
   assert.match(css, /U\+0100-02BA/);
 });
 

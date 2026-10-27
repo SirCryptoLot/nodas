@@ -109,3 +109,7 @@ Poraštė: rekvizitai (įmonės pavadinimas / ind. veiklos nr.; savininkas patei
 ## Pakeitimas 2026-10-27: viskas viename ekrane
 
 Savininkas paprašė, kad svetainė tilptų į vieną langą be slinkimo. Kompiuterio ekrane: kairėje pagrindinė žinutė ir mygtukas, dešinėje paketai, kainos, garantija ir palaikymas, apačioje dvi eilutės (ką galima nuveikti, kaip vyksta). DUK ir Kontaktai (forma, kontaktai, rekvizitai) atsidaro kaip langai (`<dialog>`), poraštės nebėra. Telefone lieka trumpas slinkimas. Patikrinta: 1024×768, 1280×720, 1366×768, 1440×900, 1920×1080 telpa be slinkimo.
+
+## Pakeitimas 2026-10-27: šriftas
+
+Pixelify Sans savininkui „per daug pikseliuotas“. Iš keturių variantų (Space Mono, Space Grotesk, IBM Plex Mono, JetBrains Mono) savininkas pasirinko **JetBrains Mono**. Laikomas pačioje svetainėje (`fonts/`), lotyniškas ir išplėstinis rinkinys, storiai 400–800. Antraštės 700–800, šiek tiek suspaustos raidės.
