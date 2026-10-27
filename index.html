@@ -19,157 +19,102 @@
 </head>
 <body>
 
-<header class="wrap nav">
-  <a href="#" class="logo">Nodas</a>
+<header class="nav">
+  <a href="/" class="logo">Nodas</a>
   <nav>
-    <a href="#paslaugos">Paslaugos</a>
-    <a href="#kainos">Kainos</a>
-    <a href="#duk">DUK</a>
-    <a href="#kontaktai">Kontaktai</a>
+    <button type="button" data-open="duk">DUK</button>
+    <button type="button" data-open="kontaktai">Kontaktai</button>
   </nav>
 </header>
 
-<main>
+<main class="screen">
 
-  <section class="wrap hero">
-    <p class="label">01 · Privatus AI</p>
+  <section id="hero" class="hero">
     <h1>Privatus AI.</h1>
     <p class="hero-sub">Duomenys lieka pas jus.</p>
     <p class="lead">Be debesų. Be prenumeratų. Be cenzūros.</p>
-    <a class="cta" href="#kontaktai">Gauti pasiūlymą →</a>
+    <p class="who">Verslui · Namams · Be cenzūros</p>
+    <button type="button" class="cta" data-open="kontaktai">Gauti pasiūlymą →</button>
   </section>
 
-  <section class="wrap block" id="paslaugos">
-    <p class="label">02 · Kam tai skirta</p>
-    <div class="cols">
-      <div>
-        <h3>Verslui</h3>
-        <p>Klientų ir įmonės duomenys neišeina iš biuro.</p>
-      </div>
-      <div>
-        <h3>Namams</h3>
-        <p>Savas pokalbių AI be mėnesinio mokesčio ir sekimo.</p>
-      </div>
-      <div>
-        <h3>Be cenzūros</h3>
-        <p>Atviri modeliai be platformų filtrų. Jūsų kompiuteris, jūsų taisyklės.</p>
-      </div>
+  <section id="kainos" class="offer" aria-label="Paketai ir kainos">
+    <div class="plan">
+      <div><h2>AI įdiegimas</h2><span>1 diena</span></div>
+      <b>nuo 149 €</b>
     </div>
-  </section>
-
-  <section class="wrap block" id="nauda">
-    <p class="label">03 · Ką galėsite nuveikti</p>
-    <ul class="uses">
-      <li>Klausti savo dokumentų</li>
-      <li>Rašyti laiškus ir pasiūlymus</li>
-      <li>Santraukos iš ilgų PDF</li>
-      <li>Vertimai</li>
-      <li>Pagalba programuojant</li>
-      <li>Darbas be interneto</li>
+    <div class="plan featured">
+      <div><h2>AI kompiuteris</h2><span>3–5 d.</span></div>
+      <b>nuo 1 500 €</b>
+    </div>
+    <div class="plan">
+      <div><h2>Verslo AI serveris</h2><span>1–3 sav.</span></div>
+      <b>nuo 4 000 €</b>
+    </div>
+    <ul class="terms">
+      <li><b>24 mėn.</b> įrangos garantija</li>
+      <li>Palaikymas <b>nuo 29 €/mėn.</b> namams, <b>nuo 99 €/mėn.</b> verslui</li>
+      <li class="muted">Kainos nurodytos su PVM</li>
     </ul>
-    <div class="cols gains">
-      <p><b>0</b> duomenų į svetimus serverius</p>
-      <p><b>0 €</b> mėnesio mokesčio už AI</p>
-      <p><b>24/7</b> veikia net be interneto</p>
-    </div>
   </section>
 
-  <section class="wrap block" id="kainos">
-    <p class="label">04 · Paketai ir kainos</p>
-    <div class="plans">
-      <div class="plan">
-        <div><h3>AI įdiegimas</h3><p>Į jūsų kompiuterį. Privatiems.</p></div>
-        <div class="price"><b>nuo 149 €</b><span>1 diena</span></div>
-      </div>
-      <div class="plan featured">
-        <div><h3>Privatus AI kompiuteris</h3><p>Paruoštas naudoti. Privatiems ir mažoms įmonėms.</p></div>
-        <div class="price"><b>nuo 1 500 €</b><span>3–5 d.</span></div>
-      </div>
-      <div class="plan">
-        <div><h3>Verslo AI serveris</h3><p>Paieška įmonės dokumentuose, keli vartotojai.</p></div>
-        <div class="price"><b>nuo 4 000 €</b><span>1–3 sav.</span></div>
-      </div>
-    </div>
-    <p class="note">Kainos nurodytos su PVM. Tiksli kaina priklauso nuo įrangos ir poreikių.</p>
-  </section>
-
-  <section class="wrap block" id="eiga">
-    <p class="label">05 · Kaip vyksta</p>
-    <ol class="steps">
-      <li><b>Pokalbis</b><span>Nemokamai.</span></li>
-      <li><b>Pasiūlymas</b><span>Su tikslia kaina ir terminu.</span></li>
-      <li><b>Įdiegimas</b><span>Viską paruošiame.</span></li>
-      <li><b>Apmokymas</b><span>Parodome, kaip naudotis.</span></li>
-    </ol>
-  </section>
-
-  <section class="wrap block" id="garantijos">
-    <p class="label">06 · Garantijos ir palaikymas</p>
-    <div class="cols gains">
-      <p><b>24 mėn.</b> įrangos garantija</p>
-      <p><b>nuo 29 €/mėn.</b> palaikymas privatiems</p>
-      <p><b>nuo 99 €/mėn.</b> palaikymas verslui</p>
-    </div>
-    <p class="note">Palaikymas: atnaujinimai, nauji modeliai ir pagalba, kai kas nors neveikia.</p>
-  </section>
-
-  <section class="wrap block" id="duk">
-    <p class="label">07 · DUK</p>
-    <details>
-      <summary>Ar tikrai niekas nemato mano duomenų?</summary>
-      <p>Taip. Modelis veikia jūsų kompiuteryje ar serveryje, užklausos niekur nesiunčiamos. Jis gali veikti ir visiškai be interneto.</p>
-    </details>
-    <details>
-      <summary>Ar veiks lietuviškai?</summary>
-      <p>Taip, bet atvirai: lokalūs modeliai lietuviškai rašo silpniau nei angliškai. Klausimus ir dokumentus supranta gerai, o svarbius tekstus verta peržiūrėti.</p>
-    </details>
-    <details>
-      <summary>Kuo skiriasi nuo ChatGPT?</summary>
-      <p>ChatGPT veikia svetimuose serveriuose ir kainuoja kas mėnesį. Privatus AI veikia pas jus ir mėnesio mokesčio neturi. Didžiausi debesų modeliai kai kuriose užduotyse vis dar stipresni.</p>
-    </details>
-    <details>
-      <summary>Kokio kompiuterio reikia?</summary>
-      <p>Svarbiausia: vaizdo plokštė su daug atminties. Jūsų kompiuterį patikrinsime nemokamai. Jei netiks, pasiūlysime paruoštą.</p>
-    </details>
-    <details>
-      <summary>Kas yra necenzūruotas modelis?</summary>
-      <p>Atviras modelis be platformų filtrų. Jis neatsisako atsakyti ten, kur komerciniai pokalbių robotai blokuoja. Atsakomybė už naudojimą tenka naudotojui.</p>
-    </details>
-  </section>
-
-  <section class="wrap block" id="kontaktai">
-    <p class="label">08 · Kontaktai</p>
-    <h2>Parašykite, ką norite daryti su AI.</h2>
-    <form id="forma" novalidate>
-      <div class="row">
-        <label>Vardas<input name="name" required maxlength="100" autocomplete="name"></label>
-        <label>El. paštas arba telefonas<input name="contact" required maxlength="200" autocomplete="email"></label>
-      </div>
-      <label>Paketas
-        <select name="plan">
-          <option value="diegimas">AI įdiegimas</option>
-          <option value="kompiuteris">AI kompiuteris</option>
-          <option value="serveris">Verslo AI serveris</option>
-          <option value="palaikymas">Palaikymas</option>
-          <option value="nezinau" selected>Nežinau</option>
-        </select>
-      </label>
-      <label>Ką norėtumėte daryti su AI?<textarea name="message" rows="4" maxlength="2000"></textarea></label>
-      <div class="hp" aria-hidden="true"><label>Svetainė<input name="website" tabindex="-1" autocomplete="off"></label></div>
-      <p class="privacy">Jūsų duomenis naudosime tik atsakyti į užklausą.</p>
-      <button type="submit" id="forma-siusti" class="cta">Siųsti →</button>
-      <p id="forma-zinute" class="status" aria-live="polite"></p>
-    </form>
-    <p class="direct">Arba tiesiogiai: <span data-email>[EL. PAŠTAS]</span> · [TELEFONAS]</p>
+  <section id="juosta" class="strip" aria-label="Ką galima nuveikti ir kaip vyksta">
+    <p>Dokumentų paieška · Laiškai · PDF santraukos · Vertimai · Programavimas · Be interneto</p>
+    <p class="muted">Pokalbis (nemokamai) → Pasiūlymas → Įdiegimas → Apmokymas</p>
   </section>
 
 </main>
 
-<footer class="wrap foot">
-  <span class="logo">Nodas</span>
-  <span>[REKVIZITAI]</span>
-  <span>© 2026</span>
-</footer>
+<dialog id="duk" aria-labelledby="duk-title">
+  <button type="button" class="close" data-close aria-label="Uždaryti">×</button>
+  <h2 id="duk-title">DUK</h2>
+  <details>
+    <summary>Ar tikrai niekas nemato mano duomenų?</summary>
+    <p>Taip. Modelis veikia jūsų kompiuteryje ar serveryje, užklausos niekur nesiunčiamos. Jis gali veikti ir visiškai be interneto.</p>
+  </details>
+  <details>
+    <summary>Ar veiks lietuviškai?</summary>
+    <p>Taip, bet atvirai: lokalūs modeliai lietuviškai rašo silpniau nei angliškai. Klausimus ir dokumentus supranta gerai, o svarbius tekstus verta peržiūrėti.</p>
+  </details>
+  <details>
+    <summary>Kuo skiriasi nuo ChatGPT?</summary>
+    <p>ChatGPT veikia svetimuose serveriuose ir kainuoja kas mėnesį. Privatus AI veikia pas jus ir mėnesio mokesčio neturi. Didžiausi debesų modeliai kai kuriose užduotyse vis dar stipresni.</p>
+  </details>
+  <details>
+    <summary>Kokio kompiuterio reikia?</summary>
+    <p>Svarbiausia: vaizdo plokštė su daug atminties. Jūsų kompiuterį patikrinsime nemokamai. Jei netiks, pasiūlysime paruoštą.</p>
+  </details>
+  <details>
+    <summary>Kas yra necenzūruotas modelis?</summary>
+    <p>Atviras modelis be platformų filtrų. Jis neatsisako atsakyti ten, kur komerciniai pokalbių robotai blokuoja. Atsakomybė už naudojimą tenka naudotojui.</p>
+  </details>
+</dialog>
+
+<dialog id="kontaktai" aria-labelledby="kontaktai-title">
+  <button type="button" class="close" data-close aria-label="Uždaryti">×</button>
+  <h2 id="kontaktai-title">Ką norite daryti su AI?</h2>
+  <form id="forma" novalidate>
+    <div class="row">
+      <label>Vardas<input name="name" required maxlength="100" autocomplete="name"></label>
+      <label>El. paštas arba telefonas<input name="contact" required maxlength="200" autocomplete="email"></label>
+    </div>
+    <label>Paketas
+      <select name="plan">
+        <option value="diegimas">AI įdiegimas</option>
+        <option value="kompiuteris">AI kompiuteris</option>
+        <option value="serveris">Verslo AI serveris</option>
+        <option value="palaikymas">Palaikymas</option>
+        <option value="nezinau" selected>Nežinau</option>
+      </select>
+    </label>
+    <label>Žinutė<textarea name="message" rows="3" maxlength="2000"></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Svetainė<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <p class="privacy">Jūsų duomenis naudosime tik atsakyti į užklausą.</p>
+    <button type="submit" id="forma-siusti" class="cta">Siųsti →</button>
+    <p id="forma-zinute" class="status" aria-live="polite"></p>
+  </form>
+  <p class="direct">Arba tiesiogiai: <span data-email>[EL. PAŠTAS]</span> · [TELEFONAS]</p>
+  <p class="direct">[REKVIZITAI] · © 2026</p>
+</dialog>
 
 </body>
 </html>

@@ -1,3 +1,25 @@
+// Langai: DUK ir Kontaktai.
+(() => {
+  const open = (id) => {
+    const d = document.getElementById(id);
+    if (d && !d.open) d.showModal();
+  };
+  document.querySelectorAll('[data-open]').forEach((b) =>
+    b.addEventListener('click', () => open(b.dataset.open)));
+  document.querySelectorAll('dialog').forEach((d) => {
+    d.querySelector('[data-close]')?.addEventListener('click', () => d.close());
+    // Paspaudus už lango ribų, jis užsidaro.
+    d.addEventListener('click', (e) => {
+      if (e.target !== d) return;
+      const r = d.getBoundingClientRect();
+      const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) d.close();
+    });
+  });
+  const hash = location.hash.slice(1);
+  if (hash === 'duk' || hash === 'kontaktai') open(hash);
+})();
+
 // Kontaktų formos siuntimas.
 (() => {
   const form = document.getElementById('forma');

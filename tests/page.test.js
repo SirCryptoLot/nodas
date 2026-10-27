@@ -12,14 +12,22 @@ test('has lang lt, title, description, og tags', () => {
   assert.match(html, /<meta property="og:description"/);
 });
 
-test('has sections in order', () => {
-  const ids = ['paslaugos', 'nauda', 'kainos', 'eiga', 'garantijos', 'duk', 'kontaktai'];
-  let last = -1;
-  for (const id of ids) {
-    const i = html.indexOf(`id="${id}"`);
-    assert.ok(i > last, `section #${id} missing or out of order`);
-    last = i;
+test('one-screen layout: hero, offer and strip inside main.screen', () => {
+  const main = html.slice(html.indexOf('<main class="screen"'), html.indexOf('</main>'));
+  assert.ok(main.length > 0, 'main.screen missing');
+  for (const id of ['hero', 'kainos', 'juosta']) assert.match(main, new RegExp(`id="${id}"`), `#${id} not in main`);
+  for (const s of ['Verslui', 'Namams', 'Be cenzūros', 'Vertimai', 'Be interneto', 'Pokalbis', 'Apmokymas']) {
+    assert.ok(main.includes(s), `main missing "${s}"`);
   }
+});
+
+test('DUK and Kontaktai are dialogs opened from buttons', () => {
+  assert.match(html, /<dialog id="duk"/);
+  assert.match(html, /<dialog id="kontaktai"/);
+  assert.match(html, /data-open="duk"/);
+  assert.match(html, /data-open="kontaktai"/);
+  assert.equal((html.match(/data-close/g) || []).length, 2);
+  assert.equal((html.match(/<details>/g) || []).length, 5);
 });
 
 test('shows exact prices and VAT note', () => {

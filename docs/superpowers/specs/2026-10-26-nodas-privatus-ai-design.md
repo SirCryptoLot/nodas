@@ -105,3 +105,7 @@ Poraštė: rekvizitai (įmonės pavadinimas / ind. veiklos nr.; savininkas patei
 - Tikslūs tekstai (trumpi, paprasta lietuvių kalba), DUK atsakymai.
 - Tikslūs dydžiai, tarpai, išdėstymas telefone.
 - Favicon / mažas pikselinis logotipo ženklas.
+
+## Pakeitimas 2026-10-27: viskas viename ekrane
+
+Savininkas paprašė, kad svetainė tilptų į vieną langą be slinkimo. Kompiuterio ekrane: kairėje pagrindinė žinutė ir mygtukas, dešinėje paketai, kainos, garantija ir palaikymas, apačioje dvi eilutės (ką galima nuveikti, kaip vyksta). DUK ir Kontaktai (forma, kontaktai, rekvizitai) atsidaro kaip langai (`<dialog>`), poraštės nebėra. Telefone lieka trumpas slinkimas. Patikrinta: 1024×768, 1280×720, 1366×768, 1440×900, 1920×1080 telpa be slinkimo.
