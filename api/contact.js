@@ -20,7 +20,7 @@ export function validate(body) {
   };
   if (!data.name || data.name.length > 100) return { ok: false };
   if (!data.contact || data.contact.length > 200) return { ok: false };
-  if (!(data.plan in PLANS)) return { ok: false };
+  if (!Object.hasOwn(PLANS, data.plan)) return { ok: false };
   if (data.message.length > 2000) return { ok: false };
   return { ok: true, data };
 }
@@ -42,6 +42,27 @@ function parseBody(raw) {
   return null;
 }
 
+// Paprastas limitas: iki 5 užklausų per 10 min. iš vieno IP.
+// Atmintis gyvena tik vienoje funkcijos instancijoje, todėl tai apsauga nuo paprasto šlamšto, ne nuo rimtos atakos.
+const LIMIT = 5;
+const WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map();
+
+export function _resetRateLimit() {
+  hits.clear();
+}
+
+function rateLimited(req) {
+  const fwd = req.headers?.['x-forwarded-for'];
+  const ip = (typeof fwd === 'string' && fwd.split(',')[0].trim()) || req.socket?.remoteAddress || 'unknown';
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > LIMIT;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -52,7 +73,9 @@ export default async function handler(req, res) {
   if (!body) return res.status(400).json({ ok: false, error: 'invalid' });
 
   // Botai užpildo paslėptą lauką: apsimetame, kad viskas gerai, bet nieko nesiunčiame.
-  if (str(body.website)) return res.status(200).json({ ok: true });
+  if (body.website) return res.status(200).json({ ok: true });
+
+  if (rateLimited(req)) return res.status(429).json({ ok: false, error: 'rate' });
 
   const v = validate(body);
   if (!v.ok) return res.status(400).json({ ok: false, error: 'invalid' });
@@ -87,6 +110,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(email),
+      signal: AbortSignal.timeout(8000),
     });
     if (!r.ok) return res.status(502).json({ ok: false, error: 'send' });
   } catch {

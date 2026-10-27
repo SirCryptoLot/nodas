@@ -113,3 +113,10 @@ Savininkas paprašė, kad svetainė tilptų į vieną langą be slinkimo. Kompiu
 ## Pakeitimas 2026-10-27: šriftas
 
 Pixelify Sans savininkui „per daug pikseliuotas“. Iš keturių variantų (Space Mono, Space Grotesk, IBM Plex Mono, JetBrains Mono) savininkas pasirinko **JetBrains Mono**. Laikomas pačioje svetainėje (`fonts/`), lotyniškas ir išplėstinis rinkinys, storiai 400–800. Antraštės 700–800, šiek tiek suspaustos raidės.
+
+## Pakeitimas 2026-10-27: prekės ženklas ir paruošimas paleidimui
+
+- Pavadinimas logotipe: **privatus AI** (ženklas: oranžinis kvadratas su rakto skylute = privatumas). Domenas nuorodose: **privatusai.lt** (canonical, og, sitemap, robots), savininkas dar neužregistravo.
+- Privatumo politika langu (BDAR pagrindai: kas tvarko, kokie duomenys, kam, Resend/Vercel, 12 mėn. saugojimas, nėra slapukų, teisės, VDAI). 12 mėn. terminas yra Claude pasiūlymas, savininkas gali keisti.
+- og.png (1200×630), 404.html, robots.txt, sitemap.xml, vercel.json (CSP be inline, saugumo antraštės, šriftų spartinimas 1 m.).
+- Forma: limitas 5 užklausos / 10 min. vienam IP, 8 s laukimo riba siunčiant į Resend, sugriežtinta paketo ir botų lauko patikra, klaidos žinutėje el. paštas ir telefonas.

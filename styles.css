@@ -64,7 +64,9 @@ h1, h2, .logo, .cta, .plan b, .terms b, .strip p:first-child, summary, .nav butt
   justify-content: space-between;
   align-items: center;
 }
-.logo { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; text-decoration: none; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; text-decoration: none; }
+.logo-mark { width: 26px; height: 26px; flex-shrink: 0; }
+.logo b { color: var(--accent); margin-left: 0.35em; }
 .nav nav { display: flex; gap: 24px; }
 .nav button { font-size: 17px; color: var(--text-3); }
 .nav button:hover { color: var(--accent); }
@@ -138,7 +140,12 @@ h1, h2, .logo, .cta, .plan b, .terms b, .strip p:first-child, summary, .nav butt
 .strip p:first-child { font-size: clamp(14px, min(1.25vw, 2.3vh), 18px); }
 .strip p:last-child { font-size: clamp(15px, min(1.3vw, 2.2vh), 18px); }
 
-/* Langai (DUK, Kontaktai) */
+/* Teksto tipo mygtukai (Privatumas) */
+.link { color: inherit; text-decoration: underline; text-underline-offset: 3px; font-family: inherit; font-size: inherit; }
+.link:hover { color: var(--accent); }
+.sep { margin: 0 6px; }
+
+/* Langai (DUK, Kontaktai, Privatumas) */
 dialog {
   width: min(680px, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
@@ -187,6 +194,13 @@ form .cta { justify-self: start; }
 .status.err { color: var(--accent); }
 .done { font-family: var(--mono); font-size: clamp(20px, 3vw, 26px); font-weight: 700; }
 .direct { margin-top: 20px; color: var(--text-3); font-size: 15px; }
+
+/* Privatumo politika */
+.legal h3 { font-family: var(--mono); font-size: 16px; font-weight: 700; margin: 20px 0 4px; }
+.legal p { color: var(--text-2); font-size: 16px; }
+
+/* 404 */
+.notfound { grid-template-columns: 1fr; grid-template-areas: "hero"; }
 
 /* Siauras arba labai žemas ekranas: įprastas slinkimas */
 @media (max-width: 860px), (max-height: 520px) {

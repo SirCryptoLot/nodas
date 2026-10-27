@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect width="16" height="16" fill="#f4f1ea"/>
-  <g fill="#c2410c">
-    <rect x="3" y="3" width="2" height="10"/>
-    <rect x="11" y="3" width="2" height="10"/>
-    <rect x="5" y="4" width="1" height="3"/>
-    <rect x="6" y="6" width="1" height="3"/>
-    <rect x="7" y="7" width="2" height="2"/>
-    <rect x="9" y="8" width="1" height="3"/>
-    <rect x="10" y="10" width="1" height="2"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <rect width="16" height="16" fill="#c2410c"/>
+  <circle cx="8" cy="6.4" r="2.4" fill="#f4f1ea"/>
+  <path d="M6.7 7.6h2.6l0.9 4.9H5.8z" fill="#f4f1ea"/>
 </svg>

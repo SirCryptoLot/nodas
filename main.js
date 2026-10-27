@@ -65,8 +65,9 @@
       done.focus();
     } catch {
       const email = document.querySelector('[data-email]')?.textContent || '';
+      const phone = document.querySelector('[data-phone]')?.textContent || '';
       status.className = 'status err';
-      status.textContent = `Nepavyko išsiųsti. Parašykite mums: ${email}`;
+      status.textContent = `Nepavyko išsiųsti. Parašykite ${email} arba skambinkite ${phone}.`;
       btn.disabled = false;
       btn.textContent = label;
       sending = false;

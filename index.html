@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nodas · Privatus AI jūsų kompiuteryje</title>
+  <title>privatus AI · AI jūsų kompiuteryje, duomenys lieka pas jus</title>
   <meta name="description" content="Įdiegiame privatų AI jūsų kompiuteryje ar serveryje. Duomenys lieka pas jus. Be debesų, be prenumeratų, be cenzūros. AI kompiuteriai, diegimas, garantija ir palaikymas.">
-  <link rel="canonical" href="https://nodas.lt/">
+  <link rel="canonical" href="https://privatusai.lt/">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nodas.lt/">
+  <meta property="og:url" content="https://privatusai.lt/">
   <meta property="og:locale" content="lt_LT">
-  <meta property="og:title" content="Nodas · Privatus AI">
+  <meta property="og:site_name" content="privatus AI">
+  <meta property="og:title" content="privatus AI · Duomenys lieka pas jus">
   <meta property="og:description" content="AI, kuris veikia pas jus. Be debesų, be prenumeratų, be cenzūros.">
+  <meta property="og:image" content="https://privatusai.lt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f4f1ea">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,7 +25,10 @@
 <body>
 
 <header class="nav">
-  <a href="/" class="logo">Nodas</a>
+  <a href="/" class="logo" aria-label="privatus AI">
+    <svg class="logo-mark" viewBox="0 0 16 16" aria-hidden="true"><rect width="16" height="16" fill="#c2410c"/><circle cx="8" cy="6.4" r="2.4" fill="#f4f1ea"/><path d="M6.7 7.6h2.6l0.9 4.9H5.8z" fill="#f4f1ea"/></svg>
+    <span>privatus<b>AI</b></span>
+  </a>
   <nav>
     <button type="button" data-open="duk">DUK</button>
     <button type="button" data-open="kontaktai">Kontaktai</button>
@@ -59,7 +67,7 @@
 
   <section id="juosta" class="strip" aria-label="Ką galima nuveikti ir kaip vyksta">
     <p>Dokumentų paieška · Laiškai · PDF santraukos · Vertimai · Programavimas · Be interneto</p>
-    <p class="muted">Pokalbis (nemokamai) → Pasiūlymas → Įdiegimas → Apmokymas</p>
+    <p class="muted">Pokalbis (nemokamai) → Pasiūlymas → Įdiegimas → Apmokymas <span class="sep">·</span> <button type="button" class="link" data-open="privatumas">Privatumas</button></p>
   </section>
 
 </main>
@@ -108,12 +116,31 @@
     </label>
     <label>Žinutė<textarea name="message" rows="3" maxlength="2000"></textarea></label>
     <div class="hp" aria-hidden="true"><label>Svetainė<input name="website" tabindex="-1" autocomplete="off"></label></div>
-    <p class="privacy">Jūsų duomenis naudosime tik atsakyti į užklausą.</p>
+    <p class="privacy">Jūsų duomenis naudosime tik atsakyti į užklausą. <button type="button" class="link" data-open="privatumas">Privatumo politika</button></p>
     <button type="submit" id="forma-siusti" class="cta">Siųsti →</button>
     <p id="forma-zinute" class="status" aria-live="polite"></p>
   </form>
-  <p class="direct">Arba tiesiogiai: <span data-email>[EL. PAŠTAS]</span> · [TELEFONAS]</p>
+  <p class="direct">Arba tiesiogiai: <span data-email>[EL. PAŠTAS]</span> · <span data-phone>[TELEFONAS]</span></p>
   <p class="direct">[REKVIZITAI] · © 2026</p>
+</dialog>
+
+<dialog id="privatumas" class="legal" aria-labelledby="privatumas-title">
+  <button type="button" class="close" data-close aria-label="Uždaryti">×</button>
+  <h2 id="privatumas-title">Privatumo politika</h2>
+  <h3>Kas tvarko duomenis</h3>
+  <p>[REKVIZITAI]. Kontaktai: [EL. PAŠTAS].</p>
+  <h3>Kokius duomenis renkame</h3>
+  <p>Tik tai, ką įrašote kontaktų formoje: vardą, el. paštą arba telefoną, pasirinktą paketą ir žinutę.</p>
+  <h3>Kam naudojame</h3>
+  <p>Tik atsakyti į jūsų užklausą ir parengti pasiūlymą. Pagrindas: jūsų prašymas prieš sudarant sutartį (BDAR 6 str. 1 d. b p.). Reklamos nesiunčiame, duomenų neparduodame.</p>
+  <h3>Kas dar juos mato</h3>
+  <p>Užklausa mums atkeliauja el. paštu per Resend (laiškų siuntimo paslauga). Svetainė talpinama Vercel. Abi įmonės duomenis tvarko pagal ES standartines sutarčių sąlygas.</p>
+  <h3>Kiek laiko saugome</h3>
+  <p>Kol bendraujame dėl užklausos, ir ne ilgiau kaip 12 mėnesių, jei sutartis nesudaroma.</p>
+  <h3>Slapukai ir sekimas</h3>
+  <p>Šioje svetainėje nėra slapukų, analitikos ir sekimo. Šriftai laikomi pačioje svetainėje.</p>
+  <h3>Jūsų teisės</h3>
+  <p>Galite prašyti parodyti, ištaisyti ar ištrinti savo duomenis: parašykite [EL. PAŠTAS]. Taip pat turite teisę pateikti skundą Valstybinei duomenų apsaugos inspekcijai (vdai.lrv.lt).</p>
 </dialog>
 
 </body>

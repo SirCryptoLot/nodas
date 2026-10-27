@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 
@@ -26,7 +26,7 @@ test('DUK and Kontaktai are dialogs opened from buttons', () => {
   assert.match(html, /<dialog id="kontaktai"/);
   assert.match(html, /data-open="duk"/);
   assert.match(html, /data-open="kontaktai"/);
-  assert.equal((html.match(/data-close/g) || []).length, 2);
+  assert.equal((html.match(/data-close/g) || []).length, 3);
   assert.equal((html.match(/<details>/g) || []).length, 5);
 });
 
@@ -73,4 +73,75 @@ test('form has required fields and privacy line', () => {
 
 test('no analytics', () => {
   assert.doesNotMatch(html, /gtag|googletagmanager|analytics/i);
+});
+
+const read = (f) => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
+const SITE = 'https://privatusai.lt/';
+
+test('brand is privatus AI with logo mark', () => {
+  assert.match(html, /<title>privatus AI/);
+  assert.match(html, /<a href="\/" class="logo" aria-label="privatus AI"/);
+  assert.match(html, /class="logo-mark"/);
+  assert.doesNotMatch(html, /Nodas/);
+  const fav = read('favicon.svg');
+  assert.match(fav, /#c2410c/i);
+});
+
+test('canonical, og:url and og:image point to privatusai.lt', () => {
+  assert.match(html, new RegExp(`<link rel="canonical" href="${SITE}">`));
+  assert.match(html, new RegExp(`<meta property="og:url" content="${SITE}">`));
+  assert.match(html, new RegExp(`<meta property="og:image" content="${SITE}og.png">`));
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  const png = readFileSync(new URL('../og.png', import.meta.url));
+  assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG');
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+});
+
+test('privacy policy dialog covers GDPR basics', () => {
+  assert.match(html, /<dialog id="privatumas"/);
+  assert.match(html, /data-open="privatumas"/);
+  const start = html.indexOf('<dialog id="privatumas"');
+  const dlg = html.slice(start, html.indexOf('</dialog>', start));
+  for (const s of ['Kokius duomenis', 'Kam naudojame', 'Kiek laiko', 'Resend', 'Vercel', 'slapuk',
+    'Valstybinei duomenų apsaugos inspekcijai', '[REKVIZITAI]', '[EL. PAŠTAS]']) {
+    assert.ok(dlg.includes(s), `privacy missing "${s}"`);
+  }
+});
+
+test('404, robots and sitemap exist', () => {
+  const nf = read('404.html');
+  assert.match(nf, /<html lang="lt">/);
+  assert.match(nf, /href="\/"/);
+  assert.match(nf, /\/styles\.css/);
+  assert.match(read('robots.txt'), new RegExp(`Sitemap: ${SITE}sitemap.xml`));
+  assert.match(read('sitemap.xml'), new RegExp(`<loc>${SITE}</loc>`));
+});
+
+test('vercel.json sets security headers and font caching', () => {
+  const cfg = JSON.parse(read('vercel.json'));
+  const all = cfg.headers.find((h) => h.source === '/(.*)').headers;
+  const get = (k) => all.find((h) => h.key === k)?.value;
+  assert.equal(get('X-Content-Type-Options'), 'nosniff');
+  assert.equal(get('Referrer-Policy'), 'strict-origin-when-cross-origin');
+  const csp = get('Content-Security-Policy');
+  for (const d of ["default-src 'self'", "script-src 'self'", "frame-ancestors 'none'", "form-action 'self'"]) {
+    assert.ok(csp.includes(d), `CSP missing ${d}`);
+  }
+  assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
+  const fonts = cfg.headers.find((h) => h.source === '/fonts/(.*)').headers;
+  assert.match(fonts[0].value, /max-age=31536000, immutable/);
+});
+
+test('no inline scripts or styles (CSP compatible)', () => {
+  for (const f of ['index.html', '404.html']) {
+    const h = read(f);
+    assert.doesNotMatch(h, /<script(?![^>]*\bsrc=)[^>]*>/, `${f} has inline script`);
+    assert.doesNotMatch(h, /<style|\sstyle="/, `${f} has inline style`);
+  }
+});
+
+test('fallback error text includes phone', () => {
+  assert.match(html, /data-phone>\[TELEFONAS\]/);
+  assert.match(read('main.js'), /\[data-phone\]/);
 });

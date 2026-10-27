@@ -1,6 +1,6 @@
 import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import handler, { validate, escapeHtml } from '../api/contact.js';
+import handler, { validate, escapeHtml, _resetRateLimit } from '../api/contact.js';
 
 const valid = { name: 'Jonas', contact: 'jonas@pvz.lt', plan: 'kompiuteris', message: 'Noriu AI', website: '' };
 
@@ -17,6 +17,7 @@ const realFetch = globalThis.fetch;
 const envBackup = { ...process.env };
 
 beforeEach(() => {
+  _resetRateLimit();
   calls = [];
   globalThis.fetch = async (url, opts) => { calls.push({ url, opts }); return { ok: true, json: async () => ({ id: '1' }) }; };
   process.env.RESEND_API_KEY = 'key123';
@@ -125,4 +126,50 @@ test('fails with 502 when fetch throws', async () => {
   const res = fakeRes();
   await handler({ method: 'POST', body: valid }, res);
   assert.equal(res.statusCode, 502);
+});
+
+test('validate rejects prototype keys as plan', () => {
+  for (const plan of ['constructor', '__proto__', 'toString']) {
+    assert.equal(validate({ ...valid, plan }).ok, false, plan);
+  }
+});
+
+test('honeypot with non-string value still blocks', async () => {
+  for (const website of [['x'], 1, true]) {
+    const res = fakeRes();
+    await handler({ method: 'POST', body: { ...valid, website } }, res);
+    assert.equal(res.statusCode, 200);
+  }
+  assert.equal(calls.length, 0);
+});
+
+test('email html escapes user input and keeps diacritics', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: { ...valid, name: '<b>Ąžuolas</b>', message: '<script>x</script>\nčęė' } }, res);
+  const sent = JSON.parse(calls[0].opts.body);
+  assert.ok(sent.html.includes('&lt;b&gt;Ąžuolas&lt;/b&gt;'));
+  assert.ok(sent.html.includes('&lt;script&gt;x&lt;/script&gt;<br>čęė'));
+  assert.doesNotMatch(sent.html, /<script>|<b>Ą/);
+});
+
+test('Resend call has a timeout signal', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: valid }, res);
+  assert.ok(calls[0].opts.signal instanceof AbortSignal);
+});
+
+test('rate limit: 6th request from same IP within window gets 429', async () => {
+  const req = () => ({ method: 'POST', body: valid, headers: { 'x-forwarded-for': '1.2.3.4, 10.0.0.1' } });
+  for (let i = 0; i < 5; i++) {
+    const res = fakeRes();
+    await handler(req(), res);
+    assert.equal(res.statusCode, 200, `request ${i + 1}`);
+  }
+  const res = fakeRes();
+  await handler(req(), res);
+  assert.equal(res.statusCode, 429);
+  assert.deepEqual(res.body, { ok: false, error: 'rate' });
+  const other = fakeRes();
+  await handler({ ...req(), headers: { 'x-forwarded-for': '5.6.7.8' } }, other);
+  assert.equal(other.statusCode, 200);
 });
