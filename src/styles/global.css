@@ -87,3 +87,93 @@ p { margin: 0; }
 .site-footer a:hover { color: var(--text); }
 .site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 14px; color: var(--text-3); }
 @media (max-width: 860px) { .site-footer .cols { grid-template-columns: 1fr 1fr; } }
+
+/* Bendri puslapių elementai */
+.lead { font-size: clamp(18px, 1.6vw, 20px); color: var(--text-2); max-width: 640px; margin: 18px 0 28px; line-height: 1.55; }
+.h3 { font-size: 20px; letter-spacing: -0.02em; }
+.mt { margin-top: 16px; }
+.narrow { max-width: 760px; }
+.section-soft { background: var(--bg-soft); }
+.section-tight { padding-top: 0; }
+.page-head { padding-bottom: 40px; }
+.more { margin-top: 24px; font-weight: 600; }
+.more a, .card a:not(.btn), .lead a, .section-head a, .prose a, .checks a { color: var(--accent); text-decoration: none; }
+.more a:hover, .lead a:hover, .section-head a:hover, .prose a:hover { text-decoration: underline; }
+.crumbs { font-size: 14px; color: var(--text-3); margin-bottom: 20px; }
+.crumbs a { text-decoration: none; color: var(--text-3); }
+.crumbs a:hover { color: var(--text); }
+.two-col { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: 24px; } }
+
+/* Pradžios viršus */
+.hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero .lead { margin-bottom: 32px; }
+.hero-promo h3 { margin-bottom: 8px; }
+.hero-promo .btn { margin-top: 18px; }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+
+.strip-trust { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 24px; padding-bottom: 24px; }
+.trust-grid b { display: block; font-size: 16px; }
+.trust-grid span { color: var(--text-3); font-size: 15px; }
+@media (max-width: 860px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+
+.path-card { text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s; }
+.path-card:hover { border-color: #cfcfcf; }
+.path-card .arrow { margin-top: auto; padding-top: 8px; font-weight: 600; font-size: 15px; color: var(--accent); }
+
+/* Produktai */
+.product-card { display: flex; flex-direction: column; gap: 10px; }
+.product-card h3 a { text-decoration: none; color: var(--text); }
+.spec-list { list-style: none; margin: 4px 0 0; padding: 0; font-size: 14px; }
+.spec-list li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); }
+.spec-list li span:first-child { color: var(--text-3); }
+.spec-list li span:last-child { text-align: right; }
+.product-foot { margin-top: auto; padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.price { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.price-request { font-weight: 600; font-size: 15px; color: var(--text-2); }
+.vat { font-weight: 400; font-size: 14px; color: var(--text-3); }
+.product-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+@media (max-width: 960px) { .product-grid { grid-template-columns: 1fr; } }
+.product-price { margin: -8px 0 24px; font-size: 22px; }
+.product-price .price { font-size: 26px; }
+.note { margin-top: 14px; }
+.specs { display: grid; grid-template-columns: auto 1fr; margin: 16px 0; font-size: 15px; }
+.specs dt, .specs dd { padding: 9px 0; border-top: 1px solid var(--line); margin: 0; }
+.specs dt { color: var(--text-3); padding-right: 16px; }
+.specs dd { text-align: right; }
+.service-card { display: flex; flex-direction: column; gap: 8px; }
+.service-card .eyebrow { margin-bottom: 0; }
+
+.checks { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+.checks li { padding-left: 28px; position: relative; }
+.checks li::before { content: ''; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: #e8efff; }
+.checks li::after { content: ''; position: absolute; left: 6px; top: 8px; width: 5px; height: 8px; border: solid var(--accent); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+/* Žingsniai */
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.steps li { counter-increment: s; border-top: 2px solid var(--text); padding-top: 16px; display: grid; gap: 4px; }
+.steps li::before { content: '0' counter(s); font-size: 14px; font-weight: 600; color: var(--accent); }
+.steps b { font-size: 18px; }
+.steps span { color: var(--text-3); font-size: 15px; }
+.steps-vertical { grid-template-columns: 1fr; margin-top: 16px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+
+/* DUK */
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-child { border-top: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 18px 40px 18px 0; font-weight: 600; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 4px; top: 14px; font-size: 22px; font-weight: 400; color: var(--text-3); }
+.faq details[open] summary::after { content: '−'; }
+.faq p { color: var(--text-2); padding: 0 0 18px; }
+
+/* Kvietimas */
+.cta-band { border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(28px, 4vw, 48px); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.cta-band p { color: var(--text-2); margin-top: 10px; max-width: 520px; }
+
+/* Tekstiniai puslapiai */
+.prose h2 { font-size: 22px; letter-spacing: -0.02em; margin: 32px 0 8px; }
+.prose p, .prose li { color: var(--text-2); }
+.prose p + p { margin-top: 12px; }

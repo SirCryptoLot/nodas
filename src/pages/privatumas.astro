@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../data/site';
+import { breadcrumbs } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Privatumo politika', path: '/privatumas' }];
+---
+<Base
+  title="Privatumo politika"
+  description="Kaip nodas tvarko užklausos formos duomenis: ką renkame, kam naudojame, kiek saugome ir kokias teises turite. Svetainėje nėra slapukų ir sekimo."
+  path="/privatumas"
+  jsonld={[breadcrumbs(crumbs, SITE)]}
+>
+  <section class="section page-head">
+    <div class="wrap narrow prose">
+      <Breadcrumbs items={crumbs} />
+      <h1>Privatumo politika</h1>
+      <h2>Kas tvarko duomenis</h2>
+      <p>{SITE.rekvizitai}. Kontaktai: {SITE.email}, {SITE.phone}.</p>
+      <h2>Kokius duomenis renkame</h2>
+      <p>Tik tai, ką įrašote užklausos formoje: vardą, el. paštą arba telefoną, pasirinktą produktą ar paslaugą, temą ir žinutę.</p>
+      <h2>Kam naudojame</h2>
+      <p>Tik atsakyti į jūsų užklausą ir parengti pasiūlymą. Pagrindas: jūsų prašymas prieš sudarant sutartį (BDAR 6 str. 1 d. b p.). Reklamos nesiunčiame, duomenų neparduodame.</p>
+      <h2>Kas dar juos mato</h2>
+      <p>Užklausa mums atkeliauja el. paštu per Resend (laiškų siuntimo paslauga). Svetainė talpinama Vercel. Abi įmonės duomenis tvarko pagal ES standartines sutarčių sąlygas.</p>
+      <h2>Kiek laiko saugome</h2>
+      <p>Kol bendraujame dėl užklausos, ir ne ilgiau kaip 12 mėnesių, jei sutartis nesudaroma.</p>
+      <h2>Slapukai ir sekimas</h2>
+      <p>Šioje svetainėje nėra slapukų, analitikos ir sekimo. Šriftai laikomi pačioje svetainėje.</p>
+      <h2>Jūsų teisės</h2>
+      <p>Galite prašyti parodyti, ištaisyti ar ištrinti savo duomenis: parašykite {SITE.email}. Taip pat turite teisę pateikti skundą Valstybinei duomenų apsaugos inspekcijai (vdai.lrv.lt).</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Price from '../components/Price.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import { services, WARRANTY_TEXT } from '../data/catalog';
+import { breadcrumbs, service } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Diegimas ir paslaugos', path: '/diegimas' }];
+const planFor: Record<string, string> = {
+  idiegimas: 'idiegimas',
+  'verslo-serveris': 'verslo-serveris',
+  'palaikymas-namams': 'palaikymas',
+  'palaikymas-verslui': 'palaikymas',
+};
+---
+<Base
+  title="Privataus AI diegimas ir palaikymas: kainos"
+  description="Privataus AI įdiegimas jūsų kompiuteryje nuo 149 €, verslo AI serveris nuo 4 000 €, palaikymas nuo 29 €/mėn. Dokumentų paieška, keli vartotojai, apmokymas."
+  path="/diegimas"
+  jsonld={[breadcrumbs(crumbs, SITE), ...services.map((s) => service(s, SITE))]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Privataus AI diegimas</h1>
+      <p class="lead">Įdiegiame AI, kuris veikia jūsų kompiuteryje ar serveryje: be debesų, be mokesčio kiekvienam vartotojui, su aiškia kaina.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap grid grid-2">
+      {services.map((s) => (
+        <article class="card service-card">
+          <p class="eyebrow">{s.audience}</p>
+          <h2 class="h3">{s.name}</h2>
+          <p>{s.short}</p>
+          <div class="product-foot">
+            <Price eur={s.priceFrom} monthly={!!s.unit} vat />
+            <a class="btn btn-secondary" href={`/kontaktai?plan=${planFor[s.slug]}&tema=${encodeURIComponent(s.name)}`}>Užsakyti</a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="wrap"><p class="small muted mt">Visos kainos nurodytos su PVM. Tiksli kaina priklauso nuo įrangos ir poreikių.</p></div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap grid grid-2">
+      <div>
+        <h2>Ką įdiegiame</h2>
+        <ul class="checks">
+          <li>Pokalbių sąsają, kuria naudojatės kaip ChatGPT, tik savo kompiuteryje</li>
+          <li>Paiešką ir klausimus jūsų dokumentuose (sutartys, instrukcijos, PDF)</li>
+          <li>Kelių vartotojų prieigą įmonės tinkle su slaptažodžiais</li>
+          <li>Pasirinktus atvirus modelius, taip pat lietuvių kalbai ir <a href="/necenzuruoti-modeliai">necenzūruotus</a></li>
+          <li>Atsargines kopijas ir atnaujinimus</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Kaip vyksta</h2>
+        <ol class="steps steps-vertical">
+          <li><b>Pokalbis</b><span>Nemokamai išsiaiškiname poreikius ir patikriname jūsų įrangą.</span></li>
+          <li><b>Pasiūlymas</b><span>Kaina ir terminas raštu.</span></li>
+          <li><b>Įdiegimas</b><span>Įdiegiame, sukonfigūruojame, išbandome.</span></li>
+          <li><b>Apmokymas</b><span>Parodome jums ir komandai, kaip naudotis.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid-2">
+      <div>
+        <h2>Palaikymas</h2>
+        <p class="lead">Sistemos ir modelių atnaujinimai, naujų modelių įdiegimas ir pagalba, kai kas nors neveikia. Palaikymas perkamas atskirai, kas mėnesį.</p>
+      </div>
+      <div class="card">
+        <h3>Garantija</h3>
+        <p>{WARRANTY_TEXT}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

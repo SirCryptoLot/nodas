@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../data/site';
+import { products, PACKAGE_INCLUDES, WARRANTY_TEXT, DELIVERY_TEXT } from '../../data/catalog';
+import { breadcrumbs, product } from '../../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Įranga', path: '/iranga' }];
+---
+<Base
+  title="AI įranga: NVIDIA DGX Spark, AI kompiuteriai ir darbo stotys"
+  description="NVIDIA DGX Spark, AI kompiuteriai su RTX 5090 ir darbo stotys su RTX PRO 6000. Kiekvienas įrenginys su įdiegtu AI ir pagalba su garantija."
+  path="/iranga"
+  jsonld={[breadcrumbs(crumbs, SITE), ...products.map((p) => product(p, SITE))]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>AI įranga</h1>
+      <p class="lead">Nuo mažo DGX Spark ant stalo iki darbo stočių su 96 GB vaizdo plokštėmis. Kiekvieną įrenginį perduodame su įdiegtu ir sukonfigūruotu AI.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/kontaktai">Gauti pasiūlymą</a>
+        <a class="btn btn-secondary" href="/skaiciuokle">Kuris man tinka?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap grid grid-2">
+      <div>
+        <h2>Kas įeina į paketą</h2>
+        <ul class="checks">
+          {PACKAGE_INCLUDES.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Garantija ir pristatymas</h3>
+        <p>{WARRANTY_TEXT}</p>
+        <p>{DELIVERY_TEXT}</p>
+        <p class="small muted">Kainos nurodomos su PVM. Kol kainų nėra, pateikiame jas pasiūlyme.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Nežinote, kurio įrenginio reikia?" text="Pasinaudokite skaičiuokle arba papasakokite, ką norite daryti: patarsime nemokamai." />
+</Base>

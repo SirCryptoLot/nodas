@@ -1,6 +1,116 @@
 ---
 import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import { products } from '../data/catalog';
+import { faq } from '../data/faq';
+import { organization, faqPage } from '../lib/seo';
+
+const featured = ['dgx-spark', 'ai-kompiuteris-rtx-5090', 'ai-darbo-stotis-rtx-pro-6000']
+  .map((s) => products.find((p) => p.slug === s)!);
+const homeFaq = faq.slice(0, 4);
 ---
-<Base title="nodas · AI įranga ir privataus AI diegimas" description="AI įranga ir privataus AI diegimas Lietuvoje." path="/">
-  <section class="section"><div class="wrap"><h1>Jūsų AI. Jūsų serveryje.</h1></div></section>
+<Base
+  title="nodas · AI įranga ir privataus AI diegimas Lietuvoje"
+  description="NVIDIA DGX, AI kompiuteriai ir privataus AI diegimas Lietuvoje. Įranga, įdiegtas AI, garantija ir palaikymas vienoje vietoje. Duomenys lieka pas jus."
+  path="/"
+  jsonld={[organization(SITE), faqPage(homeFaq)]}
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">AI įranga ir diegimas Lietuvoje</p>
+        <h1>Jūsų AI.<br>Jūsų serveryje.</h1>
+        <p class="lead">Parduodame AI įrangą nuo DGX Spark iki darbo stočių ir įdiegiame privatų AI. Duomenys niekur neišeina.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/kontaktai">Gauti pasiūlymą</a>
+          <a class="btn btn-secondary" href="/skaiciuokle">Kokio kompiuterio reikia?</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="card hero-promo">
+          <p class="eyebrow">Skaičiuoklė</p>
+          <h3>Kokio kompiuterio reikia jūsų AI?</h3>
+          <p>Pasirinkite modelio dydį ir norimą greitį: parodysime, kas tinka, ir palyginsime su DGX Spark ir Mac Studio.</p>
+          <a class="btn btn-secondary" href="/skaiciuokle">Atidaryti skaičiuoklę</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip-trust">
+    <div class="wrap trust-grid">
+      <div><b>Įranga</b><span>DGX, AI kompiuteriai, darbo stotys</span></div>
+      <div><b>Diegimas</b><span>AI įdiegtas ir sukonfigūruotas</span></div>
+      <div><b>Garantija</b><span>Tiekėjo garantiją sutvarkome už jus</span></div>
+      <div><b>Palaikymas</b><span>Atnaujinimai ir pagalba</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Ką darome</h2>
+        <p>Viskas, ko reikia privačiam AI: nuo įrangos iki veikiančio modelio jūsų biure ar namuose.</p>
+      </div>
+      <div class="grid grid-3">
+        <a class="card path-card" href="/iranga">
+          <h3>AI įranga</h3>
+          <p>NVIDIA DGX Spark, AI kompiuteriai su RTX 5090, darbo stotys su RTX PRO 6000. Su įdiegtu AI.</p>
+          <span class="arrow">Žiūrėti įrangą →</span>
+        </a>
+        <a class="card path-card" href="/diegimas">
+          <h3>Privataus AI diegimas</h3>
+          <p>Į jūsų arba mūsų įrangą. Paieška įmonės dokumentuose, keli vartotojai, palaikymas.</p>
+          <span class="arrow">Paslaugos ir kainos →</span>
+        </a>
+        <a class="card path-card" href="/necenzuruoti-modeliai">
+          <h3>Necenzūruoti modeliai</h3>
+          <p>Atviri modeliai be platformų filtrų, veikiantys jūsų kompiuteryje.</p>
+          <span class="arrow">Kaip tai veikia →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Populiariausia įranga</h2>
+        <p>Kiekvienas įrenginys parduodamas su įdiegtu ir sukonfigūruotu AI.</p>
+      </div>
+      <div class="grid grid-3">
+        {featured.map((p) => <ProductCard product={p} />)}
+      </div>
+      <p class="more"><a href="/iranga">Visa įranga →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Kaip vyksta darbas</h2>
+      </div>
+      <ol class="steps">
+        <li><b>Pokalbis</b><span>Nemokamai išsiaiškiname, ką norite daryti su AI.</span></li>
+        <li><b>Pasiūlymas</b><span>Įranga ir paslaugos su kaina ir terminu.</span></li>
+        <li><b>Įdiegimas</b><span>Paruošiame įrangą, įdiegiame ir sukonfigūruojame AI.</span></li>
+        <li><b>Apmokymas</b><span>Parodome, kaip naudotis, ir liekame šalia.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap two-col">
+      <div class="section-head">
+        <h2>Dažni klausimai</h2>
+        <p>Neradote atsakymo? <a href="/duk">Visi klausimai</a> arba <a href="/kontaktai">parašykite mums</a>.</p>
+      </div>
+      <Faq items={homeFaq} />
+    </div>
+  </section>
+
+  <CtaBand />
 </Base>

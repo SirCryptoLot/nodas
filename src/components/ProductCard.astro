@@ -1,0 +1,17 @@
+---
+import type { Product } from '../data/catalog';
+import Price from './Price.astro';
+interface Props { product: Product }
+const { product: p } = Astro.props;
+---
+<article class="card product-card">
+  <h3><a href={`/iranga/${p.slug}`}>{p.name}</a></h3>
+  <p>{p.short}</p>
+  <ul class="spec-list">
+    {p.specs.slice(0, 3).map(([k, v]) => <li><span>{k}</span><span>{v}</span></li>)}
+  </ul>
+  <div class="product-foot">
+    <Price eur={p.priceEur} />
+    <a class="btn btn-secondary" href={`/iranga/${p.slug}`}>Plačiau</a>
+  </div>
+</article>

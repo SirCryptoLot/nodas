@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import { breadcrumbs, faqPage } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Necenzūruoti modeliai', path: '/necenzuruoti-modeliai' }];
+const items = [
+  { q: 'Kas yra necenzūruotas AI modelis?', a: 'Atviras modelis, iš kurio pašalinti platformų atsisakymo filtrai. Jis atsako ten, kur komerciniai pokalbių robotai dažnai atsisako, pvz. saugumo tyrimuose, medicinos ar teisės klausimuose, kūrybiniame rašyme.' },
+  { q: 'Ar tai legalu?', a: 'Atvirų modelių naudojimas savo kompiuteryje yra legalus. Įstatymai galioja ir čia: už modelio naudojimą ir sukurtą turinį atsako naudotojas.' },
+  { q: 'Kokius modelius įdiegiate?', a: 'Tokius, kokių reikia jūsų darbui: populiarius atvirus modelius ir jų versijas be filtrų. Parenkame pagal jūsų įrangą ir užduotis.' },
+];
+---
+<Base
+  title="Necenzūruoti AI modeliai jūsų kompiuteryje"
+  description="Įdiegiame necenzūruotus atvirus AI modelius jūsų kompiuteryje: be platformų filtrų, be debesų, be sekimo. Parenkame modelį pagal jūsų įrangą ir darbą."
+  path="/necenzuruoti-modeliai"
+  jsonld={[breadcrumbs(crumbs, SITE), faqPage(items)]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Necenzūruoti modeliai</h1>
+      <p class="lead">Atviri AI modeliai be platformų filtrų, veikiantys jūsų kompiuteryje. Jokių atsisakymų atsakyti, jokių svetimų serverių, jokio sekimo.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/kontaktai?plan=necenzuruotas&tema=Necenz%C5%ABruotas%20modelis">Įdiegti modelį</a>
+        <a class="btn btn-secondary" href="/necenzuruoti-ai-modeliai">Plačiau apie modelius</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap grid grid-3">
+      <div class="card"><h3>Be filtrų</h3><p>Modelis atsako į klausimus, kuriuos komerciniai pokalbių robotai blokuoja.</p></div>
+      <div class="card"><h3>Tik jūsų kompiuteryje</h3><p>Užklausos niekur nesiunčiamos. Niekas jų nemato ir nesaugo.</p></div>
+      <div class="card"><h3>Bet kokie modeliai</h3><p>Įdiegiame tokius modelius, kokių reikia jūsų darbui, ir parenkame pagal įrangą.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap two-col">
+      <div class="section-head">
+        <h2>Svarbu žinoti</h2>
+        <p>Necenzūruotas modelis yra įrankis. Už modelio naudojimą ir sukurtą turinį atsako naudotojas.</p>
+      </div>
+      <Faq items={items} />
+    </div>
+  </section>
+
+  <CtaBand title="Norite necenzūruoto modelio?" text="Įdiegsime į jūsų arba mūsų įrangą. Diegimas nuo 149 €." href="/kontaktai?plan=necenzuruotas&tema=Necenz%C5%ABruotas%20modelis" />
+</Base>

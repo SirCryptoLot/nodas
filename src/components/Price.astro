@@ -1,0 +1,8 @@
+---
+interface Props { eur: number | null; monthly?: boolean; vat?: boolean }
+const { eur, monthly = false, vat = false } = Astro.props;
+const fmt = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+---
+{eur === null
+  ? <span class="price price-request">Kaina pagal užklausą</span>
+  : <span class="price">nuo {fmt(eur)} €{monthly ? '/mėn.' : ''}{vat && <span class="vat"> su PVM</span>}</span>}

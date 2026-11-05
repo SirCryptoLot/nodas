@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Price from '../../components/Price.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../data/site';
+import { products, devices, PACKAGE_INCLUDES, WARRANTY_TEXT, WARRANTY_TERM, DELIVERY_TEXT } from '../../data/catalog';
+import type { Product } from '../../data/catalog';
+import { breadcrumbs, product } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props as { p: Product };
+const device = devices.find((d) => d.id === p.deviceId)!;
+const path = `/iranga/${p.slug}`;
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Įranga', path: '/iranga' }, { name: p.name, path }];
+const cta = `/kontaktai?plan=${p.deviceId}&tema=${encodeURIComponent(p.name)}`;
+const description = `${p.name} Lietuvoje su įdiegtu privačiu AI. ${p.short}`.slice(0, 165);
+---
+<Base title={`${p.name}: kaina, specifikacijos, įdiegimas`} description={description} path={path} jsonld={[product(p, SITE), breadcrumbs(crumbs, SITE)]}>
+  <section class="section page-head">
+    <div class="wrap product-grid">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>{p.name}</h1>
+        <p class="lead">{p.short}</p>
+        <p class="product-price"><Price eur={p.priceEur} vat /></p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={cta}>Gauti pasiūlymą</a>
+          <a class="btn btn-secondary" href="/skaiciuokle">Palyginti skaičiuoklėje</a>
+        </div>
+        {device.onRequest && <p class="small muted note">Šis įrenginys tiekiamas tik pagal užklausą.</p>}
+      </div>
+      <div class="card">
+        <h2 class="h3">Specifikacijos</h2>
+        <dl class="specs">
+          {p.specs.map(([k, v]) => <><dt>{k}</dt><dd>{v}</dd></>)}
+          <dt>Atmintis modeliui</dt><dd>{device.memoryGB} GB</dd>
+          <dt>Atminties pralaidumas</dt><dd>{device.bandwidthGBs} GB/s</dd>
+        </dl>
+        <p class="small muted">Pavyzdinė konfigūracija, galutinė pateikiama pasiūlyme.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="wrap grid grid-2">
+      <div>
+        <h2>Kokiems modeliams tinka</h2>
+        <p class="lead">{p.forModels}</p>
+        {p.variants && (
+          <>
+            <h3 class="mt">Galimi variantai</h3>
+            <ul class="checks">{p.variants.map((v) => <li>{v}</li>)}</ul>
+          </>
+        )}
+      </div>
+      <div>
+        <h2>Kas įeina</h2>
+        <ul class="checks">{PACKAGE_INCLUDES.map((i) => <li>{i}</li>)}</ul>
+        <p class="mt">{WARRANTY_TEXT} Garantija {WARRANTY_TERM}.</p>
+        <p class="mt">{DELIVERY_TEXT}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`Norite ${p.name}?`} text="Atsiųsime pasiūlymą su kaina, terminu ir įdiegimu." href={cta} />
+</Base>

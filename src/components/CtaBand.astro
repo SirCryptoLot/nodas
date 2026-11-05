@@ -1,0 +1,22 @@
+---
+interface Props { title?: string; text?: string; href?: string }
+const {
+  title = 'Nežinote, nuo ko pradėti?',
+  text = 'Papasakokite, ką norite daryti su AI. Atsakysime ir pasiūlysime sprendimą su kaina.',
+  href = '/kontaktai',
+} = Astro.props;
+---
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={href}>Gauti pasiūlymą</a>
+        <a class="btn btn-secondary" href="/skaiciuokle">Kokio kompiuterio reikia?</a>
+      </div>
+    </div>
+  </div>
+</section>

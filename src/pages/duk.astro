@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import { faq } from '../data/faq';
+import { breadcrumbs, faqPage } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'DUK', path: '/duk' }];
+---
+<Base
+  title="DUK: dažni klausimai apie privatų AI ir įrangą"
+  description="Atsakymai į dažnus klausimus apie privatų AI: duomenų saugumas, lietuvių kalba, kokio kompiuterio reikia, garantija, pristatymas ir palaikymas."
+  path="/duk"
+  jsonld={[breadcrumbs(crumbs, SITE), faqPage(faq)]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Dažni klausimai</h1>
+      <p class="lead">Neradote atsakymo? <a href="/kontaktai">Parašykite mums</a>.</p>
+    </div>
+  </section>
+  <section class="section section-tight">
+    <div class="wrap narrow">
+      <Faq items={faq} />
+    </div>
+  </section>
+  <CtaBand />
+</Base>
