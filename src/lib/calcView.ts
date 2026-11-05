@@ -1,5 +1,5 @@
 // Skaičiuoklės rodinio būsena: tą pačią funkciją naudoja serveris (pradinis vaizdas) ir naršyklė.
-import { models } from '../data/catalog.ts';
+import { models, products, productPriceText } from '../data/catalog.ts';
 import { evaluate, recommend, memoryNeededGB, readingLabel } from './calc.ts';
 import type { Row, Recommendation } from './calc.ts';
 
@@ -11,6 +11,7 @@ export type CalcView = {
   rows: Row[];
   rec: Recommendation;
   note: string;
+  priceText: string;
   cta: string;
 };
 
@@ -36,6 +37,7 @@ export function calcView(modelId: string, tps: number, users: number, compact = 
     rows,
     rec,
     note: recNote(rec),
+    priceText: productPriceText(products.find((p) => p.slug === rec.device.productSlug)?.priceEur ?? null),
     cta: `/kontaktai?plan=${rec.device.id}&tema=${encodeURIComponent(tema)}`,
   };
 }

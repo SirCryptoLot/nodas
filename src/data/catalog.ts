@@ -115,6 +115,19 @@ export const services: Service[] = [
   { slug: 'palaikymas-verslui', name: 'Palaikymas verslui', priceFrom: 99, unit: '€/mėn.', audience: 'Įmonėms', short: 'Atnaujinimai, nauji modeliai, vartotojų pagalba, prioritetinis atsakymas.' },
 ];
 
+const fmtEur = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+// „nuo 149 €“ / „nuo 29 €/mėn.“ iš paslaugos kainos. Visur svetainėje naudokite šią funkciją.
+export function priceText(serviceSlug: string): string {
+  const s = services.find((x) => x.slug === serviceSlug);
+  if (!s) throw new Error(`Nežinoma paslauga: ${serviceSlug}`);
+  return `nuo ${fmtEur(s.priceFrom)} €${s.unit ? '/mėn.' : ''}`;
+}
+
+export function productPriceText(priceEur: number | null): string {
+  return priceEur === null ? 'Kaina pagal užklausą' : `nuo ${fmtEur(priceEur)} €`;
+}
+
 export const WARRANTY_TEXT = 'Įrangai taikoma tiekėjo garantija; garantinius reikalus sutvarkome už jus.';
 export const WARRANTY_TERM = 'pagal tiekėjo sąlygas (dažniausiai 24 mėn.)';
 export const DELIVERY_TEXT = 'Terminas nurodomas pasiūlyme, priklauso nuo tiekėjo sandėlio.';

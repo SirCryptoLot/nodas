@@ -109,3 +109,12 @@ test('404 page exists and is not in sitemap', () => {
   assert.ok(exists('/404'));
   assert.doesNotMatch(readDist('sitemap-0.xml'), /404/);
 });
+
+test('every "nuo N €" on any page is a current catalog service price', () => {
+  const allowed = new Set(['nuo 149 €', 'nuo 4 000 €', 'nuo 29 €/mėn.', 'nuo 99 €/mėn.']);
+  for (const p of allPages()) {
+    for (const m of text(page(p)).matchAll(/nuo \d[\d ]* €(\/mėn\.)?/g)) {
+      assert.ok(allowed.has(m[0]), `${p}: ${m[0]}`);
+    }
+  }
+});

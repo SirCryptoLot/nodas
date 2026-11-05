@@ -59,9 +59,9 @@ Visa tai sukonfigūruojame diegimo metu.
 
 ## Kiek kainuoja
 
-- **Verslo AI serveris** su paieška dokumentuose ir keliais vartotojais: nuo 4 000 €.
-- **Įdiegimas į turimą kompiuterį:** nuo 149 €.
-- **Palaikymas verslui:** nuo 99 €/mėn.
+- **Verslo AI serveris** su paieška dokumentuose ir keliais vartotojais: {{kaina:verslo-serveris}}.
+- **Įdiegimas į turimą kompiuterį:** {{kaina:idiegimas}}.
+- **Palaikymas verslui:** {{kaina:palaikymas-verslui}}
 
 Kainos su PVM. Plačiau: [Diegimas ir paslaugos](/diegimas).
 

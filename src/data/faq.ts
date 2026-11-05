@@ -1,3 +1,5 @@
+import { priceText } from './catalog';
+
 export type FaqItem = { q: string; a: string };
 
 export const faq: FaqItem[] = [
@@ -31,7 +33,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: 'Kas įeina į palaikymą?',
-    a: 'Sistemos ir modelių atnaujinimai, naujų modelių įdiegimas, pagalba, kai kas nors neveikia. Palaikymas namams nuo 29 €/mėn., verslui nuo 99 €/mėn.',
+    a: `Sistemos ir modelių atnaujinimai, naujų modelių įdiegimas, pagalba, kai kas nors neveikia. Palaikymas namams ${priceText('palaikymas-namams')}, verslui ${priceText('palaikymas-verslui')}.`,
   },
   {
     q: 'Kaip vyksta darbas?',
@@ -39,6 +41,6 @@ export const faq: FaqItem[] = [
   },
   {
     q: 'Ar galite įdiegti AI mano jau turimame kompiuteryje?',
-    a: 'Taip, jei kompiuteris turi pakankamai galingą vaizdo plokštę. Įdiegimas nuo 149 €. Prieš tai nemokamai patikriname, ar jūsų kompiuterio užteks.',
+    a: `Taip, jei kompiuteris turi pakankamai galingą vaizdo plokštę. Įdiegimas ${priceText('idiegimas')}. Prieš tai nemokamai patikriname, ar jūsų kompiuterio užteks.`,
   },
 ];

@@ -39,3 +39,7 @@ test('apytikslis įvertinimas label present', () => {
 test('calculator script is an external module', () => {
   assert.match(page('/skaiciuokle'), /<script type="module" src="\/_astro\/[^"]+\.js"/);
 });
+
+test('calculator recommendation shows the product price', () => {
+  assert.match(page('/skaiciuokle'), /data-out="rec-price"[^>]*>[^<]*Kaina pagal užklausą/);
+});

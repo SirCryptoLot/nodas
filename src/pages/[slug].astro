@@ -1,10 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 import { article, breadcrumbs } from '../lib/seo';
+import { fillPrices } from '../lib/fillPrices';
 
 export async function getStaticPaths() {
   const all = await getCollection('gidai');
@@ -12,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, all } = Astro.props;
-const { Content } = await render(entry);
+const html = fillPrices(entry.rendered?.html ?? '');
 const path = `/${entry.id}`;
 const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Gidai', path: '/#gidai' }, { name: entry.data.h1, path }];
 const related = entry.data.related
@@ -36,9 +37,7 @@ const related = entry.data.related
       <Breadcrumbs items={crumbs} />
       <h1>{entry.data.h1}</h1>
       <p class="guide-meta">Atnaujinta {entry.data.date}</p>
-      <div class="prose">
-        <Content />
-      </div>
+      <div class="prose" set:html={html} />
       <div class="guide-cta card">
         <h2 class="h3">Kitas žingsnis</h2>
         <p>Pasitikrinkite skaičiuoklėje, kokios įrangos reikia, arba parašykite mums: pasiūlymą su kaina atsiųsime nemokamai.</p>

@@ -44,7 +44,7 @@ Privatus AI šį klausimą išsprendžia iš esmės: duomenys lieka jūsų įran
 
 Privačiam AI reikia kompiuterio su galinga vaizdo plokšte arba specializuoto AI įrenginio. Kuo didesnio modelio norite, tuo daugiau atminties reikia. Apytiksliai pasitikrinti galite [skaičiuoklėje](/skaiciuokle), o plačiau paaiškiname gide [Kokio kompiuterio reikia AI](/kokio-kompiuterio-reikia-ai).
 
-Jei jau turite kompiuterį su NVIDIA vaizdo plokšte, gali užtekti įdiegimo. Jį atliekame nuo 149 €.
+Jei jau turite kompiuterį su NVIDIA vaizdo plokšte, gali užtekti įdiegimo. Jį atliekame {{kaina:idiegimas}}.
 
 ## Kiek tai kainuoja palyginus
 
@@ -62,7 +62,7 @@ Taip. Prie privataus AI galima jungtis per naršyklę telefone, jei esate įmon�
 
 **Ar reikės specialisto prižiūrėti sistemą?**
 
-Kasdieniam naudojimui ne. Atnaujinimus ir naujus modelius galime prižiūrėti mes, palaikymas verslui kainuoja nuo 99 €/mėn.
+Kasdieniam naudojimui ne. Atnaujinimus ir naujus modelius galime prižiūrėti mes, palaikymas verslui kainuoja {{kaina:palaikymas-verslui}}
 
 ## Kaip pradėti
 

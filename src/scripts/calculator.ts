@@ -45,6 +45,7 @@ function update(root: HTMLElement) {
 
   el(root, 'rec-name')!.textContent = v.rec.device.name;
   el(root, 'rec-note')!.textContent = v.note;
+  el(root, 'rec-price')!.textContent = v.priceText;
 
   const specEl = el<HTMLDListElement>(root, 'rec-spec');
   if (specEl) {

@@ -53,9 +53,9 @@ Mažai buhalterijai iki kelių žmonių dažnai užtenka vieno galingo kompiuter
 
 ## Kiek kainuoja
 
-- **Įdiegimas į turimą kompiuterį:** nuo 149 €, jei kompiuteris pakankamai galingas.
-- **Verslo AI serveris:** nuo 4 000 €, įranga ir diegimas su paieška dokumentuose.
-- **Palaikymas verslui:** nuo 99 €/mėn.
+- **Įdiegimas į turimą kompiuterį:** {{kaina:idiegimas}}, jei kompiuteris pakankamai galingas.
+- **Verslo AI serveris:** {{kaina:verslo-serveris}}, įranga ir diegimas su paieška dokumentuose.
+- **Palaikymas verslui:** {{kaina:palaikymas-verslui}}
 
 Kainos su PVM. Visas paslaugas rasite puslapyje [Diegimas ir paslaugos](/diegimas).
 

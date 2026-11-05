@@ -259,3 +259,5 @@ button.btn:disabled { opacity: .6; cursor: wait; }
 .related a:hover { text-decoration: underline; }
 .guide-list a { text-decoration: none; display: grid; gap: 6px; }
 .guide-list a:hover h3 { color: var(--accent); }
+
+.calc-price { font-weight: 600; font-size: 15px; color: var(--text-2); }

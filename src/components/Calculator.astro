@@ -59,9 +59,10 @@ const spec = (s: Record<string, string | undefined>) => [
     </tbody>
   </table>
 
-  <div class="calc-rec">
+  <div class="calc-rec" aria-live="polite">
     <p class="eyebrow">Rekomenduojame</p>
     <h3 data-out="rec-name">{v.rec.device.name}</h3>
+    <p class="calc-price" data-out="rec-price">{v.priceText}</p>
     <p class="small muted" data-out="rec-note">{v.note}</p>
     {!compact && (
       <dl class="specs" data-out="rec-spec">

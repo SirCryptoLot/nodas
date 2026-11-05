@@ -45,9 +45,9 @@ Privatus AI nepakeičia visų debesų įrankių, bet leidžia **jautrius darbus 
 
 Mūsų kainos su PVM:
 
-- **AI įdiegimas į jūsų turimą kompiuterį:** nuo 149 €.
-- **Verslo AI serveris** (įranga ir diegimas, paieška dokumentuose, keli vartotojai): nuo 4 000 €.
-- **Palaikymas verslui:** nuo 99 €/mėn.
+- **AI įdiegimas į jūsų turimą kompiuterį:** {{kaina:idiegimas}}.
+- **Verslo AI serveris** (įranga ir diegimas, paieška dokumentuose, keli vartotojai): {{kaina:verslo-serveris}}.
+- **Palaikymas verslui:** {{kaina:palaikymas-verslui}}
 
 Tiksli kaina priklauso nuo įrangos ir to, ką reikia sukonfigūruoti. Visas paslaugas rasite puslapyje [Diegimas ir paslaugos](/diegimas).
 

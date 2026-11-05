@@ -48,11 +48,11 @@ Visus šiuos variantus palyginti pagal jūsų norimą modelį ir greitį galite 
 
 ## Kiek greičio reikia
 
-Greitis matuojamas **tokenais per sekundę**. Lietuviškai vienas tokenas yra maždaug pusė žodžio. Žmogus skaito apie 4–5 žodžius per sekundę, todėl:
+Greitis matuojamas **tokenais per sekundę**. Tokenas yra žodžio dalis: lietuviškai vienas tokenas vidutiniškai atitinka daugiau nei pusę žodžio. Žmogus skaito apie 3–6 žodžius per sekundę, todėl:
 
-- **5 tok/s:** lėčiau nei skaitote, tinka darbams fone.
-- **10–15 tok/s:** maždaug skaitymo greitis, patogu pokalbiui.
-- **30 tok/s ir daugiau:** atsakymas atsiranda greičiau nei spėjate perskaityti.
+- **iki 5 tok/s:** lėčiau nei skaitote, tinka darbams fone.
+- **5–10 tok/s:** maždaug skaitymo greitis, patogu pokalbiui.
+- **daugiau nei 10 tok/s:** atsakymas atsiranda greičiau nei spėjate perskaityti.
 
 Jei AI naudosis keli žmonės vienu metu, greitis vienam žmogui sumažėja, todėl verslui reikia rezervo.
 
@@ -67,7 +67,7 @@ Nors svarbiausia yra vaizdo plokštė, kiti komponentai irgi turi atitikti:
 
 ## Ar galima naudoti turimą kompiuterį
 
-Taip, jei jame yra NVIDIA vaizdo plokštė su bent 12–16 GB atminties. Tokiame kompiuteryje veiks maži ir vidutiniai modeliai. AI [įdiegimą į jūsų kompiuterį](/diegimas) atliekame nuo 149 €, o prieš tai nemokamai patikriname, ar jo užteks.
+Taip, jei jame yra NVIDIA vaizdo plokštė su bent 12–16 GB atminties. Tokiame kompiuteryje veiks maži ir vidutiniai modeliai. AI [įdiegimą į jūsų kompiuterį](/diegimas) atliekame {{kaina:idiegimas}}, o prieš tai nemokamai patikriname, ar jo užteks.
 
 ## Santrauka
 

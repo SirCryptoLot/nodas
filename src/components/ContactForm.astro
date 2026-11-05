@@ -1,10 +1,10 @@
 ---
 import { PLAN_OPTIONS } from '../data/plans';
 ---
-<form id="forma" class="contact-form" novalidate>
+<form id="forma" class="contact-form" method="post" action="/api/contact" novalidate>
   <div class="form-row">
     <label>Vardas<input name="name" required maxlength="100" autocomplete="name"></label>
-    <label>El. paštas arba telefonas<input name="contact" required maxlength="200" autocomplete="email"></label>
+    <label>El. paštas arba telefonas<input name="contact" required maxlength="200" autocomplete="on"></label>
   </div>
   <label>Dėl ko rašote
     <select name="plan">

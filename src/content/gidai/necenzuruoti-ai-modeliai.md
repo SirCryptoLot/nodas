@@ -48,7 +48,7 @@ Svarbu žinoti: pašalinus filtrus, kai kurių modelių kokybė šiek tiek suma�
 
 Necenzūruotiems modeliams reikia tokios pačios įrangos kaip įprastiems: kuo didesnis modelis, tuo daugiau atminties. Mažesni modeliai veiks kompiuteryje su gera NVIDIA vaizdo plokšte, didesniems reikia daugiau atminties. Apytiksliai pasitikrinti galite [skaičiuoklėje](/skaiciuokle), o plačiau paaiškiname gide [Kokio kompiuterio reikia AI](/kokio-kompiuterio-reikia-ai).
 
-Jei jau turite tinkamą kompiuterį, necenzūruotą modelį įdiegiame nuo 149 €. Jei ne, galime pasiūlyti [įrangą](/iranga) su jau įdiegtu modeliu.
+Jei jau turite tinkamą kompiuterį, necenzūruotą modelį įdiegiame {{kaina:idiegimas}}. Jei ne, galime pasiūlyti [įrangą](/iranga) su jau įdiegtu modeliu.
 
 ## Atsakomybė
 

@@ -5,6 +5,7 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 import { breadcrumbs, faqPage } from '../lib/seo';
+import { priceText } from '../data/catalog';
 
 const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Necenzūruoti modeliai', path: '/necenzuruoti-modeliai' }];
 const items = [
@@ -49,5 +50,5 @@ const items = [
     </div>
   </section>
 
-  <CtaBand title="Norite necenzūruoto modelio?" text="Įdiegsime į jūsų arba mūsų įrangą. Diegimas nuo 149 €." href="/kontaktai?plan=necenzuruotas&tema=Necenz%C5%ABruotas%20modelis" />
+  <CtaBand title="Norite necenzūruoto modelio?" text={`Įdiegsime į jūsų arba mūsų įrangą. Diegimas ${priceText('idiegimas')}.`} href="/kontaktai?plan=necenzuruotas&tema=Necenz%C5%ABruotas%20modelis" />
 </Base>

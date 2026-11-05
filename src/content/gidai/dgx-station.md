@@ -23,7 +23,7 @@ Pati NVIDIA šio įrenginio tiesiogiai neparduoda. Jį gamina partneriai: ASUS, 
 
 ## Kiek kainuoja
 
-Oficialios kainos nėra. 2026 m. rudenį Europos platintojų kainos buvo **maždaug nuo 90 000 € iki daugiau nei 200 000 €**, priklausomai nuo gamintojo, konfigūracijos ir to, ar įskaičiuotas PVM. Pristatymo terminai paprastai yra savaitės, ne dienos. Mes DGX Station tiekiame **tik pagal užklausą**: suderiname konfigūraciją, gauname tikslią kainą ir terminą, ir tik tada pateikiame pasiūlymą.
+Oficialios kainos nėra. 2026 m. rudenį Europos platintojų skelbiamos kainos buvo **maždaug 90 000–200 000 €** ir daugiau, priklausomai nuo gamintojo, konfigūracijos ir to, ar įskaičiuotas PVM. Pristatymo terminą nurodome pasiūlyme, nes jis priklauso nuo gamintojo ir tiekėjo. Mes DGX Station tiekiame **tik pagal užklausą**: suderiname konfigūraciją, gauname tikslią kainą ir terminą, ir tik tada pateikiame pasiūlymą.
 
 ## Kam reikia DGX Station
 

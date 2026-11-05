@@ -21,3 +21,10 @@ test('kontaktai shows contact placeholders from SITE and ContactPage jsonld', ()
   assert.match(main, /data-email/);
   assert.match(main, /data-phone/);
 });
+
+test('form posts to the API even without JavaScript (no GET with personal data)', () => {
+  const h = page('/kontaktai');
+  assert.match(h, /<form[^>]*method="post"/);
+  assert.match(h, /<form[^>]*action="\/api\/contact"/);
+  assert.doesNotMatch(h, /name="contact"[^>]*autocomplete="email"/);
+});

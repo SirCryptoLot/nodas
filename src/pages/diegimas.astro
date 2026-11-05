@@ -4,7 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Price from '../components/Price.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
-import { services, WARRANTY_TEXT } from '../data/catalog';
+import { services, WARRANTY_TEXT, priceText } from '../data/catalog';
 import { breadcrumbs, service } from '../lib/seo';
 
 const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Diegimas ir paslaugos', path: '/diegimas' }];
@@ -17,7 +17,7 @@ const planFor: Record<string, string> = {
 ---
 <Base
   title="Privataus AI diegimas ir palaikymas: kainos"
-  description="Privataus AI įdiegimas jūsų kompiuteryje nuo 149 €, verslo AI serveris nuo 4 000 €, palaikymas nuo 29 €/mėn. Dokumentų paieška, keli vartotojai, apmokymas."
+  description={`Privataus AI įdiegimas jūsų kompiuteryje ${priceText('idiegimas')}, verslo AI serveris ${priceText('verslo-serveris')}, palaikymas ${priceText('palaikymas-namams')}. Dokumentų paieška, keli vartotojai.`}
   path="/diegimas"
   jsonld={[breadcrumbs(crumbs, SITE), ...services.map((s) => service(s, SITE))]}
 >
