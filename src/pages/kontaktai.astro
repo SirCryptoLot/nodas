@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site';
+import { breadcrumbs, organization } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Kontaktai', path: '/kontaktai' }];
+---
+<Base
+  title="Kontaktai: gauti pasiūlymą AI įrangai ar diegimui"
+  description="Parašykite, ką norite daryti su AI: atsiųsime pasiūlymą su kaina ir terminu įrangai, privataus AI diegimui ar palaikymui. Pokalbis nemokamas."
+  path="/kontaktai"
+  jsonld={[breadcrumbs(crumbs, SITE), organization(SITE)]}
+>
+  <section class="section page-head">
+    <div class="wrap contact-grid">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>Gauti pasiūlymą</h1>
+        <p class="lead">Papasakokite, ką norite daryti su AI. Atsiųsime pasiūlymą su kaina ir terminu. Pirmas pokalbis nemokamas.</p>
+        <dl class="contact-list">
+          <dt>El. paštas</dt><dd data-email>{SITE.email}</dd>
+          <dt>Telefonas</dt><dd data-phone>{SITE.phone}</dd>
+          <dt>Rekvizitai</dt><dd>{SITE.rekvizitai}</dd>
+          <dt>Aptarnaujame</dt><dd>Visą Lietuvą</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,25 @@
+---
+import { PLAN_OPTIONS } from '../data/plans';
+---
+<form id="forma" class="contact-form" novalidate>
+  <div class="form-row">
+    <label>Vardas<input name="name" required maxlength="100" autocomplete="name"></label>
+    <label>El. paštas arba telefonas<input name="contact" required maxlength="200" autocomplete="email"></label>
+  </div>
+  <label>Dėl ko rašote
+    <select name="plan">
+      {PLAN_OPTIONS.map(([value, label]) => <option value={value}>{label}</option>)}
+    </select>
+  </label>
+  <p class="topic-line" data-topic-line hidden>Tema: <b data-topic-text></b></p>
+  <input type="hidden" name="topic" value="">
+  <label>Ką norėtumėte daryti su AI?<textarea name="message" rows="5" maxlength="2000"></textarea></label>
+  <div class="hp" aria-hidden="true"><label>Svetainė<input name="website" tabindex="-1" autocomplete="off"></label></div>
+  <p class="small muted">Jūsų duomenis naudosime tik atsakyti į užklausą. <a href="/privatumas">Privatumo politika</a></p>
+  <div><button type="submit" id="forma-siusti" class="btn btn-primary">Siųsti užklausą</button></div>
+  <p id="forma-zinute" class="form-status" aria-live="polite"></p>
+</form>
+<script>
+  import { initContactForm } from '../scripts/contact';
+  initContactForm();
+</script>

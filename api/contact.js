@@ -1,10 +1,15 @@
 // Kontaktų forma: patikrina užklausą ir išsiunčia ją el. paštu per Resend.
 
 const PLANS = {
-  diegimas: 'AI įdiegimas',
-  kompiuteris: 'AI kompiuteris',
-  serveris: 'Verslo AI serveris',
+  idiegimas: 'AI įdiegimas',
+  'dgx-spark': 'DGX Spark',
+  rtx5090: 'AI kompiuteris RTX 5090',
+  rtx5090x2: 'AI kompiuteris 2× RTX 5090',
+  rtxpro6000: 'AI darbo stotis RTX PRO 6000',
+  'dgx-station': 'DGX Station',
+  'verslo-serveris': 'Verslo AI serveris',
   palaikymas: 'Palaikymas',
+  necenzuruotas: 'Necenzūruotas modelis',
   nezinau: 'Nežinau',
 };
 
@@ -16,11 +21,13 @@ export function validate(body) {
     name: str(b.name),
     contact: str(b.contact),
     plan: str(b.plan) || 'nezinau',
+    topic: str(b.topic),
     message: str(b.message),
   };
   if (!data.name || data.name.length > 100) return { ok: false };
   if (!data.contact || data.contact.length > 200) return { ok: false };
   if (!Object.hasOwn(PLANS, data.plan)) return { ok: false };
+  if (data.topic.length > 300) return { ok: false };
   if (data.message.length > 2000) return { ok: false };
   return { ok: true, data };
 }
@@ -85,11 +92,12 @@ export default async function handler(req, res) {
     return res.status(500).json({ ok: false, error: 'config' });
   }
 
-  const { name, contact, plan, message } = v.data;
+  const { name, contact, plan, topic, message } = v.data;
   const rows = [
     ['Vardas', name],
     ['Kontaktas', contact],
     ['Paketas', PLANS[plan]],
+    ...(topic ? [['Tema', topic]] : []),
     ['Žinutė', message || '—'],
   ];
   const html = rows

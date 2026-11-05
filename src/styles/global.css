@@ -211,3 +211,27 @@ input[type=range] { width: 100%; accent-color: var(--accent); height: 22px; marg
 .calc-compact fieldset { margin-bottom: 12px; }
 .calc-compact .calc-rec h3 { font-size: 18px; }
 @media (max-width: 480px) { .calc-table th, .calc-table td { padding: 9px 10px; } .tag { display: block; margin: 2px 0 0; } }
+
+/* Kontaktai ir forma */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+@media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-list { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; margin: 8px 0 0; font-size: 16px; }
+.contact-list dt { color: var(--text-3); }
+.contact-list dd { margin: 0; }
+.contact-form { display: grid; gap: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+.contact-form label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.contact-form input, .contact-form select, .contact-form textarea {
+  font: 400 16px/1.4 var(--font); color: var(--text); background: #fff;
+  border: 1px solid #ddd; border-radius: 10px; padding: 11px 12px; width: 100%;
+}
+.contact-form textarea { resize: vertical; }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px #dbe6ff; }
+.contact-form a { color: var(--accent); }
+.topic-line { font-size: 14px; color: var(--text-2); background: var(--bg-soft); border-radius: 10px; padding: 10px 12px; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { min-height: 1.4em; font-size: 15px; }
+.form-status.err { color: #b91c1c; }
+.form-done { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+button.btn:disabled { opacity: .6; cursor: wait; }

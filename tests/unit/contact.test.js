@@ -2,7 +2,7 @@ import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import handler, { validate, escapeHtml, _resetRateLimit } from '../../api/contact.js';
 
-const valid = { name: 'Jonas', contact: 'jonas@pvz.lt', plan: 'kompiuteris', message: 'Noriu AI', website: '' };
+const valid = { name: 'Jonas', contact: 'jonas@pvz.lt', plan: 'rtx5090', message: 'Noriu AI', website: '' };
 
 function fakeRes() {
   const res = { statusCode: null, body: null };
@@ -94,7 +94,7 @@ test('sends to Resend and returns 200', async () => {
   assert.equal(sent.to, 'to@nodas.lt');
   assert.equal(sent.from, 'forma@nodas.lt');
   assert.equal(sent.reply_to, 'jonas@pvz.lt');
-  assert.equal(sent.subject, 'Nauja užklausa: AI kompiuteris');
+  assert.equal(sent.subject, 'Nauja užklausa: AI kompiuteris RTX 5090');
 });
 
 test('no reply_to when contact is a phone number', async () => {
@@ -172,4 +172,39 @@ test('rate limit: 6th request from same IP within window gets 429', async () => 
   const other = fakeRes();
   await handler({ ...req(), headers: { 'x-forwarded-for': '5.6.7.8' } }, other);
   assert.equal(other.statusCode, 200);
+});
+
+test('validate accepts new plan values and topic', () => {
+  for (const plan of ['idiegimas', 'dgx-spark', 'rtx5090', 'rtx5090x2', 'rtxpro6000', 'dgx-station', 'verslo-serveris', 'palaikymas', 'necenzuruotas', 'nezinau']) {
+    assert.equal(validate({ ...valid, plan }).ok, true, plan);
+  }
+  const r = validate({ ...valid, topic: '  Skaičiuoklė: Didelis (70B), 30 tok/s ' });
+  assert.equal(r.ok, true);
+  assert.equal(r.data.topic, 'Skaičiuoklė: Didelis (70B), 30 tok/s');
+});
+
+test('old plan value kompiuteris is rejected', () => {
+  assert.equal(validate({ ...valid, plan: 'kompiuteris' }).ok, false);
+});
+
+test('topic over 300 chars rejected', () => {
+  assert.equal(validate({ ...valid, topic: 'a'.repeat(301) }).ok, false);
+});
+
+test('topic appears escaped in email html', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: { ...valid, topic: '<i>DGX</i> Spark' } }, res);
+  const sent = JSON.parse(calls[0].opts.body);
+  assert.ok(sent.html.includes('<b>Tema:</b><br>&lt;i&gt;DGX&lt;/i&gt; Spark'));
+});
+
+test('no Tema row when topic is empty', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: valid }, res);
+  assert.ok(!JSON.parse(calls[0].opts.body).html.includes('Tema:'));
+});
+
+test('every form option is accepted by the API', async () => {
+  const { PLAN_OPTIONS } = await import('../../src/data/plans.ts');
+  for (const [value] of PLAN_OPTIONS) assert.equal(validate({ ...valid, plan: value }).ok, true, value);
 });
