@@ -10,6 +10,7 @@ const PLANS = {
   'verslo-serveris': 'Verslo AI serveris',
   palaikymas: 'Palaikymas',
   necenzuruotas: 'Necenzūruotas modelis',
+  konfiguratorius: 'Konfigūratoriaus sistema',
   nezinau: 'Nežinau',
 };
 
@@ -22,12 +23,14 @@ export function validate(body) {
     contact: str(b.contact),
     plan: str(b.plan) || 'nezinau',
     topic: str(b.topic),
+    config: str(b.config),
     message: str(b.message),
   };
   if (!data.name || data.name.length > 100) return { ok: false };
   if (!data.contact || data.contact.length > 200) return { ok: false };
   if (!Object.hasOwn(PLANS, data.plan)) return { ok: false };
   if (data.topic.length > 300) return { ok: false };
+  if (data.config.length > 3000) return { ok: false };
   if (data.message.length > 2000) return { ok: false };
   return { ok: true, data };
 }
@@ -92,13 +95,14 @@ export default async function handler(req, res) {
     return res.status(500).json({ ok: false, error: 'config' });
   }
 
-  const { name, contact, plan, topic, message } = v.data;
+  const { name, contact, plan, topic, config, message } = v.data;
   const rows = [
     ['Vardas', name],
     ['Kontaktas', contact],
     ['Paketas', PLANS[plan]],
     ...(topic ? [['Tema', topic]] : []),
     ['Žinutė', message || '—'],
+    ...(config ? [['Konfigūracija', config]] : []),
   ];
   const html = rows
     .map(([k, val]) => `<p><b>${k}:</b><br>${escapeHtml(val).replace(/\n/g, '<br>')}</p>`)

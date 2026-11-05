@@ -1,5 +1,7 @@
 ---
 import { PLAN_OPTIONS } from '../data/plans';
+interface Props { plan?: string; config?: string }
+const { plan = 'nezinau', config } = Astro.props;
 ---
 <form id="forma" class="contact-form" method="post" action="/api/contact" novalidate>
   <div class="form-row">
@@ -8,11 +10,12 @@ import { PLAN_OPTIONS } from '../data/plans';
   </div>
   <label>Dėl ko rašote
     <select name="plan">
-      {PLAN_OPTIONS.map(([value, label]) => <option value={value}>{label}</option>)}
+      {PLAN_OPTIONS.map(([value, label]) => <option value={value} selected={value === plan}>{label}</option>)}
     </select>
   </label>
   <p class="topic-line" data-topic-line hidden>Tema: <b data-topic-text></b></p>
   <input type="hidden" name="topic" value="">
+  {config !== undefined && <input type="hidden" name="config" value={config}>}
   <label>Ką norėtumėte daryti su AI?<textarea name="message" rows="5" maxlength="2000"></textarea></label>
   <div class="hp" aria-hidden="true"><label>Svetainė<input name="website" tabindex="-1" autocomplete="off"></label></div>
   <p class="small muted">Jūsų duomenis naudosime tik atsakyti į užklausą. <a href="/privatumas">Privatumo politika</a></p>

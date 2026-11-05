@@ -68,3 +68,14 @@ test('data sanity', () => {
   assert.ok(engines.length === 4);
   assert.ok(gpus.some((g) => g.id === 'rtx2080ti') && gpus.some((g) => g.id === 'rtxpro6000'));
 });
+
+// llama.cpp diskusija #17621: RTX 4090 tg128 — gpt-oss-20b MXFP4 232, Qwen3 30B-A3B Q4_K_M 198.
+test('MoE calibration: 4090 gpt-oss-20b within 10% of measured 232', () => {
+  const r = estimate(sys('rtx4090', 1, 'r9-9950x', 64), model('gpt-oss-20b'), 'llamacpp', 1);
+  assert.ok(r.tps >= 209 && r.tps <= 255, String(r.tps));
+});
+
+test('MoE calibration: 4090 Qwen3 30B-A3B within 20% of measured 198', () => {
+  const r = estimate(sys('rtx4090', 1, 'r9-9950x', 64), model('qwen3-30b-a3b'), 'llamacpp', 1);
+  assert.ok(r.tps >= 158 && r.tps <= 238, String(r.tps));
+});

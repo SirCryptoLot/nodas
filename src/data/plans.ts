@@ -10,4 +10,5 @@ export const PLAN_OPTIONS: [string, string][] = [
   ['verslo-serveris', 'Verslo AI serveris'],
   ['palaikymas', 'Palaikymas'],
   ['necenzuruotas', 'Necenzūruotas modelis'],
+  ['konfiguratorius', 'Sistema iš konfigūratoriaus'],
 ];

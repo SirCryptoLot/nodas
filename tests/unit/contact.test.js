@@ -208,3 +208,21 @@ test('every form option is accepted by the API', async () => {
   const { PLAN_OPTIONS } = await import('../../src/data/plans.ts');
   for (const [value] of PLAN_OPTIONS) assert.equal(validate({ ...valid, plan: value }).ok, true, value);
 });
+
+test('validate accepts konfiguratorius plan with config text', () => {
+  const r = validate({ ...valid, plan: 'konfiguratorius', config: 'Įranga: RTX 5090\nModeliai:\n- Qwen3 8B: ~226 tok/s' });
+  assert.equal(r.ok, true);
+  assert.ok(r.data.config.startsWith('Įranga'));
+});
+
+test('config over 3000 chars rejected', () => {
+  assert.equal(validate({ ...valid, plan: 'konfiguratorius', config: 'a'.repeat(3001) }).ok, false);
+});
+
+test('config appears escaped with line breaks in email html', async () => {
+  const res = fakeRes();
+  await handler({ method: 'POST', body: { ...valid, plan: 'konfiguratorius', config: '<b>GPU</b>\nRAM 64 GB' } }, res);
+  const sent = JSON.parse(calls[0].opts.body);
+  assert.equal(sent.subject, 'Nauja užklausa: Konfigūratoriaus sistema');
+  assert.ok(sent.html.includes('<b>Konfigūracija:</b><br>&lt;b&gt;GPU&lt;/b&gt;<br>RAM 64 GB'));
+});

@@ -71,7 +71,8 @@ export const DGX_SPARK: UnifiedDevice = {
   priceEur: 5193, // Lenovo ThinkStation PGX 1 TB, skytech.lt
 };
 
-export type Model = { id: string; name: string; sizeGB: number; totalB: number; activeB: number; uncensored: boolean };
+// calib: papildomas koeficientas, kai turime šio modelio matavimą (llama.cpp #17621).
+export type Model = { id: string; name: string; sizeGB: number; totalB: number; activeB: number; uncensored: boolean; calib?: number };
 export const models: Model[] = [
   { id: 'llama3.1-8b', name: 'Llama 3.1 8B', sizeGB: 4.92, totalB: 8, activeB: 8, uncensored: false },
   { id: 'qwen3-8b', name: 'Qwen3 8B', sizeGB: 5.03, totalB: 8, activeB: 8, uncensored: false },
@@ -81,7 +82,7 @@ export const models: Model[] = [
   { id: 'gpt-oss-20b', name: 'gpt-oss-20b', sizeGB: 12.1, totalB: 21, activeB: 3.6, uncensored: false },
   { id: 'mistral-small-24b', name: 'Mistral Small 3.2 24B', sizeGB: 14.3, totalB: 24, activeB: 24, uncensored: false },
   { id: 'gemma3-27b', name: 'Gemma 3 27B', sizeGB: 16.5, totalB: 27, activeB: 27, uncensored: false },
-  { id: 'qwen3-30b-a3b', name: 'Qwen3 30B-A3B (MoE)', sizeGB: 18.6, totalB: 30, activeB: 3.3, uncensored: false },
+  { id: 'qwen3-30b-a3b', name: 'Qwen3 30B-A3B (MoE)', sizeGB: 18.6, totalB: 30, activeB: 3.3, uncensored: false, calib: 0.82 },
   { id: 'qwen3-32b', name: 'Qwen3 32B', sizeGB: 19.8, totalB: 32, activeB: 32, uncensored: false },
   { id: 'llama3.3-70b', name: 'Llama 3.3 70B', sizeGB: 42.5, totalB: 70, activeB: 70, uncensored: false },
   { id: 'gpt-oss-120b', name: 'gpt-oss-120b', sizeGB: 63.4, totalB: 117, activeB: 5.1, uncensored: false },

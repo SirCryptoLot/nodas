@@ -6,7 +6,7 @@ import type { Gpu, Cpu, Model, UnifiedDevice, EngineId } from '../data/parts.ts'
 
 export const REF_MODEL_GB = 3.83; // Llama 2 7B Q4_0 (3,56 GiB), kuriuo matuota tg7b
 export const FALLBACK_EFF = 0.6; // kai matavimo nėra: dalis teorinio pralaidumo
-export const MOE_FACTOR = 0.75; // MoE modelių papildomos sąnaudos (kalibruota pagal DGX Spark gpt-oss-120b)
+export const MOE_FACTOR = 0.7; // MoE modelių papildomos sąnaudos (kalibruota: DGX Spark gpt-oss-120b, RTX 4090 gpt-oss-20b ir Qwen3 30B-A3B)
 export const KV_OVERHEAD = 1.1; // kontekstas ir darbinė atmintis
 export const KV_PER_USER = 0.02; // papildoma atmintis kiekvienam vartotojui (dalis modelio dydžio)
 export const VRAM_RESERVE_GB = 1.5;
@@ -36,7 +36,7 @@ export function estimate(system: System, model: Model, engine: EngineId, users: 
   const activeGB = (model.sizeGB * model.activeB) / model.totalB;
   const finish = (mode: Estimate['mode'], raw: number): Estimate => ({
     mode,
-    tps: Math.max(1, Math.round(raw * moe * engineFactor * userFactor)),
+    tps: Math.max(1, Math.round(raw * moe * (model.calib ?? 1) * engineFactor * userFactor)),
     needGB: Math.round(need * 10) / 10,
   });
 

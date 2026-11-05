@@ -9,7 +9,7 @@ export function initContactForm() {
 
   const params = new URLSearchParams(location.search);
   const plan = params.get('plan');
-  select.value = plan && [...select.options].some((o) => o.value === plan) ? plan : 'nezinau';
+  if (plan && [...select.options].some((o) => o.value === plan)) select.value = plan;
   const tema = (params.get('tema') ?? '').trim().slice(0, 300);
   if (tema) {
     topicInput.value = tema;

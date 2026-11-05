@@ -1,0 +1,146 @@
+---
+import {
+  gpus, cpus, models, engines, operatingSystems, interfaces, agents, presets, goals, RAM_SIZES, DGX_SPARK,
+} from '../data/parts';
+import { defaultConfig, quote, results, eur, modeText, cpuOf } from '../lib/quote';
+
+const cfg = defaultConfig();
+const q = quote(cfg);
+const res = results(cfg);
+const series = [...new Set(gpus.map((g) => g.series))];
+const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as const;
+---
+<div class="cfg" data-cfg>
+  <form class="cfg-form" aria-label="AI sistemos konfigūratorius">
+    <fieldset>
+      <legend>1. Ką norite daryti?</legend>
+      <div class="chips">
+        {goals.map((g) => (
+          <label class="chip"><input type="radio" name="goal" value={g.id} checked={g.id === cfg.goal}><span>{g.name}</span></label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Įranga</legend>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="hw" value="pc" checked><span>Surinktas kompiuteris</span></label>
+        <label class="chip"><input type="radio" name="hw" value="dgx"><span>{DGX_SPARK.name}</span></label>
+        <label class="chip"><input type="radio" name="hw" value="own"><span>Turiu savo kompiuterį</span></label>
+      </div>
+
+      <div class="cfg-grid" data-show="pc own">
+        <label>Vaizdo plokštė
+          <select name="gpuId">
+            {series.map((s) => (
+              <optgroup label={s}>
+                {gpus.filter((g) => g.series === s).map((g) => (
+                  <option value={g.id} selected={g.id === cfg.gpuId}>{g.name}{g.usedOnly ? ' (naudota, pagal galimybes)' : ''}</option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+        </label>
+        <fieldset class="inline">
+          <legend>Plokščių</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="gpuCount" value="1" checked><span>1</span></label>
+            <label class="chip"><input type="radio" name="gpuCount" value="2"><span>2</span></label>
+          </div>
+        </fieldset>
+        <label data-show="pc">Procesorius
+          <select name="cpuId">
+            {cpus.map((c) => <option value={c.id} selected={c.id === cfg.cpuId}>{c.name} ({c.ramType})</option>)}
+          </select>
+          <span class="small muted" data-out="cpu-note"></span>
+        </label>
+      </div>
+      <fieldset class="inline" data-show="pc own">
+        <legend>RAM</legend>
+        <div class="chips">
+          {RAM_SIZES.map((r) => (
+            <label class="chip"><input type="radio" name="ramGB" value={String(r)} checked={r === cfg.ramGB}><span>{r} GB</span></label>
+          ))}
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Programinė dalis</legend>
+      <div class="chips">
+        {presets.map((p) => (
+          <label class="chip"><input type="radio" name="preset" value={p.id} checked={p.id === 'paprasciausias'}><span>{p.name}</span></label>
+        ))}
+      </div>
+      <details class="cfg-advanced">
+        <summary>Išplėstinis</summary>
+        <div class="cfg-adv-grid">
+          <fieldset><legend>Operacinė sistema</legend>
+            {operatingSystems.map((o) => <label class="opt"><input type="radio" name="os" value={o.id} checked={o.id === cfg.os}> {o.name}</label>)}
+          </fieldset>
+          <fieldset><legend>Variklis</legend>
+            {engines.map((e) => <label class="opt"><input type="radio" name="engine" value={e.id} checked={e.id === cfg.engine}> {e.name} <span class="muted small">{e.note}</span></label>)}
+          </fieldset>
+          <fieldset><legend>Pokalbių sąsaja</legend>
+            {interfaces.map((u) => <label class="opt"><input type="radio" name="ui" value={u.id} checked={u.id === cfg.ui}> {u.name} <span class="muted small">{u.note}</span></label>)}
+          </fieldset>
+          <fieldset><legend>Agentai</legend>
+            {agents.map((a) => <label class="opt"><input type="checkbox" name="agents" value={a.id}> {a.name} <span class="muted small">{a.note}</span></label>)}
+          </fieldset>
+          <fieldset><legend>Vartotojų vienu metu</legend>
+            <div class="chips">
+              {[1, 5, 20].map((u) => <label class="chip"><input type="radio" name="users" value={String(u)} checked={u === 1}><span>{u}</span></label>)}
+            </div>
+          </fieldset>
+        </div>
+      </details>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. Modeliai</legend>
+      <div class="cfg-models">
+        {models.map((m) => {
+          const r = res.find((x) => x.model.id === m.id);
+          return (
+            <label class="opt model-opt">
+              <input type="checkbox" name="models" value={m.id} checked={cfg.models.includes(m.id)}>
+              <span>{m.name} <span class="muted small">{m.sizeGB} GB</span></span>
+              <span class="fit" data-fit={m.id}>{r ? fitLabel[r.estimate.mode] : ''}</span>
+            </label>
+          );
+        })}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>5. Palaikymas</legend>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="support" value="none" checked><span>Nereikia</span></label>
+        <label class="chip"><input type="radio" name="support" value="namams"><span>Namams, 29 €/mėn.</span></label>
+        <label class="chip"><input type="radio" name="support" value="verslui"><span>Verslui, 99 €/mėn.</span></label>
+      </div>
+    </fieldset>
+  </form>
+
+  <aside class="cfg-result card" aria-live="polite">
+    <p class="eyebrow">Jūsų sistema</p>
+    <h2 class="h3">Greitis, apytiksliai</h2>
+    <ul class="cfg-results" data-out="results">
+      {res.map((r) => <li><span>{r.model.name}</span><b class={r.estimate.mode}>{modeText(r.estimate)}</b></li>)}
+    </ul>
+    <h2 class="h3 mt">Apytikslė kaina</h2>
+    <ul class="cfg-lines" data-out="lines">
+      {q.lines.map((l) => <li><span>{l.label}</span><span>{l.eur === null ? 'pagal užklausą' : eur(l.eur)}</span></li>)}
+    </ul>
+    <p class="cfg-total">Iš viso: <b data-out="total">~{eur(q.oneOff)}</b></p>
+    <p class="small muted" data-out="unknown">{q.unknown.length ? '+ dalys pagal užklausą' : ''}</p>
+    <p class="small" data-out="monthly">{q.monthly ? `+ palaikymas ${q.monthly} €/mėn.` : ''}</p>
+    <p class="small muted">Su PVM. Kaina preliminari, galutinė pasiūlyme. Platforma: {cpuOf(cfg).ramType}.</p>
+    <a class="btn btn-primary" href="#uzklausa">Gauti pasiūlymą</a>
+  </aside>
+</div>
+
+<script>
+  import { initConfigurator } from '../scripts/configurator';
+  initConfigurator();
+</script>

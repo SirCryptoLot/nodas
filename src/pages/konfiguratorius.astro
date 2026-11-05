@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Configurator from '../components/Configurator.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site';
+import { breadcrumbs } from '../lib/seo';
+import { defaultConfig, configText } from '../lib/quote';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Konfigūratorius', path: '/konfiguratorius' }];
+---
+<Base
+  title="AI sistemos konfigūratorius: įranga, programos, kaina"
+  description="Susidėliokite savo AI sistemą: vaizdo plokštė, procesorius, RAM, Ollama ar llama.cpp, Open WebUI, agentai ir modeliai. Matysite greitį ir apytikslę kainą."
+  path="/konfiguratorius"
+  jsonld={[breadcrumbs(crumbs, SITE)]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Susidėliokite savo AI sistemą</h1>
+      <p class="lead">Pasirinkite, ką norite daryti, įrangą ir programas. Dešinėje iš karto matysite, kaip greitai veiks modeliai ir kiek apytiksliai kainuos. Greitis skaičiuojamas pagal realius llama.cpp matavimus, apytiksliai.</p>
+    </div>
+  </section>
+  <section class="section section-tight">
+    <div class="wrap">
+      <Configurator />
+    </div>
+  </section>
+  <section class="section section-soft" id="uzklausa">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Gauti pasiūlymą šiai sistemai</h2>
+        <p class="lead">Jūsų pasirinkta konfigūracija bus pridėta prie užklausos. Atsiųsime tikslų pasiūlymą su kaina ir terminu.</p>
+      </div>
+      <div class="card">
+        <ContactForm plan="konfiguratorius" config={configText(defaultConfig())} />
+      </div>
+    </div>
+  </section>
+</Base>
