@@ -8,6 +8,9 @@ import { SITE } from '../data/site';
 import { products } from '../data/catalog';
 import { faq } from '../data/faq';
 import { organization, faqPage } from '../lib/seo';
+import { getCollection } from 'astro:content';
+
+const guides = (await getCollection('gidai')).sort((a, b) => a.data.order - b.data.order);
 
 const featured = ['dgx-spark', 'ai-kompiuteris-rtx-5090', 'ai-darbo-stotis-rtx-pro-6000']
   .map((s) => products.find((p) => p.slug === s)!);
@@ -98,7 +101,24 @@ const homeFaq = faq.slice(0, 4);
     </div>
   </section>
 
-  <section class="section section-soft">
+  <section class="section section-soft" id="gidai">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Gidai</h2>
+        <p>Viskas apie privatų AI lietuviškai: įranga, kainos, kaip pasirinkti ir kaip naudoti versle.</p>
+      </div>
+      <div class="grid grid-3 guide-list">
+        {guides.map((g) => (
+          <a class="card" href={`/${g.id}`}>
+            <h3>{g.data.h1}</h3>
+            <p>{g.data.short}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap two-col">
       <div class="section-head">
         <h2>Dažni klausimai</h2>
