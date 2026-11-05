@@ -19,8 +19,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
     <nav class="nav-links" id="meniu" aria-label="Pagrindinis meniu">
       {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
     </nav>
-    <a href="/kontaktai" class="btn btn-primary">Gauti pasiūlymą</a>
-    <button type="button" class="nav-toggle" aria-controls="meniu" aria-expanded="false">Meniu</button>
+    <div class="nav-actions">
+      <a href="/kontaktai" class="btn btn-primary nav-cta"><span class="nav-cta-long">Gauti pasiūlymą</span><span class="nav-cta-short">Pasiūlymas</span></a>
+      <button type="button" class="nav-toggle" aria-controls="meniu" aria-expanded="false" aria-label="Meniu">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path class="i-open" d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path class="i-close" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 <script>
@@ -29,5 +33,11 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
   toggle?.addEventListener('click', () => {
     const open = header!.classList.toggle('nav-open');
     toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('no-scroll', open);
   });
+  header?.querySelectorAll('.nav-links a').forEach((a) => a.addEventListener('click', () => {
+    header.classList.remove('nav-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('no-scroll');
+  }));
 </script>

@@ -80,7 +80,7 @@ const homeFaq = faq.slice(0, 4);
         <h2>Populiariausia įranga</h2>
         <p>Kiekvienas įrenginys parduodamas su įdiegtu ir sukonfigūruotu AI.</p>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3 scroller">
         {featured.map((p) => <ProductCard product={p} />)}
       </div>
       <p class="more"><a href="/iranga">Visa įranga →</a></p>
@@ -107,7 +107,7 @@ const homeFaq = faq.slice(0, 4);
         <h2>Gidai</h2>
         <p>Viskas apie privatų AI lietuviškai: įranga, kainos, kaip pasirinkti ir kaip naudoti versle.</p>
       </div>
-      <div class="grid grid-3 guide-list">
+      <div class="grid grid-3 guide-list scroller">
         {guides.map((g) => (
           <a class="card" href={`/${g.id}`}>
             <h3>{g.data.h1}</h3>

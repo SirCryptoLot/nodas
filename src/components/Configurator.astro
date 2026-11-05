@@ -122,7 +122,8 @@ const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as c
     </fieldset>
   </form>
 
-  <aside class="cfg-result card" aria-live="polite">
+  <aside class="cfg-result card" id="cfg-rezultatas" aria-live="polite">
+    <button type="button" class="cfg-close" data-cfg-close aria-label="Uždaryti rezultatą">×</button>
     <p class="eyebrow">Jūsų sistema</p>
     <h2 class="h3">Greitis, apytiksliai</h2>
     <ul class="cfg-results" data-out="results">
@@ -138,6 +139,14 @@ const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as c
     <p class="small muted">Su PVM. Kaina preliminari, galutinė pasiūlyme. <span data-out="platform">Atmintis: {cpuOf(cfg).ramType}</span></p>
     <a class="btn btn-primary" href="#uzklausa">Gauti pasiūlymą</a>
   </aside>
+</div>
+
+<div class="cfg-bar" data-cfg-bar>
+  <div class="cfg-bar-info">
+    <b data-out="bar-total">~{eur(q.oneOff)}</b>
+    <span data-out="bar-speed">{(() => { const b = res.filter((r) => r.estimate.mode !== 'none').sort((x, y) => y.estimate.tps - x.estimate.tps)[0]; return b ? `${b.model.name}: ${modeText(b.estimate)}` : 'Pasirinkite modelį'; })()}</span>
+  </div>
+  <button type="button" class="btn btn-primary" data-cfg-toggle aria-controls="cfg-rezultatas" aria-expanded="false">Rezultatas</button>
 </div>
 
 <script>

@@ -81,6 +81,11 @@ function render(root: HTMLElement, form: HTMLFormElement) {
   const q = quote(cfg);
   out('lines').replaceChildren(...q.lines.map((l) => li(l.label, l.eur === null ? 'pagal užklausą' : eur(l.eur))));
   out('total').textContent = `~${eur(q.oneOff)}`;
+  const best = res.filter((r) => r.estimate.mode !== 'none').sort((x, y) => y.estimate.tps - x.estimate.tps)[0];
+  const barTotal = document.querySelector('[data-out="bar-total"]');
+  const barSpeed = document.querySelector('[data-out="bar-speed"]');
+  if (barTotal) barTotal.textContent = `~${eur(q.oneOff)}`;
+  if (barSpeed) barSpeed.textContent = best ? `${best.model.name}: ${modeText(best.estimate)}` : 'Pasirinkite modelį';
   out('unknown').textContent = q.unknown.length ? '+ dalys pagal užklausą' : '';
   out('monthly').textContent = q.monthly ? `+ palaikymas ${q.monthly} €/mėn.` : '';
 
@@ -106,6 +111,17 @@ export function initConfigurator() {
     render(root, form);
   });
   form.addEventListener('input', () => render(root, form));
+
+  // Telefone rezultatas atsidaro iš apačios.
+  const toggle = document.querySelector<HTMLButtonElement>('[data-cfg-toggle]');
+  const setOpen = (open: boolean) => {
+    root.classList.toggle('cfg-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('no-scroll', open);
+  };
+  toggle?.addEventListener('click', () => setOpen(!root.classList.contains('cfg-open')));
+  root.querySelector('[data-cfg-close]')?.addEventListener('click', () => setOpen(false));
+  root.querySelector('.cfg-result a[href="#uzklausa"]')?.addEventListener('click', () => setOpen(false));
   render(root, form);
 }
 

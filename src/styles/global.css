@@ -97,7 +97,7 @@ p { margin: 0; }
 .section-tight { padding-top: 0; }
 .page-head { padding-bottom: 40px; }
 .more { margin-top: 24px; font-weight: 600; }
-.more a, .card a:not(.btn), .lead a, .section-head a, .prose a, .checks a { color: var(--accent); text-decoration: none; }
+.more a, .card p a, .lead a, .section-head a, .prose a, .checks a { color: var(--accent); text-decoration: none; }
 .more a:hover, .lead a:hover, .section-head a:hover, .prose a:hover { text-decoration: underline; }
 .crumbs { font-size: 14px; color: var(--text-3); margin-bottom: 20px; }
 .crumbs a { text-decoration: none; color: var(--text-3); }
@@ -303,3 +303,98 @@ button.btn:disabled { opacity: .6; cursor: wait; }
 .cfg-result .btn { margin-top: 8px; }
 @media (max-width: 960px) { .cfg-result { position: static; } }
 .chip input:disabled + span { opacity: .4; cursor: not-allowed; }
+
+
+/* ===== Telefonas ===== */
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-cta-short { display: none; }
+.nav-toggle .i-close { display: none; }
+.nav-open .nav-toggle .i-open { display: none; }
+.nav-open .nav-toggle .i-close { display: inline; }
+html.no-scroll { overflow: hidden; }
+.sticky-cta, .cfg-bar, .cfg-close { display: none; }
+
+@media (max-width: 960px) {
+  .site-header .nav-cta { display: inline-flex; padding: 9px 14px; }
+  .nav-cta-long { display: none; }
+  .nav-cta-short { display: inline; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; padding: 0; border: 1px solid #ddd; border-radius: 999px; background: #fff; color: var(--text);
+  }
+  /* Juosta turi backdrop-filter, todėl meniu pozicionuojamas nuo jos apačios. */
+  .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0; height: calc(100dvh - 64px); overflow-y: auto;
+    padding: 12px var(--pad) 32px; border-bottom: 0; background: #fff;
+  }
+  .nav-links a { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); padding: 14px 0; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 860px) {
+  body { font-size: 16px; }
+  .section { padding: 44px 0; }
+  .page-head { padding-bottom: 24px; }
+  .hero { padding: 32px 0 40px; }
+  .section-head { margin-bottom: 24px; }
+  .section-head p { font-size: 17px; }
+  .lead { margin: 14px 0 22px; }
+
+  /* Slenkami į šoną sąrašai */
+  .scroller {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 calc(-1 * var(--pad)); padding: 2px var(--pad) 12px; scrollbar-width: none;
+  }
+  .scroller::-webkit-scrollbar { display: none; }
+  .scroller > * { flex: 0 0 82%; scroll-snap-align: start; }
+  .guide-list.scroller > * { flex-basis: 70%; }
+
+  .trust-grid { gap: 16px; }
+  .cta-band { padding: 24px; }
+
+  /* Produkto puslapis: prilipęs mygtukas */
+  .sticky-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    padding: 10px var(--pad) calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, .96); border-top: 1px solid var(--line); backdrop-filter: blur(8px);
+  }
+  .sticky-cta-name { font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sticky-cta .btn { flex-shrink: 0; }
+  body:has(.sticky-cta) .site-footer, body:has(.cfg-bar) .site-footer { padding-bottom: 96px; }
+}
+
+@media (max-width: 480px) {
+  .btn-row .btn { flex: 1 1 100%; min-height: 46px; }
+  .chip span { padding: 10px 14px; font-size: 15px; }
+  .faq summary { padding: 16px 36px 16px 0; }
+}
+
+/* Konfigūratorius telefone: juosta apačioje ir rezultatas iš apačios */
+@media (max-width: 960px) {
+  .cfg-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    padding: 10px var(--pad) calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, .97); border-top: 1px solid var(--line); backdrop-filter: blur(8px);
+  }
+  .cfg-bar-info { display: grid; min-width: 0; }
+  .cfg-bar-info b { font-size: 19px; letter-spacing: -0.02em; }
+  .cfg-bar-info span { font-size: 13px; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cfg-bar .btn { flex-shrink: 0; }
+
+  .cfg-result {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 40;
+    max-height: 82dvh; overflow-y: auto; border-radius: 20px 20px 0 0; border-bottom: 0;
+    padding: 24px var(--pad) calc(24px + env(safe-area-inset-bottom));
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, .18);
+    transform: translateY(105%); transition: transform .25s ease; visibility: hidden;
+  }
+  .cfg-open .cfg-result { transform: none; visibility: visible; }
+  .cfg-close { display: block; position: absolute; top: 10px; right: 14px; font-size: 30px; line-height: 1; background: none; border: 0; color: var(--text-3); cursor: pointer; padding: 6px; }
+
+  .model-opt { min-height: 48px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; align-items: center; }
+  .cfg-models { gap: 8px; }
+  .opt input[type=checkbox], .opt input[type=radio] { width: 20px; height: 20px; flex-shrink: 0; }
+  .opt { padding: 8px 0; }
+}
+@media (prefers-reduced-motion: reduce) { .cfg-result { transition: none; } }
