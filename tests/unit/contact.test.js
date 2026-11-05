@@ -1,6 +1,6 @@
 import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import handler, { validate, escapeHtml, _resetRateLimit } from '../api/contact.js';
+import handler, { validate, escapeHtml, _resetRateLimit } from '../../api/contact.js';
 
 const valid = { name: 'Jonas', contact: 'jonas@pvz.lt', plan: 'kompiuteris', message: 'Noriu AI', website: '' };
 

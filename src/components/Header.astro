@@ -1,0 +1,32 @@
+---
+interface Props { path: string }
+const { path } = Astro.props;
+
+const links = [
+  { href: '/iranga', label: 'Įranga' },
+  { href: '/diegimas', label: 'Diegimas' },
+  { href: '/skaiciuokle', label: 'Skaičiuoklė' },
+  { href: '/necenzuruoti-modeliai', label: 'Necenzūruoti' },
+  { href: '/duk', label: 'DUK' },
+  { href: '/kontaktai', label: 'Kontaktai' },
+];
+const isCurrent = (href: string) => path === href || path.startsWith(href + '/');
+---
+<header class="site-header" id="virsus">
+  <div class="wrap">
+    <a href="/" class="logo" aria-label="nodas, pradžia"><img src="/favicon.svg" alt="" width="26" height="26">nodas</a>
+    <nav class="nav-links" id="meniu" aria-label="Pagrindinis meniu">
+      {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <a href="/kontaktai" class="btn btn-primary">Gauti pasiūlymą</a>
+    <button type="button" class="nav-toggle" aria-controls="meniu" aria-expanded="false">Meniu</button>
+  </div>
+</header>
+<script>
+  const header = document.getElementById('virsus');
+  const toggle = header?.querySelector('.nav-toggle');
+  toggle?.addEventListener('click', () => {
+    const open = header!.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

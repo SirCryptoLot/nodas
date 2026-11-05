@@ -1,0 +1,41 @@
+---
+import { SITE } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a href="/" class="logo"><img src="/favicon.svg" alt="" width="26" height="26">nodas</a>
+        <p class="muted">AI įranga ir privataus AI diegimas Lietuvoje.</p>
+      </div>
+      <div>
+        <h4>Įranga</h4>
+        <ul>
+          <li><a href="/iranga">Visa įranga</a></li>
+          <li><a href="/skaiciuokle">Skaičiuoklė</a></li>
+          <li><a href="/dgx-spark-lietuvoje">DGX Spark</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Paslaugos</h4>
+        <ul>
+          <li><a href="/diegimas">Diegimas ir palaikymas</a></li>
+          <li><a href="/necenzuruoti-modeliai">Necenzūruoti modeliai</a></li>
+          <li><a href="/duk">DUK</a></li>
+        </ul>
+      </div>
+      <div data-placeholders>
+        <h4>Kontaktai</h4>
+        <ul>
+          <li>{SITE.email}</li>
+          <li>{SITE.phone}</li>
+          <li><a href="/kontaktai">Užklausos forma</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal" data-placeholders>
+      <span>© 2026 nodas · {SITE.rekvizitai}</span>
+      <a href="/privatumas">Privatumo politika</a>
+    </div>
+  </div>
+</footer>
