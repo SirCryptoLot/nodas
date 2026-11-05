@@ -9,6 +9,14 @@ const q = quote(cfg);
 const res = results(cfg);
 const series = [...new Set(gpus.map((g) => g.series))];
 const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as const;
+
+// Kortelių kainos „nuo“: pigiausias surinktas kompiuteris, DGX Spark ir tik diegimas.
+const cheapestPc = quote({ ...defaultConfig(), hw: 'pc', gpuId: 'rtx3060', gpuCount: 1, cpuId: 'r5-5600', ramGB: 16, agents: [] }).oneOff;
+const hwCards = [
+  { value: 'pc', title: 'Surinktas AI kompiuteris', desc: 'Parenkate vaizdo plokštę, procesorių ir RAM. Surenkame, išbandome ir įdiegiame AI.', price: `nuo ~${eur(cheapestPc)}` },
+  { value: 'dgx', title: 'NVIDIA DGX Spark', desc: 'Paruoštas AI kompiuteris su 128 GB atminties. Mažas, tylus, dideliems modeliams.', price: `~${eur(quote({ ...defaultConfig(), hw: 'dgx', agents: [] }).oneOff)}` },
+  { value: 'own', title: 'Turiu savo kompiuterį', desc: 'Įdiegiame AI į jūsų kompiuterį. Nurodykite jo vaizdo plokštę ir RAM.', price: `nuo ${eur(quote({ ...defaultConfig(), hw: 'own', agents: [] }).oneOff)}` },
+];
 ---
 <div class="cfg" data-cfg>
   <form class="cfg-form" aria-label="AI sistemos konfigūratorius">
@@ -23,46 +31,57 @@ const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as c
 
     <fieldset>
       <legend>2. Įranga</legend>
-      <div class="chips">
-        <label class="chip"><input type="radio" name="hw" value="pc" checked><span>Surinktas kompiuteris</span></label>
-        <label class="chip"><input type="radio" name="hw" value="dgx"><span>{DGX_SPARK.name}</span></label>
-        <label class="chip"><input type="radio" name="hw" value="own"><span>Turiu savo kompiuterį</span></label>
+      <div class="hw-cards">
+        {hwCards.map((c) => (
+          <label class={`hw-card hw-${c.value}`}>
+            <input type="radio" name="hw" value={c.value} checked={c.value === cfg.hw}>
+            <span class="hw-body">
+              <span class="hw-title">{c.title}</span>
+              <span class="hw-desc">{c.desc}</span>
+              <span class="hw-price">{c.price}</span>
+            </span>
+          </label>
+        ))}
       </div>
 
-      <div class="cfg-grid" data-show="pc own">
-        <label>Vaizdo plokštė
-          <select name="gpuId">
-            {series.map((s) => (
-              <optgroup label={s}>
-                {gpus.filter((g) => g.series === s).map((g) => (
-                  <option value={g.id} selected={g.id === cfg.gpuId}>{g.name}{g.usedOnly ? ' (naudota, pagal galimybes)' : ''}</option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-        </label>
+      <div class="hw-panel" data-show="pc own">
+        <p class="hw-panel-title"><span data-show="pc">Kompiuterio dalys</span><span data-show="own">Jūsų kompiuteris</span></p>
+        <div class="cfg-grid">
+          <label>Vaizdo plokštė
+            <select name="gpuId">
+              {series.map((s) => (
+                <optgroup label={s}>
+                  {gpus.filter((g) => g.series === s).map((g) => (
+                    <option value={g.id} selected={g.id === cfg.gpuId}>{g.name}{g.usedOnly ? ' (naudota, pagal galimybes)' : ''}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+          </label>
+          <fieldset class="inline">
+            <legend>Plokščių</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="gpuCount" value="1" checked><span>1</span></label>
+              <label class="chip"><input type="radio" name="gpuCount" value="2"><span>2</span></label>
+            </div>
+          </fieldset>
+          <label data-show="pc">Procesorius
+            <select name="cpuId">
+              {cpus.map((c) => <option value={c.id} selected={c.id === cfg.cpuId}>{c.name} ({c.ramType})</option>)}
+            </select>
+            <span class="small muted" data-out="cpu-note"></span>
+          </label>
+        </div>
         <fieldset class="inline">
-          <legend>Plokščių</legend>
+          <legend>RAM</legend>
           <div class="chips">
-            <label class="chip"><input type="radio" name="gpuCount" value="1" checked><span>1</span></label>
-            <label class="chip"><input type="radio" name="gpuCount" value="2"><span>2</span></label>
+            {RAM_SIZES.map((r) => (
+              <label class="chip"><input type="radio" name="ramGB" value={String(r)} checked={r === cfg.ramGB}><span>{r} GB</span></label>
+            ))}
           </div>
         </fieldset>
-        <label data-show="pc">Procesorius
-          <select name="cpuId">
-            {cpus.map((c) => <option value={c.id} selected={c.id === cfg.cpuId}>{c.name} ({c.ramType})</option>)}
-          </select>
-          <span class="small muted" data-out="cpu-note"></span>
-        </label>
       </div>
-      <fieldset class="inline" data-show="pc own">
-        <legend>RAM</legend>
-        <div class="chips">
-          {RAM_SIZES.map((r) => (
-            <label class="chip"><input type="radio" name="ramGB" value={String(r)} checked={r === cfg.ramGB}><span>{r} GB</span></label>
-          ))}
-        </div>
-      </fieldset>
+      <p class="hw-panel hw-panel-note" data-show="dgx">DGX Spark yra paruoštas įrenginys: 128 GB bendros atminties, NVIDIA GB10 lustas, 1–4 TB diskas. Papildomų dalių rinktis nereikia.</p>
     </fieldset>
 
     <fieldset>
