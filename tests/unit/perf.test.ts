@@ -79,3 +79,7 @@ test('MoE calibration: 4090 Qwen3 30B-A3B within 20% of measured 198', () => {
   const r = estimate(sys('rtx4090', 1, 'r9-9950x', 64), model('qwen3-30b-a3b'), 'llamacpp', 1);
   assert.ok(r.tps >= 158 && r.tps <= 238, String(r.tps));
 });
+
+test('every GPU without a current price is marked used / on request', () => {
+  for (const g of gpus) if (g.priceEur === null) assert.equal(g.usedOnly, true, g.id);
+});

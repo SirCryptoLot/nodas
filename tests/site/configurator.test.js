@@ -39,3 +39,7 @@ test('request form is on the page with config and konfiguratorius plan', () => {
 test('header links to the configurator', () => {
   assert.match(page('/'), /href="\/konfiguratorius"/);
 });
+
+test('platform line is a live output', () => {
+  assert.match(h(), /data-out="platform"/);
+});

@@ -135,7 +135,7 @@ const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as c
     <p class="cfg-total">Iš viso: <b data-out="total">~{eur(q.oneOff)}</b></p>
     <p class="small muted" data-out="unknown">{q.unknown.length ? '+ dalys pagal užklausą' : ''}</p>
     <p class="small" data-out="monthly">{q.monthly ? `+ palaikymas ${q.monthly} €/mėn.` : ''}</p>
-    <p class="small muted">Su PVM. Kaina preliminari, galutinė pasiūlyme. Platforma: {cpuOf(cfg).ramType}.</p>
+    <p class="small muted">Su PVM. Kaina preliminari, galutinė pasiūlyme. <span data-out="platform">Atmintis: {cpuOf(cfg).ramType}</span></p>
     <a class="btn btn-primary" href="#uzklausa">Gauti pasiūlymą</a>
   </aside>
 </div>

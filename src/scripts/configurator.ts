@@ -1,8 +1,8 @@
 // Konfigūratorius naršyklėje: skaito pasirinkimus, perskaičiuoja greitį ir kainą,
 // užpildo užklausos formos lauką „config“.
-import { presets, goals, cpus } from '../data/parts';
+import { presets, goals } from '../data/parts';
 import type { EngineId } from '../data/parts';
-import { defaultConfig, quote, results, configText, eur, modeText } from '../lib/quote';
+import { defaultConfig, quote, results, configText, eur, modeText, cpuOf, MAX_DDR4_GB } from '../lib/quote';
 import type { Config } from '../lib/quote';
 
 const FIT = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as const;
@@ -56,6 +56,17 @@ function render(root: HTMLElement, form: HTMLFormElement) {
   const cpuNote = root.querySelector('[data-out="cpu-note"]')!;
   cpuNote.textContent = cfg.gpuCount > 1 ? 'Dviem plokštėms parenkame AMD Threadripper platformą.' : '';
 
+  // DDR4 platformai 192 GB neįmanoma: išjungiame pasirinkimą ir sumažiname iki 128 GB.
+  const ddr4 = cfg.hw === 'pc' && cpuOf(cfg).ramType === 'DDR4';
+  form.querySelectorAll<HTMLInputElement>('input[name="ramGB"]').forEach((i) => {
+    i.disabled = ddr4 && Number(i.value) > MAX_DDR4_GB;
+  });
+  if (ddr4 && cfg.ramGB > MAX_DDR4_GB) {
+    setRadio(form, 'ramGB', String(MAX_DDR4_GB));
+    cfg.ramGB = MAX_DDR4_GB;
+  }
+  root.querySelector('[data-out="platform"]')!.textContent = cfg.hw === 'pc' ? `Atmintis: ${cpuOf(cfg).ramType}` : '';
+
   const res = results(cfg);
   const allFit = results({ ...cfg, models: [...form.querySelectorAll<HTMLInputElement>('input[name="models"]')].map((i) => i.value) });
   allFit.forEach((r) => {
@@ -91,9 +102,6 @@ export function initConfigurator() {
       applyPreset(form, g.preset);
     } else if (t.name === 'preset') {
       applyPreset(form, t.value);
-    } else if (t.name === 'cpuId') {
-      const c = cpus.find((x) => x.id === t.value);
-      if (c?.ramType === 'DDR4' && Number(new FormData(form).get('ramGB')) > 128) setRadio(form, 'ramGB', '128');
     }
     render(root, form);
   });

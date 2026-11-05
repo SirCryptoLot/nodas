@@ -302,3 +302,4 @@ button.btn:disabled { opacity: .6; cursor: wait; }
 .cfg-total { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; }
 .cfg-result .btn { margin-top: 8px; }
 @media (max-width: 960px) { .cfg-result { position: static; } }
+.chip input:disabled + span { opacity: .4; cursor: not-allowed; }

@@ -39,10 +39,16 @@ const gpuOf = (cfg: Config) => gpus.find((g) => g.id === cfg.gpuId) ?? gpus[0];
 export const cpuOf = (cfg: Config) =>
   cpus.find((c) => c.id === (cfg.gpuCount > 1 ? WORKSTATION_CPU : cfg.cpuId)) ?? cpus[0];
 
+// DDR4 platformos (AM4, LGA1700 su DDR4) palaiko daugiausia 128 GB.
+export const MAX_DDR4_GB = 128;
+export function ramOf(cfg: Config): number {
+  return cfg.hw === 'pc' && cpuOf(cfg).ramType === 'DDR4' ? Math.min(cfg.ramGB, MAX_DDR4_GB) : cfg.ramGB;
+}
+
 export function resolveSystem(cfg: Config): System {
   if (cfg.hw === 'dgx') return { kind: 'unified', device: DGX_SPARK };
   if (cfg.hw === 'own') return { kind: 'own', gpu: gpuOf(cfg), gpuCount: cfg.gpuCount, ramGB: cfg.ramGB, ramBwGBs: OWN_RAM_BW };
-  return { kind: 'pc', gpu: gpuOf(cfg), gpuCount: cfg.gpuCount, cpu: cpuOf(cfg), ramGB: cfg.ramGB };
+  return { kind: 'pc', gpu: gpuOf(cfg), gpuCount: cfg.gpuCount, cpu: cpuOf(cfg), ramGB: ramOf(cfg) };
 }
 
 const LEVEL_ORDER: Level[] = ['paprasciausias', 'programuotojui', 'agentas'];
@@ -71,7 +77,8 @@ export function quote(cfg: Config): Quote {
     const count = cfg.gpuCount > 1 ? 2 : 1;
     lines.push({ label: `${count > 1 ? '2× ' : ''}${g.name}`, eur: g.priceEur === null ? null : g.priceEur * count });
     lines.push({ label: c.name, eur: c.priceEur });
-    lines.push({ label: `${cfg.ramGB} GB ${c.ramType} RAM`, eur: ramPrices[c.ramType][cfg.ramGB] ?? null });
+    const ram = ramOf(cfg);
+    lines.push({ label: `${ram} GB ${c.ramType} RAM`, eur: ramPrices[c.ramType][ram] ?? null });
     lines.push({ label: c.platform === 'workstation' ? 'Bazė (darbo stotis)' : 'Bazė (plokštė, diskas, maitinimas, korpusas)', eur: BASE_PRICES[c.platform] });
     lines.push({ label: 'Surinkimas ir išbandymas', eur: ASSEMBLY_PRICE });
   } else if (cfg.hw === 'dgx') {
@@ -106,7 +113,7 @@ export function configText(cfg: Config): string {
     ? DGX_SPARK.name
     : cfg.hw === 'own'
       ? `Savas kompiuteris: ${cfg.gpuCount > 1 ? '2× ' : ''}${gpuOf(cfg).name}, ${cfg.ramGB} GB RAM`
-      : `${cfg.gpuCount > 1 ? '2× ' : ''}${gpuOf(cfg).name}, ${cpuOf(cfg).name}, ${cfg.ramGB} GB RAM`;
+      : `${cfg.gpuCount > 1 ? '2× ' : ''}${gpuOf(cfg).name}, ${cpuOf(cfg).name}, ${ramOf(cfg)} GB RAM`;
   const out = [
     `Įranga: ${hw}`,
     `Operacinė sistema: ${name(operatingSystems, cfg.os)}`,

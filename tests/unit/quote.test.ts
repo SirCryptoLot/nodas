@@ -54,9 +54,14 @@ test('DGX Spark = device + install, no assembly', () => {
   assert.equal(q.oneOff, 5193 + 149);
 });
 
-test('DDR4 platform cannot take 192 GB: RAM price unknown', () => {
-  const q = quote(base({ hw: 'pc', gpuId: 'rtx3060', gpuCount: 1, cpuId: 'r5-5600', ramGB: 192, agents: [] }));
-  assert.ok(q.unknown.some((u) => u.includes('192 GB')));
+test('DDR4 platform is capped at 128 GB in price and speed', () => {
+  const cfg = base({ hw: 'pc', gpuId: 'rtx3060', gpuCount: 1, cpuId: 'r5-5600', ramGB: 192, agents: [] });
+  const q = quote(cfg);
+  assert.ok(q.lines.some((l) => l.label === '128 GB DDR4 RAM' && l.eur === 873.16));
+  assert.deepEqual(q.unknown, []);
+  const sys = resolveSystem(cfg);
+  assert.equal(sys.kind === 'pc' && sys.ramGB, 128);
+  assert.ok(configText(cfg).includes('128 GB RAM'));
 });
 
 test('results give one estimate per selected model', () => {
