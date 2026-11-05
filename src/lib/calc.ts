@@ -10,7 +10,7 @@ export const KV_PER_USER_PER_B = 0.02; // papildoma atmintis kiekvienam vartotoj
 export const WORDS_PER_TOKEN = 0.6;
 
 export type Row = { device: Device; fits: boolean; tps: number; meets: boolean };
-export type Recommendation = { device: Device; macNote: boolean; onRequest: boolean };
+export type Recommendation = { device: Device; macNote: boolean; stationNote: boolean; onRequest: boolean };
 
 export function memoryNeededGB(model: ModelPreset, users: number): number {
   const gb = model.paramsB * BYTES_PER_PARAM * OVERHEAD + (users - 1) * model.paramsB * KV_PER_USER_PER_B;
@@ -40,15 +40,16 @@ export function recommend(rows: Row[]): Recommendation {
   const meeting = sold.filter((r) => r.meets);
   if (meeting.length) {
     const best = meeting.reduce((a, b) => (b.device.tier < a.device.tier ? b : a));
-    return { device: best.device, macNote: false, onRequest: false };
+    return { device: best.device, macNote: false, stationNote: false, onRequest: false };
   }
   const fitting = sold.filter((r) => r.fits);
   const macMeets = rows.some((r) => !r.device.sold && r.meets);
+  const stationMeets = rows.some((r) => r.device.onRequest && r.meets);
   if (fitting.length) {
-    return { device: fastest(fitting).device, macNote: macMeets, onRequest: false };
+    return { device: fastest(fitting).device, macNote: macMeets, stationNote: stationMeets, onRequest: false };
   }
   const station = rows.find((r) => r.device.onRequest)!.device;
-  return { device: station, macNote: false, onRequest: true };
+  return { device: station, macNote: false, stationNote: false, onRequest: true };
 }
 
 export function readingLabel(tps: number): string {

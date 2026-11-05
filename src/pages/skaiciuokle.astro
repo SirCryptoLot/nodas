@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Calculator from '../components/Calculator.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import { breadcrumbs, faqPage } from '../lib/seo';
+
+const crumbs = [{ name: 'Pradžia', path: '/' }, { name: 'Skaičiuoklė', path: '/skaiciuokle' }];
+const items = [
+  { q: 'Kas yra tokenas?', a: 'Tokenas yra žodžio dalis, kuria modelis skaičiuoja tekstą. Lietuviškai vienas žodis vidutiniškai užima kelis tokenus, todėl 10 tokenų per sekundę yra maždaug 6 žodžiai per sekundę.' },
+  { q: 'Kodėl svarbiausia atmintis?', a: 'Visas modelis turi tilpti į vaizdo plokštės arba bendrą atmintį. Jei netelpa, jis arba nepasileis, arba veiks daug kartų lėčiau. Greitį lemia, kaip greitai atmintis gali perduoti duomenis.' },
+  { q: 'Kaip tiksliai skaičiuojate?', a: 'Atmintį vertiname pagal modelio dydį su 4 bitų suspaudimu ir rezervu kontekstui, greitį pagal atminties pralaidumą. Tai apytikslis įvertinimas: realus greitis priklauso nuo modelio, konteksto ilgio ir nustatymų.' },
+];
+---
+<Base
+  title="Kokio kompiuterio reikia AI? Skaičiuoklė"
+  description="Pasirinkite AI modelio dydį ir norimą greitį: skaičiuoklė parodys, kiek atminties reikia, ir palygins DGX Spark, RTX 5090, RTX PRO 6000 ir Mac Studio."
+  path="/skaiciuokle"
+  jsonld={[breadcrumbs(crumbs, SITE), faqPage(items)]}
+>
+  <section class="section page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Kokio kompiuterio reikia AI?</h1>
+      <p class="lead">Pasirinkite modelio dydį, norimą greitį ir kiek žmonių juo naudosis. Parodysime, kiek atminties reikia, kas tinka ir ką rekomenduojame.</p>
+    </div>
+  </section>
+  <section class="section section-tight">
+    <div class="wrap">
+      <Calculator />
+    </div>
+  </section>
+  <section class="section section-soft">
+    <div class="wrap two-col">
+      <div class="section-head">
+        <h2>Kaip skaityti rezultatą</h2>
+        <p>Žalia varnelė reiškia, kad įrenginys pasiekia jūsų norimą greitį. Mac Studio rodomas tik palyginimui. Daugiau apie tai: <a href="/kokio-kompiuterio-reikia-ai">VRAM gidas</a> ir <a href="/dgx-spark-vs-rtx-5090-vs-mac-studio">palyginimas</a>.</p>
+      </div>
+      <Faq items={items} />
+    </div>
+  </section>
+  <CtaBand title="Rezultatas neaiškus?" text="Parašykite, ką norite daryti su AI: parinksime konfigūraciją ir atsiųsime pasiūlymą." />
+</Base>

@@ -1,0 +1,82 @@
+---
+import { models } from '../data/catalog';
+import { calcView, rowStatus } from '../lib/calcView';
+
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+
+const START = { model: '32b', tps: 20, users: 1 };
+const v = calcView(START.model, START.tps, START.users, compact);
+const spec = (s: Record<string, string | undefined>) => [
+  ['Vaizdo plokštė', s.gpu], ['Procesorius', s.cpu], ['Atmintis', s.ram], ['Diskas', s.disk], ['Maitinimas', s.psu],
+].filter(([, val]) => val) as [string, string][];
+---
+<div class={`calc card${compact ? ' calc-compact' : ''}`} data-calc data-compact={compact ? 'true' : undefined}>
+  <form class="calc-controls">
+    <fieldset>
+      <legend>Modelio dydis</legend>
+      <div class="chips">
+        {models.map((m) => (
+          <label class="chip" title={`${m.example}: ${m.hint}`}>
+            <input type="radio" name="model" value={m.id} checked={m.id === START.model}>
+            <span>{m.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <label class="range-label">
+      <span class="row-between"><b>Norimas greitis</b><span><b data-out="tps">{START.tps}</b> tok/s · <span data-out="reading">{v.reading}</span></span></span>
+      <input type="range" name="tps" min="5" max="100" step="5" value={START.tps} aria-label="Norimas greitis, tokenai per sekundę">
+    </label>
+
+    {!compact && (
+      <fieldset>
+        <legend>Vartotojų vienu metu</legend>
+        <div class="chips">
+          {[1, 5, 20].map((u) => (
+            <label class="chip"><input type="radio" name="users" value={String(u)} checked={u === START.users}><span>{u}</span></label>
+          ))}
+        </div>
+      </fieldset>
+    )}
+  </form>
+
+  <p class="calc-memory">Modeliui reikia apie <b data-out="memory">{v.memory}</b> GB atminties.</p>
+
+  <table class="calc-table">
+    <caption class="visually-hidden">Įrangos palyginimas</caption>
+    <tbody data-out="rows">
+      {v.rows.map((r) => {
+        const st = rowStatus(r);
+        return (
+          <tr class={r.device.id === v.rec.device.id ? 'is-rec' : undefined}>
+            <th scope="row">{r.device.name}{!r.device.sold && <span class="tag">tik palyginimui</span>}</th>
+            <td class={st.cls}>{st.text}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+
+  <div class="calc-rec">
+    <p class="eyebrow">Rekomenduojame</p>
+    <h3 data-out="rec-name">{v.rec.device.name}</h3>
+    <p class="small muted" data-out="rec-note">{v.note}</p>
+    {!compact && (
+      <dl class="specs" data-out="rec-spec">
+        {spec(v.rec.device.spec).map(([k, val]) => <><dt>{k}</dt><dd>{val}</dd></>)}
+      </dl>
+    )}
+    <div class="btn-row">
+      <a class="btn btn-primary" data-out="cta" href={v.cta}>Gauti pasiūlymą šiai konfigūracijai</a>
+      {compact && <a class="btn btn-secondary" href="/skaiciuokle">Plačiau</a>}
+    </div>
+  </div>
+  <p class="small muted calc-disclaimer">Tai apytikslis įvertinimas: realus greitis priklauso nuo modelio, konteksto ilgio ir nustatymų.</p>
+</div>
+
+<script>
+  import { initCalculators } from '../scripts/calculator';
+  initCalculators();
+</script>

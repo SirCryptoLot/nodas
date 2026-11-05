@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Calculator from '../components/Calculator.astro';
 import { SITE } from '../data/site';
 import { products } from '../data/catalog';
 import { faq } from '../data/faq';
@@ -30,12 +31,7 @@ const homeFaq = faq.slice(0, 4);
         </div>
       </div>
       <div class="hero-side">
-        <div class="card hero-promo">
-          <p class="eyebrow">Skaičiuoklė</p>
-          <h3>Kokio kompiuterio reikia jūsų AI?</h3>
-          <p>Pasirinkite modelio dydį ir norimą greitį: parodysime, kas tinka, ir palyginsime su DGX Spark ir Mac Studio.</p>
-          <a class="btn btn-secondary" href="/skaiciuokle">Atidaryti skaičiuoklę</a>
-        </div>
+        <Calculator compact />
       </div>
     </div>
   </section>

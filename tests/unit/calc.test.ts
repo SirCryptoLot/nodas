@@ -64,6 +64,14 @@ test('recommend never picks an on-request device while a sold one meets the targ
   assert.notEqual(rec.device.id, 'dgx-station');
 });
 
+test('recommend flags DGX Station when only it reaches the target', () => {
+  const rec = recommend(evaluate(model('70b'), 25, 20));
+  assert.equal(rec.device.id, 'rtxpro6000');
+  assert.equal(rec.stationNote, true);
+  const easy = recommend(evaluate(model('8b'), 30, 1));
+  assert.equal(easy.stationNote, false);
+});
+
 test('readingLabel thresholds', () => {
   assert.equal(readingLabel(4), 'lėčiau nei skaitote');
   assert.equal(readingLabel(8), 'maždaug kaip skaitote');
