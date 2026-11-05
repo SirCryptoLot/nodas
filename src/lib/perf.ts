@@ -46,7 +46,7 @@ export function estimate(system: System, model: Model, engine: EngineId, users: 
   let ramBw = 0;
   if (system.kind === 'unified') {
     vram = system.device.usableGB;
-    bw = system.device.tg7b * REF_MODEL_GB;
+    bw = effBw(system.device.tg7b, system.device.bandwidthGBs);
   } else {
     vram = system.gpu.vramGB * system.gpuCount - VRAM_RESERVE_GB;
     bw = effBw(system.gpu.tg7b, system.gpu.bandwidthGBs);

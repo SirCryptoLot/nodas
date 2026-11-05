@@ -6,16 +6,16 @@ import { memoryNeededGB, tokensPerSecond, evaluate, recommend, readingLabel } fr
 const dev = (id: string) => devices.find((d) => d.id === id)!;
 const model = (id: string) => models.find((m) => m.id === id)!;
 
-test('memory for 70b single user is ~47 GB', () => {
-  assert.ok(Math.abs(memoryNeededGB(model('70b'), 1) - 47.25) <= 0.1);
+test('memory for 70b single user is ~47 GB (42.5 GB GGUF + context)', () => {
+  assert.ok(Math.abs(memoryNeededGB(model('70b'), 1) - 46.75) <= 0.1);
 });
 
-test('rtx5090 8b ~ 219 tok/s', () => {
-  assert.equal(tokensPerSecond(dev('rtx5090'), model('8b'), 1), 219);
+test('rtx5090 8b ~ 226 tok/s (from measured 290 tok/s on 7B Q4_0)', () => {
+  assert.equal(tokensPerSecond(dev('rtx5090'), model('8b'), 1), 226);
 });
 
-test('dgx spark 70b ~ 4 tok/s', () => {
-  assert.equal(tokensPerSecond(dev('dgx-spark'), model('70b'), 1), 4);
+test('dgx spark 70b ~ 5 tok/s', () => {
+  assert.equal(tokensPerSecond(dev('dgx-spark'), model('70b'), 1), 5);
 });
 
 test('users slow per-user speed', () => {
@@ -45,14 +45,14 @@ test('recommend picks cheapest sold device meeting target', () => {
 });
 
 test('recommend falls back to DGX Station', () => {
-  const huge = { id: 'x', label: 'x', paramsB: 400, activeB: 400, example: '', hint: '' };
+  const huge = { id: 'x', label: 'x', paramsB: 400, activeB: 400, sizeGB: 240, example: '', hint: '' };
   const rec = recommend(evaluate(huge, 20, 20));
   assert.equal(rec.device.id, 'dgx-station');
   assert.equal(rec.onRequest, true);
 });
 
 test('recommend notes Mac Studio when only Mac meets target', () => {
-  const m = { id: 'x', label: 'x', paramsB: 150, activeB: 12, example: '', hint: '' };
+  const m = { id: 'x', label: 'x', paramsB: 150, activeB: 12, sizeGB: 90, example: '', hint: '' };
   const rec = recommend(evaluate(m, 40, 1));
   assert.equal(rec.device.id, 'dgx-spark');
   assert.equal(rec.macNote, true);

@@ -6,8 +6,10 @@ test('note mentions DGX Station when only it reaches the target', () => {
   assert.equal(calcView('70b', 25, 20).note, 'Norimą greitį pasiektų tik DGX Station (tiekiama pagal užklausą).');
 });
 
-test('note for on-request recommendation', () => {
-  assert.equal(calcView('120b', 40, 20).note, 'Tiekiama tik pagal užklausą.');
+test('120B MoE for 20 users fits the RTX PRO 6000 workstation', () => {
+  const v = calcView('120b', 40, 20);
+  assert.equal(v.rec.device.id, 'rtxpro6000');
+  assert.equal(v.note, '');
 });
 
 test('no note when a sold device meets the target', () => {

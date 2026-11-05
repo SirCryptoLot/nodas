@@ -50,13 +50,13 @@ export const devices: Device[] = [
   },
 ];
 
-export type ModelPreset = { id: string; label: string; paramsB: number; activeB: number; example: string; hint: string };
+export type ModelPreset = { id: string; label: string; paramsB: number; activeB: number; sizeGB: number; example: string; hint: string };
 
 export const models: ModelPreset[] = [
-  { id: '8b', label: 'Mažas (8B)', paramsB: 8, activeB: 8, example: 'Llama 3.1 8B', hint: 'paprasti tekstai, santraukos' },
-  { id: '32b', label: 'Vidutinis (32B)', paramsB: 32, activeB: 32, example: 'Qwen3 32B', hint: 'rimtas darbas su dokumentais' },
-  { id: '70b', label: 'Didelis (70B)', paramsB: 70, activeB: 70, example: 'Llama 3.3 70B', hint: 'arti ChatGPT lygio' },
-  { id: '120b', label: 'Labai didelis (120B)', paramsB: 120, activeB: 5.1, example: 'gpt-oss-120b (MoE)', hint: 'didžiausi atviri modeliai' },
+  { id: '8b', label: 'Mažas (8B)', paramsB: 8, activeB: 8, sizeGB: 4.92, example: 'Llama 3.1 8B', hint: 'paprasti tekstai, santraukos' },
+  { id: '32b', label: 'Vidutinis (32B)', paramsB: 32, activeB: 32, sizeGB: 19.8, example: 'Qwen3 32B', hint: 'rimtas darbas su dokumentais' },
+  { id: '70b', label: 'Didelis (70B)', paramsB: 70, activeB: 70, sizeGB: 42.5, example: 'Llama 3.3 70B', hint: 'arti ChatGPT lygio' },
+  { id: '120b', label: 'Labai didelis (120B)', paramsB: 117, activeB: 5.1, sizeGB: 63.4, example: 'gpt-oss-120b (MoE)', hint: 'didžiausi atviri modeliai' },
 ];
 
 export type Product = {

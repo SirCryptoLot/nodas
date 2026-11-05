@@ -64,9 +64,9 @@ export const ramPrices: Record<'DDR4' | 'DDR5', Record<number, number>> = {
 // workstation (Threadripper, 2 plokštės): TRX50 plokštė ~850, 1600 W ~300, korpusas ~250 (įvert.).
 export const BASE_PRICES: Record<'desktop' | 'workstation', number> = { desktop: 625, workstation: 1661 };
 
-export type UnifiedDevice = { id: string; name: string; usableGB: number; tg7b: number; priceEur: number | null };
+export type UnifiedDevice = { id: string; name: string; usableGB: number; tg7b: number | null; bandwidthGBs: number; priceEur: number | null };
 export const DGX_SPARK: UnifiedDevice = {
-  id: 'dgx-spark', name: 'NVIDIA DGX Spark (GB10, 128 GB)', usableGB: 115,
+  id: 'dgx-spark', name: 'NVIDIA DGX Spark (GB10, 128 GB)', usableGB: 115, bandwidthGBs: 273,
   tg7b: 57.21, // llama.cpp diskusija #16578
   priceEur: 5193, // Lenovo ThinkStation PGX 1 TB, skytech.lt
 };
