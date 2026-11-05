@@ -435,3 +435,12 @@ html.no-scroll { overflow: hidden; }
   .hw-panel { padding: 14px; }
   .cfg-grid { grid-template-columns: 1fr; }
 }
+
+.goal-cards { grid-template-columns: repeat(2, 1fr); }
+.goal-hint { margin-top: auto; padding-top: 6px; font-size: 13px; color: var(--text-3); }
+.goal-card input:checked + .hw-body .goal-hint { color: var(--text-2); }
+@media (max-width: 860px) {
+  .goal-cards { grid-template-columns: 1fr; }
+  .goal-card .hw-body { grid-template-columns: 20px 1fr; }
+  .goal-hint { grid-column: 2; grid-row: 3; padding-top: 4px; }
+}

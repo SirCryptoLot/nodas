@@ -10,6 +10,15 @@ const res = results(cfg);
 const series = [...new Set(gpus.map((g) => g.series))];
 const fitLabel = { vram: 'telpa', partial: 'dalinai RAM', none: 'netelpa' } as const;
 
+const goalDesc: Record<string, string> = {
+  pokalbiai: 'Klausimai, laiškai, santraukos ir vertimai. Kaip ChatGPT, tik jūsų kompiuteryje.',
+  programavimas: 'Kodo rašymas, taisymas ir paaiškinimai su programavimo agentais.',
+  dokumentai: 'Klausimai apie sutartis, instrukcijas ir PDF failus. Duomenys lieka pas jus.',
+  necenzuruoti: 'Atviri modeliai be platformų filtrų. Už naudojimą atsako naudotojas.',
+};
+const presetName = (id: string) => presets.find((p) => p.id === id)?.name ?? id;
+const modelNames = (ids: string[]) => ids.map((id) => models.find((m) => m.id === id)?.name.replace(/ \(necenzūruotas\)/, '') ?? id).join(', ');
+
 // Kortelių kainos „nuo“: pigiausias surinktas kompiuteris, DGX Spark ir tik diegimas.
 const cheapestPc = quote({ ...defaultConfig(), hw: 'pc', gpuId: 'rtx3060', gpuCount: 1, cpuId: 'r5-5600', ramGB: 16, agents: [] }).oneOff;
 const hwCards = [
@@ -22,9 +31,16 @@ const hwCards = [
   <form class="cfg-form" aria-label="AI sistemos konfigūratorius">
     <fieldset>
       <legend>1. Ką norite daryti?</legend>
-      <div class="chips">
+      <div class="hw-cards goal-cards">
         {goals.map((g) => (
-          <label class="chip"><input type="radio" name="goal" value={g.id} checked={g.id === cfg.goal}><span>{g.name}</span></label>
+          <label class={`hw-card goal-card goal-${g.id}`}>
+            <input type="radio" name="goal" value={g.id} checked={g.id === cfg.goal}>
+            <span class="hw-body">
+              <span class="hw-title">{g.name}</span>
+              <span class="hw-desc">{goalDesc[g.id]}</span>
+              <span class="goal-hint">Siūlome: {modelNames(g.models)} · rinkinys „{presetName(g.preset)}“</span>
+            </span>
+          </label>
         ))}
       </div>
     </fieldset>

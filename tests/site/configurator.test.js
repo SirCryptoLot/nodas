@@ -46,7 +46,7 @@ test('platform line is a live output', () => {
 
 test('hardware choice is three clear cards with description and price hint, parts in a separate panel', () => {
   const html = h();
-  const cards = html.match(/<label class="hw-card[^"]*"[\s\S]*?<\/label>/g) || [];
+  const cards = html.match(/<label class="hw-card hw-[^"]*"[\s\S]*?<\/label>/g) || [];
   assert.equal(cards.length, 3);
   for (const c of cards) {
     assert.match(c, /type="radio" name="hw"/);
@@ -54,4 +54,15 @@ test('hardware choice is three clear cards with description and price hint, part
     assert.match(c, /class="hw-price"[^>]*>[^<]*\d[\d ]* €/);
   }
   assert.match(html, /class="hw-panel"[\s\S]*?name="gpuId"/);
+});
+
+test('goal choice is four cards with description and suggested setup', () => {
+  const html = h();
+  const cards = (html.match(/<label class="hw-card goal-card[^"]*"[\s\S]*?<\/label>/g) || []);
+  assert.equal(cards.length, 4);
+  for (const c of cards) {
+    assert.match(c, /type="radio" name="goal"/);
+    assert.match(c, /class="hw-desc"/);
+    assert.match(c, /class="goal-hint"[^>]*>[^<]*Siūlome/);
+  }
 });
